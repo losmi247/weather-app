@@ -34,9 +34,13 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                   0.3, // 30% of screen height
               child: Expanded(
                 child: Container(
-                  alignment: AlignmentDirectional.center,
-                  child: SvgPicture.asset("images/sun.svg")
-                ),
+                    alignment: AlignmentDirectional.center,
+                    child: SvgPicture.asset("images/sun.svg")
+                    // child: Text(
+                    //   'Graphic goes here',
+                    //   style: TextStyle(fontSize: 32.0),
+                    // ),
+                    ),
               ),
             ),
             Slider(
@@ -55,6 +59,64 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             Text(
               'Current weather conditions go here',
               style: TextStyle(fontSize: 20.0),
+            ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      // 'assets/icons/feels_like.svg',
+                      "images/red.svg",
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    // SvgPicture.asset("images/sun.svg"),
+                    SizedBox(width: 16.0),
+                    Text('Feels like ${_isCelsius ? '40°C' : '104°F'}'),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    // Container(
+                    //   width: 24,
+                    //   height: 24,
+                    //   color: Colors.red,
+                    // ),
+                    SizedBox(width: 16.0),
+                    Text('Strong winds'),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    SizedBox(width: 16.0),
+                    Text('Not too sunny'),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    SizedBox(width: 16.0),
+                    Text('Sunrise is in 35 minutes'),
+                  ],
+                ),
+              ],
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
