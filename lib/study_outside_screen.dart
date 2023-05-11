@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/settings_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StudyOutsideScreen extends StatefulWidget {
   const StudyOutsideScreen({Key? key}) : super(key: key);
@@ -34,10 +35,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               child: Expanded(
                 child: Container(
                   alignment: AlignmentDirectional.center,
-                  child: Text(
-                    'Graphic goes here',
-                    style: TextStyle(fontSize: 32.0),
-                  ),
+                  child: SvgPicture.asset("images/sun.svg")
                 ),
               ),
             ),
