@@ -21,17 +21,23 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         title: Text('Study Outside'),
       ),
       body: Container(
+        //move top of container to top of screen
+        alignment: AlignmentDirectional.topCenter,
         padding: EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  'Graphic goes here',
-                  style: TextStyle(fontSize: 32.0),
+            SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.3, // 30% of screen height
+              child: Expanded(
+                child: Container(
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    'Graphic goes here',
+                    style: TextStyle(fontSize: 32.0),
+                  ),
                 ),
               ),
             ),
