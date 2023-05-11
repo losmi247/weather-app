@@ -38,16 +38,16 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height *
                   0.3, // 30% of screen height
-              child: Expanded(
+              //child: Expanded(
                 child: Container(
                     alignment: AlignmentDirectional.center,
-                    child: SvgPicture.asset("images/sun.svg")
+                    child: SvgPicture.asset("images/sun.svg", fit: BoxFit.contain,)
                     // child: Text(
                     //   'Graphic goes here',
                     //   style: TextStyle(fontSize: 32.0),
                     // ),
                     ),
-              ),
+              //),
             ),
             Slider(
               value: _sliderValue,
