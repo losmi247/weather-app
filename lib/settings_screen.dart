@@ -20,6 +20,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isCelsius = false;
   double _minTemp = 0;
   double _maxTemp = 0;
+  bool _workInRain = false;
+  bool _workInSnow = false;
+  bool _workInWind = false;
+  bool _workAtNight = false;
 
   @override
   void initState() {
@@ -82,6 +86,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ],
+          ),
+          SizedBox(height: 16.0),
+          Text('Willing to work in:'),
+          SwitchListTile(
+            title: Text('Rain'),
+            value: _workInRain,
+            onChanged: (value) {
+              setState(() {
+                _workInRain = value;
+              });
+            },
+          ),
+          SwitchListTile(
+            title: Text('Snow'),
+            value: _workInSnow,
+            onChanged: (value) {
+              setState(() {
+                _workInSnow = value;
+              });
+            },
+          ),
+          SwitchListTile(
+            title: Text('Wind'),
+            value: _workInWind,
+            onChanged: (value) {
+              setState(() {
+                _workInWind = value;
+              });
+            },
+          ),
+          SwitchListTile(
+            title: Text('At night'),
+            value: _workAtNight,
+            onChanged: (value) {
+              setState(() {
+                _workAtNight = value;
+              });
+            },
           ),
         ],
       ),
