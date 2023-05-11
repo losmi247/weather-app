@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final bool isCelsius;
-  final double minTemp;
-  final double maxTemp;
+  final Preferences preferences;
 
   const SettingsScreen({
     Key? key,
-    required this.isCelsius,
-    required this.minTemp,
-    required this.maxTemp,
+    required this.preferences,
   }) : super(key: key);
 
   @override
@@ -17,37 +14,47 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isCelsius = false;
-  double _minTemp = 0;
-  double _maxTemp = 0;
-  bool _workInRain = false;
-  bool _workInSnow = false;
-  bool _workInWind = false;
-  bool _workAtNight = false;
+  Preferences preferences = Preferences(isCelsius: true, minTemp: 0, maxTemp: 0,
+                                        workInRain: false, workInSnow: false, 
+                                        workInWind: false, workAtNight: false);
 
   @override
   void initState() {
     super.initState();
-    _isCelsius = widget.isCelsius;
-    _minTemp = widget.minTemp;
-    _maxTemp = widget.maxTemp;
+    preferences = Preferences.copy(widget.preferences);
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    /// sends preferences back to the previous page
+    void _sendDataBack(BuildContext context) {
+      Navigator.pop(context, preferences);
+    }
+
     return Scaffold(
       appBar: AppBar(
+        /// flutter automatically adds a back button if there is a previous page,
+        /// so we need a custom button to be able to send data back to the main page
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          onPressed: () {
+            // send preferences back
+            _sendDataBack(context);
+          }
+        ),
         title: Text('Settings'),
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
           SwitchListTile(
             title: Text('Use Celsius'),
-            value: _isCelsius,
+            value: preferences.isCelsius,
             onChanged: (value) {
               setState(() {
-                _isCelsius = value;
+                preferences.isCelsius = value;
               });
             },
           ),
@@ -61,11 +68,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   decoration: InputDecoration(
                     labelText: 'Min temperature',
                   ),
-                  initialValue: _minTemp.toString(),
+                  initialValue: preferences.minTemp.toString(),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
-                      _minTemp = double.tryParse(value) ?? 0;
+                      preferences.minTemp = double.tryParse(value) ?? 0;
                     });
                   },
                 ),
@@ -76,11 +83,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   decoration: InputDecoration(
                     labelText: 'Max temperature',
                   ),
-                  initialValue: _maxTemp.toString(),
+                  initialValue: preferences.maxTemp.toString(),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
                     setState(() {
-                      _maxTemp = double.tryParse(value) ?? 0;
+                      preferences.maxTemp = double.tryParse(value) ?? 0;
                     });
                   },
                 ),
@@ -91,37 +98,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text('Willing to work in:'),
           SwitchListTile(
             title: Text('Rain'),
-            value: _workInRain,
+            value: preferences.workInRain,
             onChanged: (value) {
               setState(() {
-                _workInRain = value;
+                preferences.workInRain = value;
               });
             },
           ),
           SwitchListTile(
             title: Text('Snow'),
-            value: _workInSnow,
+            value: preferences.workInSnow,
             onChanged: (value) {
               setState(() {
-                _workInSnow = value;
+                preferences.workInSnow = value;
               });
             },
           ),
           SwitchListTile(
             title: Text('Wind'),
-            value: _workInWind,
+            value: preferences.workInWind,
             onChanged: (value) {
               setState(() {
-                _workInWind = value;
+                preferences.workInWind = value;
               });
             },
           ),
           SwitchListTile(
             title: Text('At night'),
-            value: _workAtNight,
+            value: preferences.workAtNight,
             onChanged: (value) {
               setState(() {
-                _workAtNight = value;
+                preferences.workAtNight = value;
               });
             },
           ),

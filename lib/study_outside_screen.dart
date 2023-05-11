@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,16 +11,21 @@ class StudyOutsideScreen extends StatefulWidget {
 
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   double _sliderValue = 0.0;
-  bool _isCelsius = true;
-  double _minTemp = 18.0;
-  double _maxTemp = 25.0;
   bool _isLocationEnabled = true;
+  Preferences preferences = Preferences(isCelsius: true, minTemp: 18.0, maxTemp: 25.0, 
+                                        workInRain: false, workInSnow: false, 
+                                        workInWind: false, workAtNight: false);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: Text('Study Outside'),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         //move top of container to top of screen
@@ -72,7 +78,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     ),
                     // SvgPicture.asset("images/sun.svg"),
                     SizedBox(width: 16.0),
-                    Text('Feels like ${_isCelsius ? '40°C' : '104°F'}'),
+                    Text('Feels like ${preferences.isCelsius ? '40°C' : '104°F'}'),
                   ],
                 ),
                 SizedBox(height: 16.0),
@@ -121,15 +127,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SettingsScreen(
-                            isCelsius: _isCelsius,
-                            minTemp: _minTemp,
-                            maxTemp: _maxTemp,
-                          )),
-                );
+                /// push the second screen and wait for updated preferences
+                awaitReturnPreferencesFromSettingsScreen(context);
               },
               child: Text('Settings'),
             ),
@@ -137,5 +136,27 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         ),
       ),
     );
+  }
+
+  /// awaits for the returned preferences from the settings screen
+  /// and updates the preferences on stored on this screen so that 
+  /// we can access them later
+  void awaitReturnPreferencesFromSettingsScreen(BuildContext context) async {
+    final Preferences returnedPreferences = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsScreen(preferences: preferences)
+                                  ),
+                        );
+    setState(() {
+      //preferences = Preferences.copy(returnedPreferences);
+      preferences.isCelsius = returnedPreferences.isCelsius;
+      preferences.minTemp = returnedPreferences.minTemp;
+      preferences.maxTemp = returnedPreferences.maxTemp;
+      preferences.workAtNight = returnedPreferences.workAtNight;
+      preferences.workInRain = returnedPreferences.workInRain;
+      preferences.workInSnow = returnedPreferences.workInSnow;
+      preferences.workInWind = returnedPreferences.workInWind;
+    });
   }
 }
