@@ -11,10 +11,7 @@ class StudyOutsideScreen extends StatefulWidget {
 
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   double _sliderValue = 0.0;
-  bool _isLocationEnabled = true;
-  Preferences preferences = Preferences(isCelsius: true, minTemp: 18.0, maxTemp: 25.0, 
-                                        workInRain: false, workInSnow: false, 
-                                        workInWind: false, workAtNight: false);
+  Preferences preferences = Preferences.defaultPreferences();
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +122,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               ],
             ),
             SizedBox(height: 16.0),
+            /// Button to go to 'Settings' screen
             ElevatedButton(
               onPressed: () {
-                /// push the second screen and wait for updated preferences
+                /// push the 'Settings' screen and wait for updated preferences
                 awaitReturnPreferencesFromSettingsScreen(context);
               },
               child: Text('Settings'),
@@ -157,6 +155,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
+      preferences.isLocationEnabled = returnedPreferences.isLocationEnabled;
     });
   }
 }

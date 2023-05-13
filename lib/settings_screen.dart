@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/location_settings.dart';
 import 'package:flutter_application_1/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -14,9 +15,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  Preferences preferences = Preferences(isCelsius: true, minTemp: 0, maxTemp: 0,
-                                        workInRain: false, workInSnow: false, 
-                                        workInWind: false, workAtNight: false);
+  Preferences preferences = Preferences.defaultPreferences();
 
   @override
   void initState() {
@@ -24,14 +23,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     preferences = Preferences.copy(widget.preferences);
   }
 
+  /// sends preferences back to the previous page
+  void _sendDataBack(BuildContext context) {
+    Navigator.pop(context, preferences);
+  }
+
   @override
   Widget build(BuildContext context) {
-    
-    /// sends preferences back to the previous page
-    void _sendDataBack(BuildContext context) {
-      Navigator.pop(context, preferences);
-    }
-
     return Scaffold(
       appBar: AppBar(
         /// flutter automatically adds a back button if there is a previous page,
@@ -39,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () {
-            // send preferences back
+            // send preferences back to Study Outside screen
             _sendDataBack(context);
           }
         ),
@@ -132,8 +130,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
               });
             },
           ),
+          /// Button to go to 'Location Settings' screen
+          SizedBox(height: 16.0),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              onPressed: () {
+                /// push the 'Location Settings' screen and wait for updated preferences
+                awaitReturnPreferencesFromLocationSettingsScreen(context);
+              },
+              child: Text('Location Settings'),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  /// awaits for the returned preferences from the location settings 
+  /// screen and updates the preferences on stored on this screen so 
+  /// that we can access them later
+  void awaitReturnPreferencesFromLocationSettingsScreen(BuildContext context) async {
+    final Preferences returnedPreferences = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LocationSettingsScreen(preferences: preferences)
+                                  ),
+                        );
+    setState(() {
+      //preferences = Preferences.copy(returnedPreferences);
+      preferences.isCelsius = returnedPreferences.isCelsius;
+      preferences.minTemp = returnedPreferences.minTemp;
+      preferences.maxTemp = returnedPreferences.maxTemp;
+      preferences.workAtNight = returnedPreferences.workAtNight;
+      preferences.workInRain = returnedPreferences.workInRain;
+      preferences.workInSnow = returnedPreferences.workInSnow;
+      preferences.workInWind = returnedPreferences.workInWind;
+      preferences.isLocationEnabled = returnedPreferences.isLocationEnabled;
+    });
   }
 }

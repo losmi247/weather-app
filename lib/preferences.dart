@@ -6,6 +6,7 @@ class Preferences {
   bool workInSnow;
   bool workInWind;
   bool workAtNight;
+  bool isLocationEnabled;
 
   Preferences({
     required this.isCelsius, 
@@ -15,6 +16,7 @@ class Preferences {
     required this.workInSnow, 
     required this.workInWind, 
     required this.workAtNight,
+    required this.isLocationEnabled
   });
 
   Preferences.copy(Preferences p)
@@ -24,5 +26,16 @@ class Preferences {
         workInRain = p.workInRain,
         workInSnow = p.workInSnow,
         workInWind = p.workInWind,
-        workAtNight = p.workAtNight;
+        workAtNight = p.workAtNight,
+        isLocationEnabled = p.isLocationEnabled;
+
+  Preferences.defaultPreferences()
+      : isCelsius = true, 
+        minTemp = 18.0, 
+        maxTemp = 25.0,
+        workInRain = false, 
+        workInSnow = false, 
+        workInWind = false, 
+        workAtNight = false,
+        isLocationEnabled =  true;
 }
