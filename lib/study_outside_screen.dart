@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/custom_components/slider.dart';
+import 'package:flutter_application_1/pallete.dart';
 import 'package:flutter_application_1/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +12,9 @@ class StudyOutsideScreen extends StatefulWidget {
 }
 
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
-  double _sliderValue = 0.0;
+  //double _sliderValue = 0.0;
+  /// to get slider value - slider.value
+  SliderWithLabels slider = const SliderWithLabels(minValue: 0, maxValue: 12, initialValue: 0);
   Preferences preferences = Preferences.defaultPreferences();
 
   @override
@@ -46,21 +50,34 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     ),
               //),
             ),
-            Slider(
-              value: _sliderValue,
-              min: 0.0,
-              max: 100.0,
-              divisions: 20,
-              label: '${_sliderValue.toInt()}',
-              onChanged: (value) {
-                setState(() {
-                  _sliderValue = value;
-                });
-              },
-              thumbColor: Color.fromARGB(255, 194, 78, 78),
-              activeColor: Color.fromARGB(255, 105, 194, 75),
-              inactiveColor: Color.fromARGB(255, 90, 76, 234),  
-            ),
+            /*SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                thumbColor: Pallete.sliderThumbColor,
+                //thumbShape: 
+              ),
+              child: Slider(
+                value: _sliderValue,
+                min: 0.0,
+                max: 100.0,
+                divisions: 20,
+                label: '${_sliderValue.toInt()}',
+                onChanged: (value) {
+                  setState(() {
+                    _sliderValue = value;
+                  });
+                },
+                activeColor: Pallete.sliderActiveColor,
+                inactiveColor: Pallete.sliderInactiveColor,
+              ),
+            ),*/
+            /*const SliderWithLabels(
+              minValue: 0,
+              maxValue: 12,
+              initialValue: 0,
+            ),*/
+            /////// SLIDER
+            slider,
+            /////// SLIDER
             SizedBox(height: 16.0),
             Text(
               'Current weather conditions go here',
