@@ -20,14 +20,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         /*leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.pop(context),
         ),*/
         title: Text('Study Outside'),
         //automaticallyImplyLeading: false,
-      ),
+      ),*/
       body: Container(
         //move top of container to top of screen
         alignment: AlignmentDirectional.topCenter,
@@ -37,17 +37,33 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.3, // 30% of screen height
+              height: MediaQuery.of(context).size.height * 0.3, // 30% of screen height
               //child: Expanded(
-                child: Container(
-                    alignment: AlignmentDirectional.center,
-                    child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
-                    // child: Text(
-                    //   'Graphic goes here',
-                    //   style: TextStyle(fontSize: 32.0),
-                    // ),
-                    ),
+                child: Stack(
+                    children: [
+                      Container(
+                        alignment: AlignmentDirectional.center,
+                        child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
+                        // child: Text(
+                        //   'Graphic goes here',
+                        //   style: TextStyle(fontSize: 32.0),
+                        // ),
+                      ),
+                      Positioned(
+                        top: 5,
+                        right: 5,
+                        /// Button to go to 'Settings' screen
+                        child: IconButton(
+                          icon: SvgPicture.asset("assets/images/gear.svg"),
+                          onPressed: () {
+                            /// push the 'Settings' screen and wait for updated preferences
+                            awaitReturnPreferencesFromSettingsScreen(context);
+                          },
+                          //child: Text('Settings'),
+                        ),
+                      ),
+                    ]
+                ),
               //),
             ),
             /*SliderTheme(
@@ -142,14 +158,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               ],
             ),
             SizedBox(height: 16.0),
-            /// Button to go to 'Settings' screen
-            ElevatedButton(
-              onPressed: () {
-                /// push the 'Settings' screen and wait for updated preferences
-                awaitReturnPreferencesFromSettingsScreen(context);
-              },
-              child: Text('Settings'),
-            ),
           ],
         ),
       ),
