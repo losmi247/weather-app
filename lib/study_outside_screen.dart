@@ -17,12 +17,12 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
+        /*leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_sharp),
           onPressed: () => Navigator.pop(context),
-        ),
+        ),*/
         title: Text('Study Outside'),
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
       ),
       body: Container(
         //move top of container to top of screen
@@ -38,7 +38,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               //child: Expanded(
                 child: Container(
                     alignment: AlignmentDirectional.center,
-                    child: SvgPicture.asset("images/sun.svg", fit: BoxFit.contain,)
+                    child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
                     // child: Text(
                     //   'Graphic goes here',
                     //   style: TextStyle(fontSize: 32.0),
@@ -57,6 +57,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                   _sliderValue = value;
                 });
               },
+              thumbColor: Color.fromARGB(255, 194, 78, 78),
+              activeColor: Color.fromARGB(255, 105, 194, 75),
+              inactiveColor: Color.fromARGB(255, 90, 76, 234),  
             ),
             SizedBox(height: 16.0),
             Text(
@@ -69,7 +72,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                   children: [
                     SvgPicture.asset(
                       // 'assets/icons/feels_like.svg',
-                      "images/red.svg",
+                      "assets/images/red.svg",
                       width: 24.0,
                       height: 24.0,
                     ),
@@ -82,7 +85,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 Row(
                   children: [
                     SvgPicture.asset(
-                      'images/red.svg',
+                      'assets/images/red.svg',
                       width: 24.0,
                       height: 24.0,
                     ),
@@ -99,7 +102,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 Row(
                   children: [
                     SvgPicture.asset(
-                      'images/red.svg',
+                      'assets/images/red.svg',
                       width: 24.0,
                       height: 24.0,
                     ),
@@ -111,7 +114,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 Row(
                   children: [
                     SvgPicture.asset(
-                      'images/red.svg',
+                      'assets/images/red.svg',
                       width: 24.0,
                       height: 24.0,
                     ),
