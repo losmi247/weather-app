@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/custom_components/slider.dart';
-import 'package:flutter_application_1/pallete.dart';
-import 'package:flutter_application_1/preferences.dart';
+import 'package:flutter_application_1/custom_components/pallete.dart';
+import 'package:flutter_application_1/custom_components/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/preferences.dart';
+import 'package:flutter_application_1/custom_components/preferences.dart';
 
 class LocationSettingsScreen extends StatefulWidget {
   final Preferences preferences;

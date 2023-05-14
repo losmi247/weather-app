@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pallete.dart';
+import 'package:flutter_application_1/custom_components/pallete.dart';
 
 class SliderWithLabels extends StatefulWidget {
   const SliderWithLabels({
