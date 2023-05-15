@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
 
 class LocationSettingsScreen extends StatefulWidget {
@@ -34,28 +35,40 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
         /// flutter automatically adds a back button if there is a previous page,
         /// so we need a custom button to be able to send data back to the main page
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_sharp),
+          icon: const Icon(Icons.arrow_back_ios_new_sharp, 
+                          color: Pallete.locationSettingsBackButtonColor,),
           onPressed: () {
             // send preferences back to Settings screen
             _sendDataBack(context);
           }
         ),
-        title: Text('Location Settings'),
+        title: const Text('Location Settings', 
+                    style: TextStyle(color: Pallete.locationSettingsTextColor)),
         automaticallyImplyLeading: false,
+        backgroundColor: Pallete.locationSettingsAppBarColor,
       ),
+      backgroundColor: Pallete.locationSettingsBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SwitchListTile(
-              title: Text('Enable Location'),
+              title: const Text('Enable Location',
+                    style: TextStyle(color: Pallete.locationSettingsTextColor)),
               value: preferences.isLocationEnabled,
               onChanged: (value) {
                 setState(() {
                   preferences.isLocationEnabled = value;
                 });
               },
+              inactiveThumbColor: Pallete.locationSettingsSwitchListTileInactiveThumbColor,
+              inactiveTrackColor: Pallete.locationSettingsSwitchListTileInactiveTrackColor,
+              activeColor: Pallete.locationSettingsSwitchListTileActiveColor,
+               shape: RoundedRectangleBorder(
+                side: const BorderSide(color: Pallete.locationSettingsSwitchListTileBorderColor),
+                borderRadius: BorderRadius.circular(5),
+              ), 
             ),
           ],
         ),

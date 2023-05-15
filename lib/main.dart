@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Pallete.backgroundColor,
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-          titleLarge: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
+          titleLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
           bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Roboto'),  
         )
       ),

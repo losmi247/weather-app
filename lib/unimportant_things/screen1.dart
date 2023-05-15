@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screen2.dart';
+import 'package:flutter_application_1/unimportant_things/screen2.dart';
 import 'package:flutter_application_1/study_outside_screen.dart';
 
 class Screen1 extends StatelessWidget {
