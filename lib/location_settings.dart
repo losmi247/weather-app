@@ -136,6 +136,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                         child: Text(value),
                       );
                     }).toList(),
+                    dropdownColor: Pallete.settingsLocationDropdownColor,
                   )
                 ),
                 SizedBox(width: 10.0),
