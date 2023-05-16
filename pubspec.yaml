@@ -98,6 +98,7 @@ flutter:
     - assets/images/cloud.svg
     - assets/images/gear.svg
     - assets/images/
+    - assets/images/angry-thunder/
 
   fonts:
     - family: Roboto

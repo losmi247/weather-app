@@ -22,17 +22,26 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   late final Timer timer;
 
-  final values = [
-    'sun-l.svg',
-    'sun-ml.svg',
-    'sun-m.svg',
-    'sun-mr.svg',
-    'sun-r.svg',
-    'sun-mr.svg',
-    'sun-m.svg',
-    'sun-ml.svg',
-  ];
   int _index = 0;
+
+  final values = [
+    // 'sun-l.svg',
+    // 'sun-ml.svg',
+    // 'sun-m.svg',
+    // 'sun-mr.svg',
+    // 'sun-r.svg',
+    // 'sun-mr.svg',
+    // 'sun-m.svg',
+    // 'sun-ml.svg',
+    'angry-thunder/thunder-1.svg',
+    'angry-thunder/thunder-2.svg',
+    'angry-thunder/thunder-3.svg',
+    'angry-thunder/thunder-4.svg',
+    'angry-thunder/thunder-5.svg',
+    'angry-thunder/thunder-6.svg',
+    'angry-thunder/thunder-7.svg',
+    'angry-thunder/thunder-8.svg',
+  ];
 
   @override
   void initState() {
