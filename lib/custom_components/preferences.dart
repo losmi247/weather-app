@@ -7,7 +7,7 @@ class Preferences {
   bool workInWind;
   bool workAtNight;
   bool isLocationSetAutomatically;
-  LocationLabel? selectedLocation;
+  String selectedLocation;
 
   Preferences({
     required this.isCelsius, 
@@ -41,15 +41,7 @@ class Preferences {
         workInWind = false, 
         workAtNight = false,
         isLocationSetAutomatically = true,
-        selectedLocation = LocationLabel.cambridge;
+        selectedLocation = 'Cambridge';
 }
 
-enum LocationLabel {
-  cambridge('Cambridge', 'Cambridge'),
-  oxford('Oxford', 'Oxford'),
-  manchester('Manchester', 'Manchester');
-
-  const LocationLabel(this.label, this.location);
-  final String label;
-  final String location;
-}
+const List<String> locations = <String>['Cambridge', 'Manchester', 'Oxford'];
