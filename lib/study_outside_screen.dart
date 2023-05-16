@@ -5,6 +5,7 @@ import 'package:flutter_application_1/custom_components/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
+import 'util.dart';
 
 class StudyOutsideScreen extends StatefulWidget {
   const StudyOutsideScreen({Key? key}) : super(key: key);
@@ -160,7 +161,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     // SvgPicture.asset("images/sun.svg"),
                     SizedBox(width: 16.0),
                     Text(
-                        'Feels like ${preferences.isCelsius ? '40°C' : '104°F'}'),
+                        'Feels like ${Util.getStringForTemperature(40, preferences.isCelsius)}'),
                   ],
                 ),
                 SizedBox(height: 16.0),
