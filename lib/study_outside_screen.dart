@@ -116,26 +116,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               child: Stack(children: [
                 Container(
                     alignment: AlignmentDirectional.center,
-                    // child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
-                    // child: SvgPicture.asset(
-                    //   "assets/images/sun-m.svg",
-                    //   fit: BoxFit.contain,
-                    // )
-                    // child: AnimatedSwitcher(
-                    //     duration: Duration(milliseconds: 180),
-                    //     // child: Text(
-                    //     //   values[_index % values.length],
-                    //     //   key: UniqueKey(),
-                    //     // ),
-                    //     child: SvgPicture.asset(
-                    //       getAnimationFrame('happy-sun', _index),
-                    //       // getAnimationFrame('angry-thunder', _index),
-                    //       fit: BoxFit.cover,
-                    //     )),
-                    // child: Text(
-                    //   'Graphic goes here',
-                    //   style: TextStyle(fontSize: 32.0),
-                    // ),
                     child: SvgPicture.asset(
                       getAnimationFrame('happy-sun', _index),
                       // getAnimationFrame('angry-thunder', _index),
