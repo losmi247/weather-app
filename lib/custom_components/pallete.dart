@@ -28,6 +28,8 @@ class Pallete {
   static const Color settingsTextFormFieldCursorColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color settingsTextFormFieldUnderlineColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color settingsLocationDropdownArrowColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsTextFormFieldUnderlineEnabledColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsTextFormFieldUnderlineFocusedColor = Color.fromRGBO(209, 204, 204, 1);
 
   /// Disabled Colors
   static const Color disabledColor = Color.fromRGBO(137, 137, 137, 1.0);

@@ -79,7 +79,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Min temperature',
-                    labelStyle: TextStyle(color: Pallete.settingsTextColor)
+                    labelStyle: TextStyle(color: Pallete.settingsTextColor),
+                    enabledBorder: UnderlineInputBorder(      
+                      borderSide: BorderSide(
+                        color: Pallete.settingsTextFormFieldUnderlineEnabledColor
+                      ),   
+                    ),  
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Pallete.settingsTextFormFieldUnderlineFocusedColor
+                      ),
+                    ),
                   ),
                   style: const TextStyle(color: Pallete.settingsTextColor),
                   initialValue: preferences.minTemp.toString(),
@@ -89,6 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       preferences.minTemp = double.tryParse(value) ?? 0;
                     });
                   },
+                  cursorColor: Pallete.settingsTextFormFieldCursorColor,
                 ),
               ),
               SizedBox(width: 16.0),
