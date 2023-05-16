@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Pallete {
   /// Study Outside Screen Colors
-  static const Color backgroundColor = Color.fromRGBO(62, 62, 66, 1);
+  static const Color backgroundColor = Color.fromRGBO(189, 222, 255, 1);
   static const Color gradient1 = Color.fromRGBO(187, 63, 221, 1);
   static const Color gradient2 = Color.fromRGBO(251, 109, 169, 1);
   static const Color gradient3 = Color.fromRGBO(255, 159, 124, 1);
@@ -19,9 +19,12 @@ class Pallete {
   static const Color settingsAppBarColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color settingsTextColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color settingsBackButtonColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color settingsSwitchListTileActiveColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color settingsSwitchListTileBorderColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color settingsSwitchListTileInactiveThumbColor = Color.fromRGBO(115, 105, 105, 1);
-  static const Color settingsSwitchListTileInactiveTrackColor = Color.fromRGBO(175, 171, 171, 1);
-
+  static const Color settingsSwitchListTileActiveColor =
+      Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsSwitchListTileBorderColor =
+      Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsSwitchListTileInactiveThumbColor =
+      Color.fromRGBO(115, 105, 105, 1);
+  static const Color settingsSwitchListTileInactiveTrackColor =
+      Color.fromRGBO(175, 171, 171, 1);
 }
