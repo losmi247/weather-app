@@ -16,7 +16,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   //double _sliderValue = 0.0;
   /// to get slider value - slider.value
   SliderWithLabels slider =
-      const SliderWithLabels(minValue: 0, maxValue: 12, initialValue: 0);
+      const SliderWithLabels(minValue: 0, maxValue: 720, initialValue: 60);
   Preferences preferences = Preferences.defaultPreferences();
 
   late final Timer timer;

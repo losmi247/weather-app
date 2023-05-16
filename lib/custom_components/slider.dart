@@ -46,7 +46,7 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     thumbColor: Pallete.sliderThumbColor,
-                    //thumbShape: 
+                    //thumbShape:
                   ),
                   child: Slider(
                     value: sliderValue,
@@ -67,25 +67,56 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
               Positioned(
                 bottom: 5,
                 left: 20,
-                child: Text(widget.minValue.toInt().toString(), 
-                        style: TextStyle(fontSize: 14)),
+                child: Text(widget.minValue.toInt().toString(),
+                    style: TextStyle(fontSize: 14)),
               ),
               Positioned(
                 bottom: 5,
                 right: 15,
-                child: Text(widget.maxValue.toInt().toString(), 
-                        style: TextStyle(fontSize: 14)),
+                child: Text(widget.maxValue.toInt().toString(),
+                    style: TextStyle(fontSize: 14)),
               ),
               Positioned(
                 left: MediaQuery.of(context).size.width / 2 - 75,
                 top: -4,
-                child: Text("Revise for " + sliderValue.toInt().toString() + "h", 
-                        style: TextStyle(fontSize: 20)),
+                child: Text(
+                    "Revise for " +
+                        getStringForTimeDelta(sliderValue.toInt() * 60 * 1000),
+                    style: TextStyle(fontSize: 20)),
               ),
             ],
           ),
         ),
       ],
     );
+  }
+
+  String getStringForTimeDelta(int timeDelta, {int digits = 1}) {
+    if (timeDelta == 0) {
+      return '0m';
+    }
+
+    if (timeDelta >= (1000 * 60 * 60 * 24 * 365) * (1 - 0.05 / 12)) {
+      double years = timeDelta / (1000 * 60 * 60 * 24 * 365);
+      return '${years.toStringAsFixed(years.truncateToDouble() == years ? 0 : digits)}yr';
+    } else if (timeDelta >= (1000 * 60 * 60 * 24 * 30) * (1 - 0.05 / 30)) {
+      // months all have 30 days now
+      double months = timeDelta / (1000 * 60 * 60 * 24 * 30);
+      return '${months.toStringAsFixed(months.truncateToDouble() == months ? 0 : digits)}months';
+    } else if (timeDelta >= (1000 * 60 * 60 * 24) * (1 - 0.05 / 24)) {
+      double days = timeDelta / (1000 * 60 * 60 * 24);
+      return '${days.toStringAsFixed(days.truncateToDouble() == days ? 0 : digits)}d';
+    } else if (timeDelta >= (1000 * 60 * 60) * (1 - 0.05 / 60)) {
+      double hours = timeDelta / (1000 * 60 * 60);
+      return '${hours.toStringAsFixed(hours.truncateToDouble() == hours ? 0 : digits)}h';
+    } else if (timeDelta >= (1000 * 60) * (1 - 0.05 / 60)) {
+      double minutes = timeDelta / (1000 * 60);
+      return '${minutes.toStringAsFixed(minutes.truncateToDouble() == minutes ? 0 : digits)}m';
+    } else if (timeDelta >= (1000) * (1 - 0.05 / 1)) {
+      double seconds = timeDelta / (1000);
+      return '${seconds.toStringAsFixed(seconds.truncateToDouble() == seconds ? 0 : digits)}s';
+    } else {
+      return '${timeDelta.toStringAsFixed(digits)}ms';
+    }
   }
 }
