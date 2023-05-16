@@ -140,7 +140,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             /////// SLIDER
             SizedBox(height: 16.0),
             Text(
-              'The current location is set to ${preferences.selectedLocation?.label}',
+              'The current location is set to ${preferences.selectedLocation}',
               style: TextStyle(fontSize: 20.0),
             ),
             Text(

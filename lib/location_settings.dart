@@ -30,15 +30,15 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController locationController = TextEditingController();
-    final List<DropdownMenuEntry<LocationLabel>> locationEntries = <DropdownMenuEntry<LocationLabel>>[];
-    for (final LocationLabel location in LocationLabel.values) {
-      locationEntries.add(
-        DropdownMenuEntry<LocationLabel>(
-            value: location, label: location.label, enabled: location.label != 'Oxford'
-        ),
-      );
-    }
+    // final TextEditingController locationController = TextEditingController();
+    // final List<DropdownMenuEntry<LocationLabel>> locationEntries = <DropdownMenuEntry<LocationLabel>>[];
+    // for (final LocationLabel location in LocationLabel.values) {
+    //   locationEntries.add(
+    //     DropdownMenuEntry<LocationLabel>(
+    //         value: location, label: location.label, enabled: location.label != 'Oxford'
+    //     ),
+    //   );
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -81,19 +81,40 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
               ), 
             ),
             SizedBox(height: 24.0),
-            DropdownMenu<LocationLabel>(
-              initialSelection: preferences.selectedLocation,
-              controller: locationController,
-              label: const Text('Location', style: TextStyle(color: Pallete.settingsTextColor)),
-              dropdownMenuEntries: locationEntries,
-              onSelected: (LocationLabel? location) {
+            // DropdownMenu<LocationLabel>(
+            //   initialSelection: preferences.selectedLocation,
+            //   controller: locationController,
+            //   label: const Text('Location', style: TextStyle(color: Pallete.settingsTextColor)),
+            //   dropdownMenuEntries: locationEntries,
+            //   onSelected: (LocationLabel? location) {
+            //     setState(() {
+            //       preferences.selectedLocation = location;
+            //     });
+            //   },
+            //   // menuStyle: MenuStyle(
+            //   //   backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+            //   //   fixedSize: MaterialStatePropertyAll(Size(480, 320)),
+            //   // ),
+            //
+            // ),
+            SizedBox(height: 24.0),
+            DropdownButton<String>(
+              isExpanded: true,
+              value: preferences.selectedLocation,
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              style: const TextStyle(color: Pallete.settingsTextColor),
+              onChanged: (String? location) {
                 setState(() {
-                  preferences.selectedLocation = location;
+                  preferences.selectedLocation = location!;
                 });
               },
-              menuStyle: MenuStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
-              ),
+              items: locations.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
             )
           ],
         ),
