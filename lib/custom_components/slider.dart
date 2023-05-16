@@ -55,7 +55,8 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
                     min: minValue,
                     max: maxValue,
                     divisions: (maxValue - minValue).toInt(),
-                    label: '${sliderValue.toInt()}',
+                    label:
+                        '${getStringForTimeDelta(sliderValue.toInt() * MINUTES_TO_MILISECONDS)}',
                     onChanged: (value) {
                       setState(() {
                         sliderValue = value;
