@@ -15,7 +15,8 @@ class Pallete {
   static const Color sliderInactiveColor = Color.fromARGB(255, 90, 76, 234);
 
   /// Settings Screens Colors
-  static const Color settingsBackgroundColor = Color.fromRGBO(214, 235, 184, 1);
+  static const Color settingsBackgroundDayColor = Color.fromRGBO(214, 235, 184, 1);
+  static const Color settingsBackgroundNightColor = Color.fromRGBO(85, 193, 114, 1);
   static const Color settingsAppBarColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color settingsTextColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color settingsBackButtonColor = Color.fromRGBO(0, 0, 0, 1);

@@ -57,7 +57,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Pallete.settingsAppBarColor,
       ),
-      backgroundColor: Pallete.settingsBackgroundColor,
+      backgroundColor: Pallete.settingsBackgroundDayColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

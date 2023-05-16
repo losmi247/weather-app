@@ -48,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Pallete.settingsAppBarColor,
       ),
-      backgroundColor: Pallete.settingsBackgroundColor,
+      backgroundColor: Pallete.settingsBackgroundDayColor,
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [

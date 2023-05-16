@@ -90,6 +90,15 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     super.dispose();
   }
 
+  /// RELATIVE POSITIONING (screen height):
+  /// 0.07 - settings button
+  /// 0.3 - weather graphic
+  /// 0.04 - sizedbox
+  /// 0.1 - slider
+  /// 0.02 - sizedbox
+  /// 0.03 - "Current location is Oxford"
+  /// 0.02 sizedbox
+  /// 0.03 - currentweather conditions go here
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,8 +119,25 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.3, // 30% of screen height
+              height: MediaQuery.of(context).size.height * 0.07,
+              child: Stack(children: [
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  /// Button to go to 'Settings' screen
+                  child: IconButton(
+                    icon: SvgPicture.asset("assets/images/gear.svg"),
+                    onPressed: () {
+                      /// push the 'Settings' screen and wait for updated preferences
+                      awaitReturnPreferencesFromSettingsScreen(context);
+                    },
+                    //child: Text('Settings'),
+                  ),
+                ),
+              ],),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3, // 30% of screen height
               //child: Expanded(
               child: Stack(children: [
                 Container(
@@ -121,7 +147,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       // getAnimationFrame('angry-thunder', _index),
                       fit: BoxFit.cover,
                     )),
-                Positioned(
+                /// PREVIOUS POSITION OF BUTTON
+                /*Positioned(
                   top: 5,
                   right: 5,
 
@@ -134,7 +161,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     },
                     //child: Text('Settings'),
                   ),
-                ),
+                ),*/
               ]),
               //),
             ),
@@ -163,18 +190,29 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               maxValue: 12,
               initialValue: 0,
             ),*/
+            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             /////// SLIDER
             slider,
             /////// SLIDER
-            SizedBox(height: 16.0),
-            Text(
-              'The current location is set to ${preferences.selectedLocation}',
-              style: TextStyle(fontSize: 20.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+              child: Center(
+                child: Text(
+                  'The current location is set to ${preferences.selectedLocation}',
+                  style: const TextStyle(fontSize: 20.0),
+                ),
+              )
             ),
-            Text(
-              'Current weather conditions go here',
-              style: TextStyle(fontSize: 20.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+              child: const Text(
+                'Current weather conditions go here',
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Column(
               children: [
                 Row(
