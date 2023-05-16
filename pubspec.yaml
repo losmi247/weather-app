@@ -96,6 +96,7 @@ flutter:
     - assets/images/red.svg
     - assets/images/cloud.svg
     - assets/images/gear.svg
+    - assets/images/
 
   fonts:
     - family: Roboto

@@ -4,6 +4,7 @@ import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:async';
 
 class StudyOutsideScreen extends StatefulWidget {
   const StudyOutsideScreen({Key? key}) : super(key: key);
@@ -14,8 +15,34 @@ class StudyOutsideScreen extends StatefulWidget {
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   //double _sliderValue = 0.0;
   /// to get slider value - slider.value
-  SliderWithLabels slider = const SliderWithLabels(minValue: 0, maxValue: 12, initialValue: 0);
+  SliderWithLabels slider =
+      const SliderWithLabels(minValue: 0, maxValue: 12, initialValue: 0);
   Preferences preferences = Preferences.defaultPreferences();
+
+  late final Timer timer;
+
+  final values = [
+    'sun-l.svg',
+    'sun-m.svg',
+    'sun-r.svg',
+    'sun-m.svg',
+    // 'sun-h.svg',
+  ];
+  int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(milliseconds: 333), (timer) {
+      setState(() => _index++);
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,33 +64,47 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.3, // 30% of screen height
+              height: MediaQuery.of(context).size.height *
+                  0.3, // 30% of screen height
               //child: Expanded(
-                child: Stack(
-                    children: [
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
-                        // child: Text(
-                        //   'Graphic goes here',
-                        //   style: TextStyle(fontSize: 32.0),
-                        // ),
-                      ),
-                      Positioned(
-                        top: 5,
-                        right: 5,
-                        /// Button to go to 'Settings' screen
-                        child: IconButton(
-                          icon: SvgPicture.asset("assets/images/gear.svg"),
-                          onPressed: () {
-                            /// push the 'Settings' screen and wait for updated preferences
-                            awaitReturnPreferencesFromSettingsScreen(context);
-                          },
-                          //child: Text('Settings'),
-                        ),
-                      ),
-                    ]
+              child: Stack(children: [
+                Container(
+                  alignment: AlignmentDirectional.center,
+                  // child: SvgPicture.asset("assets/images/sun.svg", fit: BoxFit.contain,)
+                  // child: SvgPicture.asset(
+                  //   "assets/images/sun-m.svg",
+                  //   fit: BoxFit.contain,
+                  // )
+                  child: AnimatedSwitcher(
+                      duration: Duration(milliseconds: 16),
+                      // child: Text(
+                      //   values[_index % values.length],
+                      //   key: UniqueKey(),
+                      // ),
+                      child: SvgPicture.asset(
+                        'assets/images/' + values[_index % values.length],
+                        fit: BoxFit.contain,
+                      )),
+                  // child: Text(
+                  //   'Graphic goes here',
+                  //   style: TextStyle(fontSize: 32.0),
+                  // ),
                 ),
+                Positioned(
+                  top: 5,
+                  right: 5,
+
+                  /// Button to go to 'Settings' screen
+                  child: IconButton(
+                    icon: SvgPicture.asset("assets/images/gear.svg"),
+                    onPressed: () {
+                      /// push the 'Settings' screen and wait for updated preferences
+                      awaitReturnPreferencesFromSettingsScreen(context);
+                    },
+                    //child: Text('Settings'),
+                  ),
+                ),
+              ]),
               //),
             ),
             /*SliderTheme(
@@ -115,7 +156,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     ),
                     // SvgPicture.asset("images/sun.svg"),
                     SizedBox(width: 16.0),
-                    Text('Feels like ${preferences.isCelsius ? '40°C' : '104°F'}'),
+                    Text(
+                        'Feels like ${preferences.isCelsius ? '40°C' : '104°F'}'),
                   ],
                 ),
                 SizedBox(height: 16.0),
@@ -169,15 +211,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   /// awaits for the returned preferences from the settings screen
-  /// and updates the preferences on stored on this screen so that 
+  /// and updates the preferences on stored on this screen so that
   /// we can access them later
   void awaitReturnPreferencesFromSettingsScreen(BuildContext context) async {
     final Preferences returnedPreferences = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen(preferences: preferences)
-                                  ),
-                        );
+      context,
+      MaterialPageRoute(
+          builder: (context) => SettingsScreen(preferences: preferences)),
+    );
     setState(() {
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
@@ -187,7 +228,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
-      preferences.isLocationSetAutomatically = returnedPreferences.isLocationSetAutomatically;
+      preferences.isLocationSetAutomatically =
+          returnedPreferences.isLocationSetAutomatically;
       preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }
