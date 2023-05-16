@@ -24,4 +24,6 @@ class Pallete {
   static const Color locationSettingsSwitchListTileInactiveThumbColor = Color.fromRGBO(115, 105, 105, 1);
   static const Color locationSettingsSwitchListTileInactiveTrackColor = Color.fromRGBO(175, 171, 171, 1);
 
+  static const Color locationTextColor = Color.fromRGBO(0, 0, 0, 1);
+
 }

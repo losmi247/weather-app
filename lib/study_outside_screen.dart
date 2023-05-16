@@ -96,6 +96,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             /////// SLIDER
             SizedBox(height: 16.0),
             Text(
+              'The current location is set to ${preferences.selectedLocation?.label}',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            Text(
               'Current weather conditions go here',
               style: TextStyle(fontSize: 20.0),
             ),
@@ -183,7 +187,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
-      preferences.isLocationEnabled = returnedPreferences.isLocationEnabled;
+      preferences.isLocationSetAutomatically = returnedPreferences.isLocationSetAutomatically;
+      preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }
 }

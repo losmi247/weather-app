@@ -173,7 +173,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
-      preferences.isLocationEnabled = returnedPreferences.isLocationEnabled;
+      preferences.isLocationSetAutomatically = returnedPreferences.isLocationSetAutomatically;
+      preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }
 }

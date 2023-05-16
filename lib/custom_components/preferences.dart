@@ -6,7 +6,8 @@ class Preferences {
   bool workInSnow;
   bool workInWind;
   bool workAtNight;
-  bool isLocationEnabled;
+  bool isLocationSetAutomatically;
+  LocationLabel? selectedLocation;
 
   Preferences({
     required this.isCelsius, 
@@ -16,7 +17,8 @@ class Preferences {
     required this.workInSnow, 
     required this.workInWind, 
     required this.workAtNight,
-    required this.isLocationEnabled
+    required this.isLocationSetAutomatically,
+    required this.selectedLocation
   });
 
   Preferences.copy(Preferences p)
@@ -27,7 +29,8 @@ class Preferences {
         workInSnow = p.workInSnow,
         workInWind = p.workInWind,
         workAtNight = p.workAtNight,
-        isLocationEnabled = p.isLocationEnabled;
+        isLocationSetAutomatically = p.isLocationSetAutomatically,
+        selectedLocation = p.selectedLocation;
 
   Preferences.defaultPreferences()
       : isCelsius = true, 
@@ -37,5 +40,16 @@ class Preferences {
         workInSnow = false, 
         workInWind = false, 
         workAtNight = false,
-        isLocationEnabled =  true;
+        isLocationSetAutomatically = true,
+        selectedLocation = LocationLabel.cambridge;
+}
+
+enum LocationLabel {
+  cambridge('Cambridge', 'Cambridge'),
+  oxford('Oxford', 'Oxford'),
+  manchester('Manchester', 'Manchester');
+
+  const LocationLabel(this.label, this.location);
+  final String label;
+  final String location;
 }

@@ -30,6 +30,16 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController locationController = TextEditingController();
+    final List<DropdownMenuEntry<LocationLabel>> locationEntries = <DropdownMenuEntry<LocationLabel>>[];
+    for (final LocationLabel location in LocationLabel.values) {
+      locationEntries.add(
+        DropdownMenuEntry<LocationLabel>(
+            value: location, label: location.label, enabled: location.label != 'Oxford'
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         /// flutter automatically adds a back button if there is a previous page,
@@ -54,12 +64,12 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SwitchListTile(
-              title: const Text('Enable Location',
+              title: const Text("Automatically set location",
                     style: TextStyle(color: Pallete.locationSettingsTextColor)),
-              value: preferences.isLocationEnabled,
+              value: preferences.isLocationSetAutomatically,
               onChanged: (value) {
                 setState(() {
-                  preferences.isLocationEnabled = value;
+                  preferences.isLocationSetAutomatically = value;
                 });
               },
               inactiveThumbColor: Pallete.locationSettingsSwitchListTileInactiveThumbColor,
@@ -70,9 +80,22 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                 borderRadius: BorderRadius.circular(5),
               ), 
             ),
+            SizedBox(height: 24.0),
+            DropdownMenu<LocationLabel>(
+              initialSelection: preferences.selectedLocation,
+              controller: locationController,
+              label: const Text('Location', style: TextStyle(color: Pallete.locationTextColor)),
+              dropdownMenuEntries: locationEntries,
+              onSelected: (LocationLabel? location) {
+                setState(() {
+                  preferences.selectedLocation = location;
+                });
+              },
+            )
           ],
         ),
       ),
     );
   }
 }
+
