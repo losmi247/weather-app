@@ -1,7 +1,6 @@
 # weather-app
 Weather app
 
-AAAAAB
 
 # flutter_application_1
 
