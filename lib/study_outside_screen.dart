@@ -128,7 +128,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       child: SvgPicture.asset(
                         // getAnimationFrame('happy-sun', _index),
                         getAnimationFrame('angry-thunder', _index),
-                        fit: BoxFit.contain,
+                        // fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                       )),
                   // child: Text(
                   //   'Graphic goes here',
