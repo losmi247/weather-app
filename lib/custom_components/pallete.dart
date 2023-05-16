@@ -15,15 +15,13 @@ class Pallete {
   static const Color sliderInactiveColor = Color.fromARGB(255, 90, 76, 234);
 
   /// Settings Screens Colors
-  static const Color locationSettingsBackgroundColor = Color.fromRGBO(214, 235, 184, 1);
-  static const Color locationSettingsAppBarColor = Color.fromRGBO(255, 255, 255, 1);
-  static const Color locationSettingsTextColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color locationSettingsBackButtonColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color locationSettingsSwitchListTileActiveColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color locationSettingsSwitchListTileBorderColor = Color.fromRGBO(0, 0, 0, 1);
-  static const Color locationSettingsSwitchListTileInactiveThumbColor = Color.fromRGBO(115, 105, 105, 1);
-  static const Color locationSettingsSwitchListTileInactiveTrackColor = Color.fromRGBO(175, 171, 171, 1);
-
-  static const Color locationTextColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsBackgroundColor = Color.fromRGBO(214, 235, 184, 1);
+  static const Color settingsAppBarColor = Color.fromRGBO(255, 255, 255, 1);
+  static const Color settingsTextColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsBackButtonColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsSwitchListTileActiveColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsSwitchListTileBorderColor = Color.fromRGBO(0, 0, 0, 1);
+  static const Color settingsSwitchListTileInactiveThumbColor = Color.fromRGBO(115, 105, 105, 1);
+  static const Color settingsSwitchListTileInactiveTrackColor = Color.fromRGBO(175, 171, 171, 1);
 
 }

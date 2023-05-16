@@ -46,18 +46,18 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
         /// so we need a custom button to be able to send data back to the main page
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_sharp, 
-                          color: Pallete.locationSettingsBackButtonColor,),
+                          color: Pallete.settingsBackButtonColor,),
           onPressed: () {
             // send preferences back to Settings screen
             _sendDataBack(context);
           }
         ),
         title: const Text('Location Settings', 
-                    style: TextStyle(color: Pallete.locationSettingsTextColor)),
+                    style: TextStyle(color: Pallete.settingsTextColor)),
         automaticallyImplyLeading: false,
-        backgroundColor: Pallete.locationSettingsAppBarColor,
+        backgroundColor: Pallete.settingsAppBarColor,
       ),
-      backgroundColor: Pallete.locationSettingsBackgroundColor,
+      backgroundColor: Pallete.settingsBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -65,18 +65,18 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
           children: [
             SwitchListTile(
               title: const Text("Automatically set location",
-                    style: TextStyle(color: Pallete.locationSettingsTextColor)),
+                    style: TextStyle(color: Pallete.settingsTextColor)),
               value: preferences.isLocationSetAutomatically,
               onChanged: (value) {
                 setState(() {
                   preferences.isLocationSetAutomatically = value;
                 });
               },
-              inactiveThumbColor: Pallete.locationSettingsSwitchListTileInactiveThumbColor,
-              inactiveTrackColor: Pallete.locationSettingsSwitchListTileInactiveTrackColor,
-              activeColor: Pallete.locationSettingsSwitchListTileActiveColor,
+              inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
+              inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+              activeColor: Pallete.settingsSwitchListTileActiveColor,
                shape: RoundedRectangleBorder(
-                side: const BorderSide(color: Pallete.locationSettingsSwitchListTileBorderColor),
+                side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
                 borderRadius: BorderRadius.circular(5),
               ), 
             ),
@@ -84,13 +84,16 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
             DropdownMenu<LocationLabel>(
               initialSelection: preferences.selectedLocation,
               controller: locationController,
-              label: const Text('Location', style: TextStyle(color: Pallete.locationTextColor)),
+              label: const Text('Location', style: TextStyle(color: Pallete.settingsTextColor)),
               dropdownMenuEntries: locationEntries,
               onSelected: (LocationLabel? location) {
                 setState(() {
                   preferences.selectedLocation = location;
                 });
               },
+              menuStyle: MenuStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+              ),
             )
           ],
         ),
