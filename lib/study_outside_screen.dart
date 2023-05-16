@@ -23,17 +23,20 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   final values = [
     'sun-l.svg',
+    'sun-ml.svg',
     'sun-m.svg',
+    'sun-mr.svg',
     'sun-r.svg',
+    'sun-mr.svg',
     'sun-m.svg',
-    // 'sun-h.svg',
+    'sun-ml.svg',
   ];
   int _index = 0;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 333), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 180), (timer) {
       setState(() => _index++);
     });
   }
