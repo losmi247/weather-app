@@ -112,8 +112,8 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                   child: DropdownButton<String>(
                     isExpanded: true,
                     value: preferences.selectedLocation,
-                    icon: const Icon(Icons.arrow_downward),
                     elevation: 16,
+                    iconEnabledColor: Pallete.settingsLocationDropdownArrowColor,
                     style: const TextStyle(color: Pallete.settingsTextColor),
                     // onChanged: (String? location) {
                     //   setState(() {
