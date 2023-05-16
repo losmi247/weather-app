@@ -43,6 +43,37 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     'angry-thunder/thunder-8.svg',
   ];
 
+  final animations = {
+    'angry-thunder': [
+      'angry-thunder/thunder-1.svg',
+      'angry-thunder/thunder-2.svg',
+      'angry-thunder/thunder-3.svg',
+      'angry-thunder/thunder-4.svg',
+      'angry-thunder/thunder-5.svg',
+      'angry-thunder/thunder-6.svg',
+      'angry-thunder/thunder-7.svg',
+      'angry-thunder/thunder-8.svg',
+    ],
+    'happy-sun': [
+      'sun-l.svg',
+      'sun-ml.svg',
+      'sun-m.svg',
+      'sun-mr.svg',
+      'sun-r.svg',
+      'sun-mr.svg',
+      'sun-m.svg',
+      'sun-ml.svg',
+    ],
+  };
+
+  String getAnimationFrame(animationID, index) {
+    final animation = animations[animationID];
+    if (animation == null) {
+      throw Exception('Animation $animationID not found');
+    }
+    return 'assets/images/${animation[index % animation.length]}';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -95,7 +126,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       //   key: UniqueKey(),
                       // ),
                       child: SvgPicture.asset(
-                        'assets/images/' + values[_index % values.length],
+                        // getAnimationFrame('happy-sun', _index),
+                        getAnimationFrame('angry-thunder', _index),
                         fit: BoxFit.contain,
                       )),
                   // child: Text(
