@@ -34,5 +34,4 @@ class WeatherApiClient{
     return body;
   }
 
-  }
 }
