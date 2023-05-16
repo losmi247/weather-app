@@ -83,7 +83,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                 borderRadius: BorderRadius.circular(5),
               ), 
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             // DropdownMenu<LocationLabel>(
             //   initialSelection: preferences.selectedLocation,
             //   controller: locationController,
@@ -100,14 +100,14 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
             //   // ),
             //
             // ),
-            SizedBox(height: 24.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Row(
               children: [
-                SizedBox(width: 10.0),
-                Expanded(
+                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
+                const Expanded(
                   child: Text('Select location', style: TextStyle(color: Pallete.settingsTextColor)),
                 ),
-                SizedBox(width: 10.0),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
                 Expanded(
                   child: DropdownButton<String>(
                     isExpanded: true,
@@ -139,10 +139,9 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                     dropdownColor: Pallete.settingsLocationDropdownColor,
                   )
                 ),
-                SizedBox(width: 10.0),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
               ]
-            )
-
+            ),
           ],
         ),
       ),

@@ -69,10 +69,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               borderRadius: BorderRadius.circular(10),
             ), 
           ),
-          SizedBox(height: 16.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.03),
           const Text('Temperature range',
               style: TextStyle(color: Pallete.settingsTextColor)),
-          SizedBox(height: 8.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.005),
           Row(
             children: [
               Expanded(
@@ -102,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   cursorColor: Pallete.settingsTextFormFieldCursorColor,
                 ),
               ),
-              SizedBox(width: 16.0),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.06),
               Expanded(
                 child: TextFormField(
                   decoration: const InputDecoration(
@@ -131,10 +131,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
           ),
-          SizedBox(height: 16.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.032),
           const Text('Willing to work in:', 
                 style: TextStyle(color: Pallete.settingsTextColor)),
-          SizedBox(height: 14.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.024),
           SwitchListTile(
             title: const Text('Rain', 
                             style: TextStyle(color: Pallete.settingsTextColor)),
@@ -204,7 +204,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ), 
           ),
           /// Button to go to 'Location Settings' screen
-          SizedBox(height: 16.0),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -219,7 +219,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 /// push the 'Location Settings' screen and wait for updated preferences
                 awaitReturnPreferencesFromLocationSettingsScreen(context);
               },
-              child: Text('Location Settings'),
+              child: const Text('Location Settings'),
             ),
           ),
         ],
