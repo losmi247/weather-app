@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 
+import '../constants.dart';
+
 class SliderWithTimeLabels extends StatefulWidget {
   const SliderWithTimeLabels({
     Key? key,
@@ -24,8 +26,6 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
   double minValue = 0;
   double maxValue = 12;
   double sliderValue = 0;
-
-  static const MINUTES_TO_MILISECONDS = 60 * 1000;
 
   @override
   void initState() {
@@ -55,8 +55,8 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                     min: minValue,
                     max: maxValue,
                     divisions: (maxValue - minValue).toInt(),
-                    label:
-                        '${getStringForTimeDelta(sliderValue.toInt() * MINUTES_TO_MILISECONDS)}',
+                    label: getStringForTimeDelta(sliderValue.toInt() *
+                        Constants.MINUTES_TO_MILLISECONDS),
                     onChanged: (value) {
                       setState(() {
                         sliderValue = value;
@@ -71,16 +71,16 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 bottom: 5,
                 left: 20,
                 child: Text(
-                    getStringForTimeDelta(
-                        widget.minValue.toInt() * MINUTES_TO_MILISECONDS),
+                    getStringForTimeDelta(widget.minValue.toInt() *
+                        Constants.MINUTES_TO_MILLISECONDS),
                     style: TextStyle(fontSize: 14)),
               ),
               Positioned(
                 bottom: 5,
                 right: 15,
                 child: Text(
-                    getStringForTimeDelta(
-                        widget.maxValue.toInt() * MINUTES_TO_MILISECONDS),
+                    getStringForTimeDelta(widget.maxValue.toInt() *
+                        Constants.MINUTES_TO_MILLISECONDS),
                     style: TextStyle(fontSize: 14)),
               ),
               Positioned(
@@ -88,8 +88,8 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 top: -4,
                 child: Text(
                     "Revise for " +
-                        getStringForTimeDelta(
-                            sliderValue.toInt() * MINUTES_TO_MILISECONDS),
+                        getStringForTimeDelta(sliderValue.toInt() *
+                            Constants.MINUTES_TO_MILLISECONDS),
                     style: TextStyle(fontSize: 20)),
               ),
             ],
