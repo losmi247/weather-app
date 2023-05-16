@@ -25,6 +25,8 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
   double maxValue = 12;
   double sliderValue = 0;
 
+  static const MINUTES_TO_MILISECONDS = 60 * 1000;
+
   @override
   void initState() {
     super.initState();
@@ -67,13 +69,17 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
               Positioned(
                 bottom: 5,
                 left: 20,
-                child: Text(widget.minValue.toInt().toString(),
+                child: Text(
+                    getStringForTimeDelta(
+                        widget.minValue.toInt() * MINUTES_TO_MILISECONDS),
                     style: TextStyle(fontSize: 14)),
               ),
               Positioned(
                 bottom: 5,
                 right: 15,
-                child: Text(widget.maxValue.toInt().toString(),
+                child: Text(
+                    getStringForTimeDelta(
+                        widget.maxValue.toInt() * MINUTES_TO_MILISECONDS),
                     style: TextStyle(fontSize: 14)),
               ),
               Positioned(
@@ -81,7 +87,8 @@ class _SliderWithLabelsState extends State<SliderWithLabels> {
                 top: -4,
                 child: Text(
                     "Revise for " +
-                        getStringForTimeDelta(sliderValue.toInt() * 60 * 1000),
+                        getStringForTimeDelta(
+                            sliderValue.toInt() * MINUTES_TO_MILISECONDS),
                     style: TextStyle(fontSize: 20)),
               ),
             ],
