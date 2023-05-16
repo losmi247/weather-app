@@ -3,6 +3,7 @@ import 'package:flutter_application_1/custom_components/slider.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
 import 'package:flutter_application_1/settings_screen.dart';
+import 'package:flutter_application_1/weather_api_client.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class StudyOutsideScreen extends StatefulWidget {
@@ -16,7 +17,13 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   /// to get slider value - slider.value
   SliderWithLabels slider = const SliderWithLabels(minValue: 0, maxValue: 12, initialValue: 0);
   Preferences preferences = Preferences.defaultPreferences();
-
+  WeatherApiClient client = WeatherApiClient();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    client.getHourlyWeather('Cambridge');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

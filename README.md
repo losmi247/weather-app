@@ -1,8 +1,3 @@
-# weather-app
-Weather app
-
-AAAAAB
-
 # flutter_application_1
 
 A new Flutter project.
@@ -19,32 +14,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-
-
-
-___
-
-
-## Getting started
-
-
-clone git repo locally
-
-
-download the flutter vs code extension
-
-run command (cmd + shift + p)
-`Flutter: New Project`
-select a new folder
-
-`Flutter: Select Device` -> Chrome/web
-
-check it runs (F5)
-
-copy all files except test/, lib/ and README.md to weather-app/
-
-open weather-app/ in vs code, then it should run
-
-
-
-
