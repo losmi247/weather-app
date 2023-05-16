@@ -15,8 +15,8 @@ class StudyOutsideScreen extends StatefulWidget {
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   //double _sliderValue = 0.0;
   /// to get slider value - slider.value
-  SliderWithLabels slider =
-      const SliderWithLabels(minValue: 0, maxValue: 720, initialValue: 60);
+  SliderWithTimeLabels slider =
+      const SliderWithTimeLabels(minValue: 0, maxValue: 720, initialValue: 60);
   Preferences preferences = Preferences.defaultPreferences();
 
   late final Timer timer;
