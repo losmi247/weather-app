@@ -70,6 +70,9 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
               onChanged: (value) {
                 setState(() {
                   preferences.isLocationSetAutomatically = value;
+                  if (value == true) {
+                    preferences.selectedLocation = "Cambridge";
+                  }
                 });
               },
               inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
@@ -98,24 +101,47 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
             //
             // ),
             SizedBox(height: 24.0),
-            DropdownButton<String>(
-              isExpanded: true,
-              value: preferences.selectedLocation,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Pallete.settingsTextColor),
-              onChanged: (String? location) {
-                setState(() {
-                  preferences.selectedLocation = location!;
-                });
-              },
-              items: locations.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+            Row(
+              children: [
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: Text('Select location', style: TextStyle(color: Pallete.settingsTextColor)),
+                ),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: preferences.selectedLocation,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    style: const TextStyle(color: Pallete.settingsTextColor),
+                    // onChanged: (String? location) {
+                    //   setState(() {
+                    //     preferences.selectedLocation = location!;
+                    //   });
+                    // },
+                    onChanged: (!preferences.isLocationSetAutomatically ?
+                    ((String? location) {
+                      setState(() {
+                        preferences.selectedLocation = location!;
+                      });
+                    })
+                        :
+                    null
+
+                    ),
+                    items: locations.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ),
+                SizedBox(width: 10.0),
+              ]
             )
+
           ],
         ),
       ),
