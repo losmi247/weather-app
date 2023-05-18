@@ -102,6 +102,7 @@ flutter:
     - assets/images/happy-cloud/
     - assets/images/hot-sun/
     - assets/images/too-windy/
+    - assets/images/rain/
 
   fonts:
     - family: Roboto

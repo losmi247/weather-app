@@ -106,6 +106,13 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       'too-windy/too-windy-5.svg',
       'too-windy/too-windy-6.svg',
       'too-windy/too-windy-7.svg',
+    ],
+    'rain': [
+      'rain/rain-1.svg',
+      'rain/rain-2.svg',
+      'rain/rain-3.svg',
+      'rain/rain-4.svg',
+      'rain/rain-5.svg',
     ]
   };
 
@@ -261,8 +268,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       // getAnimationFrame('happy-sun', _index),
                       // getAnimationFrame('angry-thunder', _index),
                       // getAnimationFrame('happy-cloud', _index),
-                      getAnimationFrame('hot-sun', _index),
+                      // getAnimationFrame('hot-sun', _index),
                       // getAnimationFrame('too-windy', _index),
+                      getAnimationFrame('rain', _index),
                       fit: BoxFit.cover,
                     )),
 
