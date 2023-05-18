@@ -14,17 +14,10 @@ class SliderWithTimeLabels extends StatefulWidget {
   final double minValue;
   final double maxValue;
   final double initialValue;
-  late _SliderWithTimeLabelsState sliderState;
+  late _SliderWithTimeLabelsState sliderState = _SliderWithTimeLabelsState();
 
   @override
-  //_SliderWithTimeLabelsState createState() => _SliderWithTimeLabelsState();
-  _SliderWithTimeLabelsState createState() {
-    sliderState = _SliderWithTimeLabelsState();
-    return sliderState;
-  }
-
-  /// getter for the slider value
-  //double get value => _SliderWithTimeLabelsState().sliderValue;
+  _SliderWithTimeLabelsState createState() => sliderState;
 
   double get value => sliderState.sliderValue;
 }
