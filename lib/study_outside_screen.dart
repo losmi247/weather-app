@@ -79,9 +79,17 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     return 'assets/images/${animation[index % animation.length]}';
   }
 
+  WeatherApiClient client = WeatherApiClient();
+  Weather? data;
+
+  Future<void> getData() async {
+    data = await client.getWeather(preferences.selectedLocation);
+  }
+
   @override
   void initState() {
     super.initState();
+    getData();
     timer = Timer.periodic(const Duration(milliseconds: 180), (timer) {
       setState(() => _index++);
     });
@@ -91,6 +99,34 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   void dispose() {
     timer.cancel();
     super.dispose();
+  }
+
+  double feelsLikeTemp() {
+    if (data == null) {
+      return 0;
+    }
+    return data!.feelsLike![0].round();
+  }
+
+  String windSpeedText() {
+    if (data == null) {
+      return 'Loading...';
+    }
+    return '${data!.wind![0]}';
+  }
+
+  String weatherDescriptionText() {
+    if (data == null) {
+      return 'Loading...';
+    }
+    return '${data!.description![0]}';
+  }
+
+  String sunriseOrSunsetText() {
+    if (data == null) {
+      return 'Loading...';
+    }
+    return data!.timeToSunriseOrSunset();
   }
 
   /// RELATIVE POSITIONING (screen height):
@@ -103,12 +139,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   /// 0.02 sizedbox
   /// 0.03 - currentweather conditions go here
 
-  WeatherApiClient client = WeatherApiClient();
-  Weather? data;
 
-  Future<void> getData() async {
-    data = await client.getWeather(preferences.selectedLocation);
-  }
 
 
   @override
@@ -142,6 +173,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           onPressed: () {
                             /// push the 'Settings' screen and wait for updated preferences
                             awaitReturnPreferencesFromSettingsScreen(context);
+                            getData();
                           },
                           //child: Text('Settings'),
                         ),
@@ -237,8 +269,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           ),
                           // SvgPicture.asset("images/sun.svg"),
                           SizedBox(width: 16.0),
-                          Text(
-                              'Feels like ${Util.getStringForTemperature(40, preferences.isCelsius)}'),
+                          Text('Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
                         ],
                       ),
                       SizedBox(height: 16.0),
@@ -255,7 +286,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           //   color: Colors.red,
                           // ),
                           SizedBox(width: 16.0),
-                          Text('Strong winds'),
+                          Text(windSpeedText()),
                         ],
                       ),
                       SizedBox(height: 16.0),
@@ -267,7 +298,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             height: 24.0,
                           ),
                           SizedBox(width: 16.0),
-                          Text('Not too sunny'),
+                          Text(weatherDescriptionText()),
                         ],
                       ),
                       SizedBox(height: 16.0),
@@ -279,7 +310,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             height: 24.0,
                           ),
                           SizedBox(width: 16.0),
-                          Text('Sunrise is in 35 minutes'),
+                          Text(sunriseOrSunsetText()),
                         ],
                       ),
                     ],
