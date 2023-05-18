@@ -146,7 +146,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (data == null) {
       return 'Loading...';
     }
-    return '${data!.wind![0]}';
+    return '${data!.windDescription![0]}';
   }
 
   // capitalize first letter
@@ -167,6 +167,40 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     }
     return data!.timeToSunriseOrSunset();
   }
+
+  String checkRain(int hours) {
+    // loop through rain data for each hour and return false if over 0.3
+    for (int i = 0; i < hours; i++) {
+      if (data!.rainChance![i] > 0.3) {
+        return 'It\'s going to rain in the next $hours hours';
+      }
+    }
+    return 'No rain in the next $hours hours';
+  }
+
+  String checkWind(int hours) {
+    // loop through wind data for each hour and return false if over
+    for (int i = 0; i < hours; i++) {
+      if (data!.wind![i] >= 14) {
+        return 'It\'s going to be a ${data!.windDescription![i]} in the next $hours hours';
+      }
+    }
+    return 'Not too windy in the next $hours hours';
+  }
+
+  String checkTemp(int hours) {
+    // loop through temp data for each hour and return false if outside of selected min and max
+    for (int i = 0; i < hours; i++) {
+      if (data!.feelsLike![i] < preferences.minTemp) {
+        return 'It\'s going to be too cold in the next $hours hours';
+      }
+      else if (data!.feelsLike![i] > preferences.maxTemp) {
+        return 'It\'s going to be too hot in the next $hours hours';
+      }
+    }
+    return 'It\'s going to be a comfortable temperature for the next $hours hours';
+  }
+
 
   /// RELATIVE POSITIONING (screen height):
   /// 0.07 - settings button
