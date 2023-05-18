@@ -100,13 +100,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     super.dispose();
   }
 
-  // double feelsLikeTemp() {
-  //   if (data == null) {
-  //     return 0;
-  //   }
-  //   return data!.feelsLike![0].round();
-  // }
-
   String feelsLikeTempText() {
     // 'Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
 
