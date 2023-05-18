@@ -341,8 +341,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
-              child: const Text(
-                'Current weather conditions go here',
+              child: Text(
+                checkTemp(getNumHoursStudy()),
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
@@ -361,7 +361,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     SizedBox(width: 16.0),
                     Text(feelsLikeTempText()),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.4),
-                    Text(checkTemp(getNumHoursStudy()))
+                    // Text(checkTemp(getNumHoursStudy()))
                   ],
                 ),
                 SizedBox(height: 16.0),
@@ -437,16 +437,13 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   int getNumHoursStudy() {
-    // todo: fix this
-    // int end_unix_time = data!.time!! + (slider.value * 3600 as int);
-    // print(end_unix_time);
-    // int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
-    // int curr_unix_time = data!.time!;
-    // print(curr_unix_time);
-    // int curr_unix_hour = (curr_unix_time - curr_unix_time % 3600) / 3600 as int;
-    print(slider.value);
-    // return end_unix_hour - curr_unix_hour;
-    return 1;
+    int currentTime = data!.time!;
+    int endTime = currentTime + (slider.value * 60).toInt();
+
+    int currentHour = (currentTime - currentTime % 3600) ~/ 3600;
+    int endHour = (endTime - endTime % 3600) ~/ 3600;
+
+    return endHour - currentHour;
   }
 
   /// awaits for the returned preferences from the settings screen
