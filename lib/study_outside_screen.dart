@@ -17,9 +17,11 @@ class StudyOutsideScreen extends StatefulWidget {
 
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   //double _sliderValue = 0.0;
-  /// to get slider value - slider.value
+  /// TO GET SLIDER VALUE - slider.value
   SliderWithTimeLabels slider =
       SliderWithTimeLabels(minValue: 0, maxValue: 720, initialValue: 60);
+  /// TO GET MIN/MAX TEMP VALUE - preferences.minTemp, preferences.maxTemp
+  /// (these are getters, not fields)
   Preferences preferences = Preferences.defaultPreferences();
 
   late final Timer timer;
@@ -551,14 +553,20 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
-      preferences.minTemp = returnedPreferences.minTemp;
-      preferences.maxTemp = returnedPreferences.maxTemp;
+      /// minTemp, maxTemp are now getters in the Preferences class
+      //preferences.minTemp = returnedPreferences.minTemp;
+      //preferences.maxTemp = returnedPreferences.maxTemp;
       preferences.workAtNight = returnedPreferences.workAtNight;
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
+
+      /// update the min/max temp indices when you come back from 
+      /// 'settings' screen
+      preferences.minTempIndex = returnedPreferences.minTempIndex;
+      preferences.maxTempIndex = returnedPreferences.maxTempIndex;
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/custom_components/option_slider.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/location_settings.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
@@ -17,15 +18,29 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   Preferences preferences = Preferences.defaultPreferences();
+  /// don't access these for min/max temp, access
+  /// preferences.minTemp, preferences.maxTemp,
+  /// except they are now getters, not fields in the 
+  /// Preferences class
+  OptionSlider minTempSlider = OptionSlider(options: Preferences.minTemperatures, label: "Min temperature");
+  OptionSlider maxTempSlider = OptionSlider(options: Preferences.maxTemperatures, label: "Max temperature");
 
   @override
   void initState() {
     super.initState();
     preferences = Preferences.copy(widget.preferences);
+    /// set up the min/max temperature
+    /// sliders to current indices
+    minTempSlider.index = preferences.minTempIndex;
+    maxTempSlider.index = preferences.maxTempIndex;
   }
 
   /// sends preferences back to the previous page
   void _sendDataBack(BuildContext context) {
+    /// update preferences for min/max temperature
+    /// when going back to 'study outside' screen
+    preferences.minTempIndex = minTempSlider.index;
+    preferences.maxTempIndex = maxTempSlider.index;
     Navigator.pop(context, preferences);
   }
 
@@ -72,7 +87,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-          const Text('Temperature range',
+          /// OLD MIN/MAX TEMP SETTINGS
+          /*const Text('Temperature range',
               style: TextStyle(color: Pallete.settingsTextColor)),
           SizedBox(height: MediaQuery.of(context).size.height * 0.005),
           Row(
@@ -132,7 +148,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ],
-          ),
+          ),*/
+
+          /// NEW MIN/MAX TEMPS SETTINGS
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              minTempSlider,
+              maxTempSlider
+            ],
+          ), 
+          
           SizedBox(height: MediaQuery.of(context).size.height * 0.032),
           const Text('Willing to work in:',
               style: TextStyle(color: Pallete.settingsTextColor)),
@@ -231,6 +257,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               onPressed: () {
+                /// before going to 'Location Settings', update 
+                /// the preferences for min/max temperature
+                /// (maybe can leave it for later, when we leave this
+                /// screen to go back to 'Study Outside Screen', 
+                /// but it's safer this way)
+                preferences.minTempIndex = minTempSlider.index;
+                preferences.maxTempIndex = maxTempSlider.index;
                 /// push the 'Location Settings' screen and wait for updated preferences
                 awaitReturnPreferencesFromLocationSettingsScreen(context);
               },
@@ -256,8 +289,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
-      preferences.minTemp = returnedPreferences.minTemp;
-      preferences.maxTemp = returnedPreferences.maxTemp;
+      /// minTemp, maxTemp are now getters
+      //preferences.minTemp = returnedPreferences.minTemp;
+      //preferences.maxTemp = returnedPreferences.maxTemp;
       preferences.workAtNight = returnedPreferences.workAtNight;
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
@@ -265,6 +299,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
       preferences.selectedLocation = returnedPreferences.selectedLocation;
+
+      /// update the min/max temp indices when you come back from 
+      /// 'location settings' screen (even they won't be changed there)
+      preferences.minTempIndex = returnedPreferences.minTempIndex;
+      preferences.maxTempIndex = returnedPreferences.maxTempIndex;
     });
   }
 }
