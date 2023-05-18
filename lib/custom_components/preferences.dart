@@ -61,5 +61,6 @@ const List<String> locations = <String>[
   'Vienna',
   'Washington DC',
   'Dubai',
-  'Singapore'
+  'Singapore',
+  'Reykjavík'
 ];

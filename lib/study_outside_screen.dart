@@ -215,6 +215,88 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     return 'It\'s going to be a comfortable temperature for $hours hours';
   }
 
+  // return tuple of bool and string
+  // bool is true if conditions are met
+  // string is the text to display
+
+  List checkTemp2(int hour) {
+    // loop through temp data for each hour and return false if outside of selected min and max
+    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+      if (data!.feelsLike![i] < preferences.minTemp) {
+        if (i == 0) {
+          return [false, 'It\'s too cold right now'];
+        }
+
+        return [false, 'It\'s going to be too cold in $i hours'];
+      } else if (data!.feelsLike![i] > preferences.maxTemp) {
+        if (i == 0) {
+          return [false, 'It\'s too hot right now'];
+        }
+
+        return [false, 'It\'s going to be too hot in $i hours'];
+      }
+    }
+    return [
+      true,
+      'It\'s going to be a comfortable temperature for $hour hours'
+    ];
+  }
+
+  List checkWind2(int hour) {
+    // loop through wind data for each hour and return false if over
+    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+      if (data!.wind![i] >= 14) {
+        return [
+          false,
+          'There will be a ${data!.windDescription![i]} in $hour hours'
+        ];
+      }
+    }
+    return [true, 'Not too windy in the next $hour hours'];
+  }
+
+  List checkRain2(int hour) {
+    // loop through rain data for each hour and return false if over 0.3
+    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+      if (data!.rainChance![i] > 0.3) {
+        if (i == 0) {
+          return [false, 'It\'s raining now'];
+        }
+
+        return [false, 'It\'s going to rain in the next $hour hours'];
+      }
+    }
+    return [true, 'No rain in the next $hour hours'];
+  }
+
+  String checkConditions(int hours) {
+    // call check temp -> (inBounds: bool, text: String)
+    // call check wind -> (inBounds, text)
+    // call check rain -> (inBounds, text)
+
+    // if all inBounds are true, return comfortable
+
+    // if any inBounds are false, return the text of the first one that is false
+
+    List temp = checkTemp2(hours);
+    List wind = checkWind2(hours);
+    List rain = checkRain2(hours);
+
+    if (!rain[0] && !preferences.workInRain) {
+      return rain[1];
+    }
+
+    if (!wind[0] && !preferences.workInWind) {
+      return wind[1];
+    }
+
+    if (!temp[0]) {
+      return temp[1];
+    }
+
+    return 'It\'s going to be a comfortable temperature for $hours hours';
+  }
+
   /// RELATIVE POSITIONING (screen height):
   /// 0.07 - settings button
   /// 0.3 - weather graphic
@@ -342,7 +424,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
               child: Text(
-                checkTemp(getNumHoursStudy()),
+                checkConditions(getNumHoursStudy()),
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
@@ -443,7 +525,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     int currentHour = (currentTime - currentTime % 3600) ~/ 3600;
     int endHour = (endTime - endTime % 3600) ~/ 3600;
 
-    return endHour - currentHour;
+    return endHour - currentHour + 1;
   }
 
   /// awaits for the returned preferences from the settings screen
