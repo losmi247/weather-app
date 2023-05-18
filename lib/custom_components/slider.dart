@@ -4,7 +4,7 @@ import 'package:flutter_application_1/custom_components/pallete.dart';
 import '../constants.dart';
 
 class SliderWithTimeLabels extends StatefulWidget {
-  const SliderWithTimeLabels({
+  SliderWithTimeLabels({
     Key? key,
     required this.minValue,
     required this.maxValue,
@@ -14,12 +14,19 @@ class SliderWithTimeLabels extends StatefulWidget {
   final double minValue;
   final double maxValue;
   final double initialValue;
+  late _SliderWithTimeLabelsState sliderState;
 
   @override
-  _SliderWithTimeLabelsState createState() => _SliderWithTimeLabelsState();
+  //_SliderWithTimeLabelsState createState() => _SliderWithTimeLabelsState();
+  _SliderWithTimeLabelsState createState() {
+    sliderState = _SliderWithTimeLabelsState();
+    return sliderState;
+  }
 
   /// getter for the slider value
-  double get value => _SliderWithTimeLabelsState().sliderValue;
+  //double get value => _SliderWithTimeLabelsState().sliderValue;
+
+  double get value => sliderState.sliderValue;
 }
 
 class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
