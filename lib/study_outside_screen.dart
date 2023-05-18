@@ -19,7 +19,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   //double _sliderValue = 0.0;
   /// to get slider value - slider.value
   SliderWithTimeLabels slider =
-      const SliderWithTimeLabels(minValue: 0, maxValue: 720, initialValue: 60);
+      SliderWithTimeLabels(minValue: 0, maxValue: 720, initialValue: 60);
   Preferences preferences = Preferences.defaultPreferences();
 
   late final Timer timer;
@@ -199,8 +199,16 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     // loop through temp data for each hour and return false if outside of selected min and max
     for (int i = 0; i <= hours; i++) {
       if (data!.feelsLike![i] < preferences.minTemp) {
+        if (i == 0) {
+          return 'It\'s too cold right now';
+        }
+
         return 'It\'s going to be too cold in $i hours';
       } else if (data!.feelsLike![i] > preferences.maxTemp) {
+        if (i == 0) {
+          return 'It\'s too hot right now';
+        }
+
         return 'It\'s going to be too hot in $i hours';
       }
     }
@@ -266,11 +274,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     alignment: AlignmentDirectional.center,
                     child: SvgPicture.asset(
                       // getAnimationFrame('happy-sun', _index),
-                      // getAnimationFrame('angry-thunder', _index),
+                      getAnimationFrame('angry-thunder', _index),
                       // getAnimationFrame('happy-cloud', _index),
                       // getAnimationFrame('hot-sun', _index),
                       // getAnimationFrame('too-windy', _index),
-                      getAnimationFrame('rain', _index),
+                      // getAnimationFrame('rain', _index),
                       fit: BoxFit.cover,
                     )),
 
@@ -429,13 +437,16 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   int getNumHoursStudy() {
-    int end_unix_time = data!.time!! + (slider.value * 3600 as int);
-    print(end_unix_time);
-    int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
-    int curr_unix_time = data!.time!;
-    print(curr_unix_time);
-    int curr_unix_hour = (curr_unix_time - curr_unix_time % 3600) / 3600 as int;
-    return end_unix_hour - curr_unix_hour;
+    // todo: fix this
+    // int end_unix_time = data!.time!! + (slider.value * 3600 as int);
+    // print(end_unix_time);
+    // int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
+    // int curr_unix_time = data!.time!;
+    // print(curr_unix_time);
+    // int curr_unix_hour = (curr_unix_time - curr_unix_time % 3600) / 3600 as int;
+    print(slider.value);
+    // return end_unix_hour - curr_unix_hour;
+    return 1;
   }
 
   /// awaits for the returned preferences from the settings screen
