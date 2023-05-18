@@ -350,93 +350,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 SizedBox(height: 16.0),
                 Row(
                   children: [
-                    // SvgPicture.asset(
-                    //   // 'assets/images/red.svg',
-                    //   // width: 24.0,
-                    //   // height: 24.0,
-                    //   //
-                    //   width: 36.0,
-                    //   height: 36.0,
-                    //   "assets/images/too-windy/too-windy-7.svg",
-                    // ),
-                    // Container(
-                    //   width: 24,
-                    //   height: 24,
-                    //   color: Colors.red,
-                    // ),
-                    // ConstrainedBox(
-                    // constraints: BoxConstraints.tight(Size(36, 36)),
-                    // Container(
-                    //   width: 36,
-                    //   height: 36,
-                    //   border: Border.all(color: Colors.red, width: 1),
-                    //   child: SvgPicture.asset(
-                    //     // 'assets/images/red.svg',
-                    //     // width: 36.0,
-                    //     // height: 24.0,
-                    //     //
-                    //     // width: 36.0,
-                    //     // height: 360.0,
-                    //     "assets/images/too-windy/too-windy-7.svg",
-                    //     // image fills box, keeping aspect ratio
-                    //     // fit: BoxFit.cover,
-                    //     // fit: BoxFit.contain,
-                    //     // fit height, keeping aspect ratio
-                    //     // fit: BoxFit.fitHeight,
-                    //     // 1.5 times the size of the box, so that it overflows
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-
-                    // // image natively has some padding, so need to make image ~1.5 times the size of the box, so that it overflows
-                    // Container(
-                    //   width: 36,
-                    //   height: 36,
-                    //   child: SvgPicture.asset(
-                    //     "assets/images/too-windy/too-windy-7.svg",
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-
-                    // OverflowBox(
-                    //   minWidth: 0.0,
-                    //   minHeight: 0.0,
-                    //   maxWidth: 100,
-                    //   maxHeight: 100,
-                    //   child: Container(
-                    //     width: 36,
-                    //     height: 36,
-                    //     // child: SvgPicture.asset(
-                    //     //   "assets/images/too-windy/too-windy-7.svg",
-                    //     //   fit: BoxFit.cover,
-                    //     // ),
-                    //     child: Text("Hello"),
-                    //   ),
-                    // ),
-
-                    // Container(
-                    //   width: 48,
-                    //   height: 36,
-                    //   // child: ClipRect(
-                    //   child: OverflowBox(
-                    //     alignment: Alignment.center,
-                    //     child: SvgPicture.asset(
-                    //       "assets/images/too-windy/too-windy-7.svg",
-                    //       // fit: BoxFit.cover,
-                    //       width: 1.5 *
-                    //           36, // Adjust the width to achieve the desired overflow
-                    //       height: 1.5 *
-                    //           36, // Adjust the height to achieve the desired overflow
-                    //     ),
-                    //   ),
-                    //   // ),
-                    // ),
-
                     Container(
                       width: 36,
                       height: 36,
                       // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                      // child: ClipRect(
                       child: OverflowBox(
                         alignment: Alignment.center,
                         minWidth: 0.0,
@@ -448,9 +365,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      // ),
                     ),
-
                     SizedBox(width: 16.0),
                     Text(windSpeedText()),
                   ],
