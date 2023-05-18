@@ -75,6 +75,38 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       'sun-m.svg',
       'sun-ml.svg',
     ],
+    'happy-cloud': [
+      'happy-cloud/happy-cloud-1.svg',
+      'happy-cloud/happy-cloud-2.svg',
+      'happy-cloud/happy-cloud-3.svg',
+      'happy-cloud/happy-cloud-4.svg',
+      'happy-cloud/happy-cloud-5.svg',
+      'happy-cloud/happy-cloud-6.svg',
+      'happy-cloud/happy-cloud-7.svg',
+      'happy-cloud/happy-cloud-8.svg',
+      'happy-cloud/happy-cloud-9.svg',
+      'happy-cloud/happy-cloud-10.svg',
+      'happy-cloud/happy-cloud-11.svg',
+    ],
+    'hot-sun': [
+      'hot-sun/sun-too-hot-l.svg',
+      'hot-sun/sun-too-hot-ml.svg',
+      'hot-sun/sun-too-hot-m.svg',
+      'hot-sun/sun-too-hot-mr.svg',
+      'hot-sun/sun-too-hot-r.svg',
+      'hot-sun/sun-too-hot-mr.svg',
+      'hot-sun/sun-too-hot-m.svg',
+      'hot-sun/sun-too-hot-ml.svg',
+    ],
+    'too-windy': [
+      'too-windy/too-windy-1.svg',
+      'too-windy/too-windy-2.svg',
+      'too-windy/too-windy-3.svg',
+      'too-windy/too-windy-4.svg',
+      'too-windy/too-windy-5.svg',
+      'too-windy/too-windy-6.svg',
+      'too-windy/too-windy-7.svg',
+    ]
   };
 
   String getAnimationFrame(animationID, index) {
@@ -195,8 +227,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 Container(
                     alignment: AlignmentDirectional.center,
                     child: SvgPicture.asset(
-                      getAnimationFrame('happy-sun', _index),
+                      // getAnimationFrame('happy-sun', _index),
                       // getAnimationFrame('angry-thunder', _index),
+                      // getAnimationFrame('happy-cloud', _index),
+                      getAnimationFrame('hot-sun', _index),
+                      // getAnimationFrame('too-windy', _index),
                       fit: BoxFit.cover,
                     )),
 
