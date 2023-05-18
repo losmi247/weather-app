@@ -159,7 +159,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ), 
           
-          SizedBox(height: MediaQuery.of(context).size.height * 0.032),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           const Text('Willing to work in:',
               style: TextStyle(color: Pallete.settingsTextColor)),
           SizedBox(height: MediaQuery.of(context).size.height * 0.024),

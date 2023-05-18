@@ -74,7 +74,7 @@ class _OptionSliderState extends State<OptionSlider> {
         children: [
           Text(label, style: const TextStyle(color: Pallete.settingsTextColor)),
           Positioned(
-            top: 27,
+            top: 30,
             child: Container(
               width: 130,
               height: 80,
