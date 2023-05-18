@@ -371,6 +371,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                         maxHeight: 36,
                         child: SvgPicture.asset(
                           "assets/images/too-windy/too-windy-7.svg",
+                          // getAnimationFrame('too-windy', _index),
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -9,18 +9,14 @@ class Weather {
   List? windDescription;
 
   Weather(
-  {
-    this.feelsLike,
-    this.wind,
-    this.sunrise,
-    this.sunset,
-    this.rainChance,
-    this.description,
-    this.time,
-    this.windDescription
-  });
-
-
+      {this.feelsLike,
+      this.wind,
+      this.sunrise,
+      this.sunset,
+      this.rainChance,
+      this.description,
+      this.time,
+      this.windDescription});
 
   void windSpeedToDescription() {
     for (int i = 0; i < wind!.length; i++) {
@@ -54,24 +50,30 @@ class Weather {
     return (time! > sunrise! && time! < sunset!);
   }
 
-  String timeToSunrise() {
-    var mins = ((sunrise! - time!) / 60).ceil();
+  String getTimeUntilString(delta) {
+    delta = positiveOnlyMod(delta, 86400);
+    var mins = (delta / 60).ceil();
     var hours = (mins / 60).floor();
-    if (hours > 0 ){
+    if (hours > 0) {
       return 'Sunrise is in $hours hours and ${mins % 60} minutes';
     }
-    else {
-      return 'Sunrise is in $mins minutes';
-    }
+    return '$hours hours and ${mins % 60} minutes';
+  }
+
+  double positiveOnlyMod(double a, double b) {
+    return (a % b + b) % b;
+  }
+
+  String timeToSunrise() {
+    return 'Sunrise is in ${getTimeUntilString(sunrise! - time!)}';
   }
 
   String timeToSunset() {
     var mins = ((sunset! - time!) / 60).ceil();
     var hours = (mins / 60).floor();
-    if (hours > 0 ){
+    if (hours > 0) {
       return 'Sunset is in $hours hours and ${mins % 60} minutes';
-    }
-    else {
+    } else {
       return 'Sunset is in $mins minutes';
     }
   }
@@ -79,8 +81,7 @@ class Weather {
   String timeToSunriseOrSunset() {
     if (isDay()) {
       return timeToSunset();
-    }
-    else {
+    } else {
       return timeToSunrise();
     }
   }
