@@ -17,13 +17,22 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  Preferences preferences = Preferences.defaultPreferences();
+  /// static?
+  static Preferences preferences = Preferences.defaultPreferences();
   /// don't access these for min/max temp, access
   /// preferences.minTemp, preferences.maxTemp,
   /// except they are now getters, not fields in the 
   /// Preferences class
-  OptionSlider minTempSlider = OptionSlider(options: Preferences.minTemperatures, label: "Min temperature");
-  OptionSlider maxTempSlider = OptionSlider(options: Preferences.maxTemperatures, label: "Max temperature");
+  OptionSlider minTempSlider = OptionSlider(
+    options: (preferences.isCelsius ? Preferences.minTemperaturesCelsius : 
+                                     Preferences.minTemperaturesFahrenheit),
+    label: "Min temperature"
+  );
+  OptionSlider maxTempSlider = OptionSlider(
+    options: (preferences.isCelsius ? Preferences.maxTemperaturesCelsius : 
+                                     Preferences.maxTemperaturesFahrenheit),
+    label: "Max temperature"
+  );
 
   @override
   void initState() {
@@ -73,6 +82,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: (value) {
               setState(() {
                 preferences.isCelsius = value;
+                minTempSlider.options = (preferences.isCelsius ? 
+                                     Preferences.minTemperaturesCelsius : 
+                                     Preferences.minTemperaturesFahrenheit);
+                maxTempSlider.options = (preferences.isCelsius ? 
+                                     Preferences.maxTemperaturesCelsius : 
+                                     Preferences.maxTemperaturesFahrenheit);
               });
             },
             inactiveThumbColor:

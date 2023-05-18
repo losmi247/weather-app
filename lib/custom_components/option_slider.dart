@@ -23,6 +23,9 @@ class OptionSlider extends StatefulWidget {
   set index(int newIndex){
     sliderState.selectedIndex = newIndex;
   }
+  set options(List<double> newOptions){
+    sliderState.setState(() { sliderState.options = newOptions; });
+  }
 }
 
 class _OptionSliderState extends State<OptionSlider> {
@@ -96,9 +99,9 @@ class _OptionSliderState extends State<OptionSlider> {
   }
 
   List<Widget> stringsToWidgets() {
-    List<Text> b = [];
+    List<Center> b = [];
     for (var item in options) {
-      b.add(Text(item.toInt().toString(), style: const TextStyle(color: Pallete.settingsTextColor)));
+      b.add(Center(child: Text(item.toInt().toString(), style: const TextStyle(color: Pallete.settingsTextColor))));
     }
     return b;
   }

@@ -11,4 +11,12 @@ class Util {
 
     return '${temperatureCelsius.toStringAsFixed(0)}°C';
   }
+
+  static List<double> listCelsiusToFahrenheit(List<double> celsiusTemps) {
+    List<double> fahrenheitTemps = [];
+    for (var cTemp in celsiusTemps) {
+      fahrenheitTemps.add(celsiusToFahrenheit(cTemp));
+    }
+    return fahrenheitTemps;
+  }
 }

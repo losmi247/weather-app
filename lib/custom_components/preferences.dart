@@ -1,3 +1,5 @@
+import "package:flutter_application_1/util.dart";
+
 class Preferences {
   bool isCelsius;
   /// minTemp, maxTemp are now getters
@@ -13,43 +15,49 @@ class Preferences {
   /// minTempIndex - zero-based index of currently selected
   /// minimum temperature on the 'Settings' screen
   int minTempIndex;
-  /// IF YOU CHANGE THIS - CHANGE THE DEFAULT INDICES
+  /// IF YOU CHANGE THESE LISTS - CHANGE THE DEFAULT INDICES
   /// IN Preferences.defaultPreferences() BELOW 
-  static List<double> minTemperatures = [0, 5, 10, 15, 20, 25];
+  static List<double> minTemperaturesCelsius = [0, 5, 10, 15, 20, 25];
+  static List<double> minTemperaturesFahrenheit = 
+                 Util.listCelsiusToFahrenheit(minTemperaturesCelsius);
   /// maxTempIndex - zero-based index of currently selected
   /// maximum temperature on the 'Settings' screen
   int maxTempIndex;
-  /// IF YOU CHANGE THIS - CHANGE THE DEFAULT INDICES
+  /// IF YOU CHANGE THESE LISTS - CHANGE THE DEFAULT INDICES
   /// IN Preferences.defaultPreferences() BELOW 
-  static List<double> maxTemperatures = [25, 30, 35, 40];
+  static List<double> maxTemperaturesCelsius = [25, 30, 35, 40];
+  static List<double> maxTemperaturesFahrenheit = 
+                 Util.listCelsiusToFahrenheit(maxTemperaturesCelsius);
 
   /// getter for the currently selected minTemp,
   /// lowest minTemp if index is lower than 0,
   /// highest minTemp if index is higher than l-1
+  /// ALWAYS IN CELSIUS
   double get minTemp {
     if(minTempIndex < 0){
-      return minTemperatures[0];
+      return minTemperaturesCelsius[0];
     }
-    else if(minTempIndex > minTemperatures.length-1){
-      return minTemperatures[minTemperatures.length-1];
+    else if(minTempIndex > minTemperaturesCelsius.length-1){
+      return minTemperaturesCelsius[minTemperaturesCelsius.length-1];
     }
     else{
-      return minTemperatures[minTempIndex];
+      return minTemperaturesCelsius[minTempIndex];
     }
   }
 
   /// getter for the currently selected maxTemp,
   /// lowest maxTemp if index is lower than 0,
   /// highest maxTemp if index is higher than l-1
+  /// ALWAYS IN CELSIUS
   double get maxTemp {
     if(maxTempIndex < 0){
-      return maxTemperatures[0];
+      return maxTemperaturesCelsius[0];
     }
-    else if(maxTempIndex > maxTemperatures.length-1){
-      return maxTemperatures[maxTemperatures.length-1];
+    else if(maxTempIndex > maxTemperaturesCelsius.length-1){
+      return maxTemperaturesCelsius[maxTemperaturesCelsius.length-1];
     }
     else{
-      return maxTemperatures[maxTempIndex];
+      return maxTemperaturesCelsius[maxTempIndex];
     }
   }
 
