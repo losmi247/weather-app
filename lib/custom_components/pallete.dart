@@ -33,5 +33,5 @@ class Pallete {
   static const Color settingsTextFormFieldUnderlineFocusedColor = Color.fromRGBO(209, 204, 204, 1);
 
   /// Disabled Colors
-  static const Color disabledColor = Color.fromRGBO(137, 137, 137, 1.0);
+  // static const Color disabledColor = Color.fromRGBO(137, 137, 137, 1.0);
 }
