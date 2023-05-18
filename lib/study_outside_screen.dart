@@ -416,21 +416,20 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   String checkSunrise(int hours) {
     double seconds = hours * 3600;
     if (!preferences.workAtNight) {
-      if ((data!.time !+ seconds) > data!.sunrise!) {
+      if ((data!.time! + seconds) > data!.sunrise!) {
         double time_to_dark = (data!.sunset! - data!.time!) / 3600;
         return 'It\'s going to be dark in the next $time_to_dark hours';
       }
     }
     if (data!.isDay()) {
       return 'Sun is up';
-    }
-    else {
+    } else {
       return 'Sun is down';
     }
   }
 
   int getNumHoursStudy() {
-    int end_unix_time = data!.time! !+ (slider.value* 3600 as int);
+    int end_unix_time = data!.time!! + (slider.value * 3600 as int);
     print(end_unix_time);
     int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
     int curr_unix_time = data!.time!;
