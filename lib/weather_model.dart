@@ -5,21 +5,24 @@ class Weather {
   double? sunset;
   List? rainChance;
   List? description;
-  double? time;
+  int? time;
   List? windDescription;
 
   Weather(
-      {this.feelsLike,
-      this.wind,
-      this.sunrise,
-      this.sunset,
-      this.rainChance,
-      this.description,
-      this.time,
-      this.windDescription});
+  {
+    this.feelsLike,
+    this.wind,
+    this.sunrise,
+    this.sunset,
+    this.rainChance,
+    this.description,
+    this.time,
+    this.windDescription
+  });
+
+
 
   void windSpeedToDescription() {
-    windDescription = List.filled(wind!.length, '');
     for (int i = 0; i < wind!.length; i++) {
       if (wind![i] < 0.27) {
         windDescription![i] = 'Calm';
@@ -51,27 +54,33 @@ class Weather {
     return (time! > sunrise! && time! < sunset!);
   }
 
-  String getTimeUntilString(delta) {
-    var mins = (delta / 60).ceil();
-    var hours = (mins / 60).floor();
-    if (hours == 0) {
-      return '$mins minutes';
-    }
-    return '$hours hours and ${mins % 60} minutes';
-  }
-
   String timeToSunrise() {
-    return 'Sunrise is in ${getTimeUntilString(sunrise! - time!)}';
+    var mins = ((sunrise! - time!) / 60).ceil();
+    var hours = (mins / 60).floor();
+    if (hours > 0 ){
+      return 'Sunrise is in $hours hours and ${mins % 60} minutes';
+    }
+    else {
+      return 'Sunrise is in $mins minutes';
+    }
   }
 
   String timeToSunset() {
-    return 'Sunset is in ${getTimeUntilString(sunset! - time!)}';
+    var mins = ((sunset! - time!) / 60).ceil();
+    var hours = (mins / 60).floor();
+    if (hours > 0 ){
+      return 'Sunset is in $hours hours and ${mins % 60} minutes';
+    }
+    else {
+      return 'Sunset is in $mins minutes';
+    }
   }
 
   String timeToSunriseOrSunset() {
     if (isDay()) {
       return timeToSunset();
-    } else {
+    }
+    else {
       return timeToSunrise();
     }
   }
@@ -81,6 +90,7 @@ class Weather {
     wind = [];
     rainChance = [];
     description = [];
+    windDescription = [];
     sunrise = json['current']['sunrise'];
     sunset = json['current']['sunset'];
     time = json['current']['dt'];
@@ -90,6 +100,7 @@ class Weather {
       wind!.add(json['hourly'][i]['wind_speed']);
       rainChance!.add(json['hourly'][i]['pop']);
       description!.add(json['hourly'][i]['weather'][0]['description']);
+      windDescription!.add('');
     }
     windSpeedToDescription();
   }

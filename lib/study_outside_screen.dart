@@ -170,7 +170,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   String checkRain(int hours) {
     // loop through rain data for each hour and return false if over 0.3
-    for (int i = 0; i < hours; i++) {
+    for (int i = 0; i <= hours; i++) {
       if (data!.rainChance![i] > 0.3) {
         return 'It\'s going to rain in the next $hours hours';
       }
@@ -180,7 +180,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   String checkWind(int hours) {
     // loop through wind data for each hour and return false if over
-    for (int i = 0; i < hours; i++) {
+    for (int i = 0; i <= hours; i++) {
       if (data!.wind![i] >= 14) {
         return 'It\'s going to be a ${data!.windDescription![i]} in the next $hours hours';
       }
@@ -190,14 +190,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   String checkTemp(int hours) {
     // loop through temp data for each hour and return false if outside of selected min and max
-    for (int i = 0; i < hours; i++) {
+    for (int i = 0; i <= hours; i++) {
       if (data!.feelsLike![i] < preferences.minTemp) {
-        return 'It\'s going to be too cold in the next $hours hours';
+        return 'It\'s going to be too cold in $i hours';
       } else if (data!.feelsLike![i] > preferences.maxTemp) {
-        return 'It\'s going to be too hot in the next $hours hours';
+        return 'It\'s going to be too hot in $i hours';
       }
     }
-    return 'It\'s going to be a comfortable temperature for the next $hours hours';
+    return 'It\'s going to be a comfortable temperature for $hours hours';
   }
 
   /// RELATIVE POSITIONING (screen height):
@@ -243,7 +243,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       onPressed: () {
                         /// push the 'Settings' screen and wait for updated preferences
                         awaitReturnPreferencesFromSettingsScreen(context);
-                        getData();
                       },
                       //child: Text('Settings'),
                     ),
@@ -345,6 +344,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     // SvgPicture.asset("images/sun.svg"),
                     SizedBox(width: 16.0),
                     Text(feelsLikeTempText()),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+                    Text(checkTemp(getNumHoursStudy()))
                   ],
                 ),
                 SizedBox(height: 16.0),
@@ -401,6 +402,32 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         ),
       ),
     );
+  }
+
+  String checkSunrise(int hours) {
+    double seconds = hours * 3600;
+    if (!preferences.workAtNight) {
+      if ((data!.time !+ seconds) > data!.sunrise!) {
+        double time_to_dark = (data!.sunset! - data!.time!) / 3600;
+        return 'It\'s going to be dark in the next $time_to_dark hours';
+      }
+    }
+    if (data!.isDay()) {
+      return 'Sun is up';
+    }
+    else {
+      return 'Sun is down';
+    }
+  }
+
+  int getNumHoursStudy() {
+    int end_unix_time = data!.time! !+ (slider.value* 3600 as int);
+    print(end_unix_time);
+    int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
+    int curr_unix_time = data!.time!;
+    print(curr_unix_time);
+    int curr_unix_hour = (curr_unix_time - curr_unix_time % 3600) / 3600 as int;
+    return end_unix_hour - curr_unix_hour;
   }
 
   /// awaits for the returned preferences from the settings screen
