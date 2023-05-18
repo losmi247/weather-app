@@ -19,6 +19,7 @@ class Weather {
       this.windDescription});
 
   void windSpeedToDescription() {
+    windDescription = List.filled(wind!.length, '');
     for (int i = 0; i < wind!.length; i++) {
       if (wind![i] < 0.27) {
         windDescription![i] = 'Calm';
