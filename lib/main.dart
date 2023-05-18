@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Weather App',
       theme: ThemeData.dark().copyWith(
-        disabledColor: Pallete.disabledColor,
+        disabledColor: Pallete.settingsSwitchListTileInactiveThumbColor,
         scaffoldBackgroundColor: Pallete.backgroundColor,
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),

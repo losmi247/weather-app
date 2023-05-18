@@ -75,6 +75,38 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       'sun-m.svg',
       'sun-ml.svg',
     ],
+    'happy-cloud': [
+      'happy-cloud/happy-cloud-1.svg',
+      'happy-cloud/happy-cloud-2.svg',
+      'happy-cloud/happy-cloud-3.svg',
+      'happy-cloud/happy-cloud-4.svg',
+      'happy-cloud/happy-cloud-5.svg',
+      'happy-cloud/happy-cloud-6.svg',
+      'happy-cloud/happy-cloud-7.svg',
+      'happy-cloud/happy-cloud-8.svg',
+      'happy-cloud/happy-cloud-9.svg',
+      'happy-cloud/happy-cloud-10.svg',
+      'happy-cloud/happy-cloud-11.svg',
+    ],
+    'hot-sun': [
+      'hot-sun/sun-too-hot-l.svg',
+      'hot-sun/sun-too-hot-ml.svg',
+      'hot-sun/sun-too-hot-m.svg',
+      'hot-sun/sun-too-hot-mr.svg',
+      'hot-sun/sun-too-hot-r.svg',
+      'hot-sun/sun-too-hot-mr.svg',
+      'hot-sun/sun-too-hot-m.svg',
+      'hot-sun/sun-too-hot-ml.svg',
+    ],
+    'too-windy': [
+      'too-windy/too-windy-1.svg',
+      'too-windy/too-windy-2.svg',
+      'too-windy/too-windy-3.svg',
+      'too-windy/too-windy-4.svg',
+      'too-windy/too-windy-5.svg',
+      'too-windy/too-windy-6.svg',
+      'too-windy/too-windy-7.svg',
+    ]
   };
 
   String getAnimationFrame(animationID, index) {
@@ -91,6 +123,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   Weather? data;
 
   Future<void> getData() async {
+    // // sleep for 200ms
+    // await Future.delayed(Duration(milliseconds: 200));
+
     data = await client.getWeather(preferences.selectedLocation);
   }
 
@@ -101,8 +136,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   String feelsLikeTempText() {
-    // 'Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
-
     if (data == null) {
       return 'Loading...';
     }
@@ -113,7 +146,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (data == null) {
       return 'Loading...';
     }
-    return '${data!.wind![0]}';
+    return '${data!.windDescription![0]}';
   }
 
   // capitalize first letter
@@ -133,6 +166,38 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       return 'Loading...';
     }
     return data!.timeToSunriseOrSunset();
+  }
+
+  String checkRain(int hours) {
+    // loop through rain data for each hour and return false if over 0.3
+    for (int i = 0; i <= hours; i++) {
+      if (data!.rainChance![i] > 0.3) {
+        return 'It\'s going to rain in the next $hours hours';
+      }
+    }
+    return 'No rain in the next $hours hours';
+  }
+
+  String checkWind(int hours) {
+    // loop through wind data for each hour and return false if over
+    for (int i = 0; i <= hours; i++) {
+      if (data!.wind![i] >= 14) {
+        return 'It\'s going to be a ${data!.windDescription![i]} in the next $hours hours';
+      }
+    }
+    return 'Not too windy in the next $hours hours';
+  }
+
+  String checkTemp(int hours) {
+    // loop through temp data for each hour and return false if outside of selected min and max
+    for (int i = 0; i <= hours; i++) {
+      if (data!.feelsLike![i] < preferences.minTemp) {
+        return 'It\'s going to be too cold in $i hours';
+      } else if (data!.feelsLike![i] > preferences.maxTemp) {
+        return 'It\'s going to be too hot in $i hours';
+      }
+    }
+    return 'It\'s going to be a comfortable temperature for $hours hours';
   }
 
   /// RELATIVE POSITIONING (screen height):
@@ -178,7 +243,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       onPressed: () {
                         /// push the 'Settings' screen and wait for updated preferences
                         awaitReturnPreferencesFromSettingsScreen(context);
-                        getData();
                       },
                       //child: Text('Settings'),
                     ),
@@ -194,8 +258,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 Container(
                     alignment: AlignmentDirectional.center,
                     child: SvgPicture.asset(
-                      getAnimationFrame('happy-sun', _index),
+                      // getAnimationFrame('happy-sun', _index),
                       // getAnimationFrame('angry-thunder', _index),
+                      // getAnimationFrame('happy-cloud', _index),
+                      getAnimationFrame('hot-sun', _index),
+                      // getAnimationFrame('too-windy', _index),
                       fit: BoxFit.cover,
                     )),
 
@@ -277,21 +344,29 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     // SvgPicture.asset("images/sun.svg"),
                     SizedBox(width: 16.0),
                     Text(feelsLikeTempText()),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+                    Text(checkTemp(getNumHoursStudy()))
                   ],
                 ),
                 SizedBox(height: 16.0),
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/images/red.svg',
-                      width: 24.0,
-                      height: 24.0,
+                    Container(
+                      width: 36,
+                      height: 36,
+                      // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                      child: OverflowBox(
+                        alignment: Alignment.center,
+                        minWidth: 0.0,
+                        minHeight: 0.0,
+                        maxWidth: 56,
+                        maxHeight: 36,
+                        child: SvgPicture.asset(
+                          "assets/images/too-windy/too-windy-7.svg",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                    // Container(
-                    //   width: 24,
-                    //   height: 24,
-                    //   color: Colors.red,
-                    // ),
                     SizedBox(width: 16.0),
                     Text(windSpeedText()),
                   ],
@@ -329,6 +404,32 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     );
   }
 
+  String checkSunrise(int hours) {
+    double seconds = hours * 3600;
+    if (!preferences.workAtNight) {
+      if ((data!.time !+ seconds) > data!.sunrise!) {
+        double time_to_dark = (data!.sunset! - data!.time!) / 3600;
+        return 'It\'s going to be dark in the next $time_to_dark hours';
+      }
+    }
+    if (data!.isDay()) {
+      return 'Sun is up';
+    }
+    else {
+      return 'Sun is down';
+    }
+  }
+
+  int getNumHoursStudy() {
+    int end_unix_time = data!.time! !+ (slider.value* 3600 as int);
+    print(end_unix_time);
+    int end_unix_hour = (end_unix_time - end_unix_time % 3600) / 3600 as int;
+    int curr_unix_time = data!.time!;
+    print(curr_unix_time);
+    int curr_unix_hour = (curr_unix_time - curr_unix_time % 3600) / 3600 as int;
+    return end_unix_hour - curr_unix_hour;
+  }
+
   /// awaits for the returned preferences from the settings screen
   /// and updates the preferences on stored on this screen so that
   /// we can access them later
@@ -339,6 +440,12 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           builder: (context) => SettingsScreen(preferences: preferences)),
     );
     setState(() {
+      if (preferences.selectedLocation !=
+          returnedPreferences.selectedLocation) {
+        preferences.selectedLocation = returnedPreferences.selectedLocation;
+        getData();
+      }
+
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
       preferences.minTemp = returnedPreferences.minTemp;
@@ -349,7 +456,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.workInWind = returnedPreferences.workInWind;
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
-      preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }
 }
