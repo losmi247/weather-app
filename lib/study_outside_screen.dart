@@ -16,7 +16,6 @@ class StudyOutsideScreen extends StatefulWidget {
 }
 
 class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
-
   //double _sliderValue = 0.0;
   /// to get slider value - slider.value
   SliderWithTimeLabels slider =
@@ -26,6 +25,15 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   late final Timer timer;
 
   int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+    timer = Timer.periodic(const Duration(milliseconds: 180), (timer) {
+      setState(() => _index++);
+    });
+  }
 
   final values = [
     // 'sun-l.svg',
@@ -87,25 +95,25 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getData();
-    timer = Timer.periodic(const Duration(milliseconds: 180), (timer) {
-      setState(() => _index++);
-    });
-  }
-
-  @override
   void dispose() {
     timer.cancel();
     super.dispose();
   }
 
-  double feelsLikeTemp() {
+  // double feelsLikeTemp() {
+  //   if (data == null) {
+  //     return 0;
+  //   }
+  //   return data!.feelsLike![0].round();
+  // }
+
+  String feelsLikeTempText() {
+    // 'Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
+
     if (data == null) {
-      return 0;
+      return 'Loading...';
     }
-    return data!.feelsLike![0].round();
+    return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0].round(), preferences.isCelsius)}';
   }
 
   String windSpeedText() {
@@ -115,11 +123,16 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     return '${data!.wind![0]}';
   }
 
+  // capitalize first letter
+  String capitaliseFirstLetter(String string) {
+    return '${string[0].toUpperCase()}${string.substring(1)}';
+  }
+
   String weatherDescriptionText() {
     if (data == null) {
       return 'Loading...';
     }
-    return '${data!.description![0]}';
+    return capitaliseFirstLetter('${data!.description![0]}');
   }
 
   String sunriseOrSunsetText() {
@@ -139,9 +152,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   /// 0.02 sizedbox
   /// 0.03 - currentweather conditions go here
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,45 +164,50 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         //automaticallyImplyLeading: false,
       ),*/
       body: Container(
-              //move top of container to top of screen
-              alignment: AlignmentDirectional.topCenter,
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    child: Stack(children: [
-                      Positioned(
-                        top: 5,
-                        right: 5,
-                        /// Button to go to 'Settings' screen
-                        child: IconButton(
-                          icon: SvgPicture.asset("assets/images/gear.svg"),
-                          onPressed: () {
-                            /// push the 'Settings' screen and wait for updated preferences
-                            awaitReturnPreferencesFromSettingsScreen(context);
-                            getData();
-                          },
-                          //child: Text('Settings'),
-                        ),
-                      ),
-                    ],),
+        //move top of container to top of screen
+        alignment: AlignmentDirectional.topCenter,
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.07,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 5,
+                    right: 5,
+
+                    /// Button to go to 'Settings' screen
+                    child: IconButton(
+                      icon: SvgPicture.asset("assets/images/gear.svg"),
+                      onPressed: () {
+                        /// push the 'Settings' screen and wait for updated preferences
+                        awaitReturnPreferencesFromSettingsScreen(context);
+                        getData();
+                      },
+                      //child: Text('Settings'),
+                    ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3, // 30% of screen height
-                    //child: Expanded(
-                    child: Stack(children: [
-                      Container(
-                          alignment: AlignmentDirectional.center,
-                          child: SvgPicture.asset(
-                            getAnimationFrame('happy-sun', _index),
-                            // getAnimationFrame('angry-thunder', _index),
-                            fit: BoxFit.cover,
-                          )),
-                      /// PREVIOUS POSITION OF BUTTON
-                      /*Positioned(
+                ],
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.3, // 30% of screen height
+              //child: Expanded(
+              child: Stack(children: [
+                Container(
+                    alignment: AlignmentDirectional.center,
+                    child: SvgPicture.asset(
+                      getAnimationFrame('happy-sun', _index),
+                      // getAnimationFrame('angry-thunder', _index),
+                      fit: BoxFit.cover,
+                    )),
+
+                /// PREVIOUS POSITION OF BUTTON
+                /*Positioned(
                         top: 5,
                         right: 5,
 
@@ -206,10 +221,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           //child: Text('Settings'),
                         ),
                       ),*/
-                    ]),
-                    //),
-                  ),
-                  /*SliderTheme(
+              ]),
+              //),
+            ),
+            /*SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       thumbColor: Pallete.sliderThumbColor,
                       //thumbShape:
@@ -229,97 +244,96 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       inactiveColor: Pallete.sliderInactiveColor,
                     ),
                   ),*/
-                  /*const SliderWithLabels(
+            /*const SliderWithLabels(
                     minValue: 0,
                     maxValue: 12,
                     initialValue: 0,
                   ),*/
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                  /////// SLIDER
-                  slider,
-                  /////// SLIDER
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                    child: Center(
-                      child: Text(
-                        'The current location is set to ${preferences.selectedLocation}',
-                        style: const TextStyle(fontSize: 20.0),
-                      ),
-                    )
+            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+            /////// SLIDER
+            slider,
+            /////// SLIDER
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
+                child: Center(
+                  child: Text(
+                    'The current location is set to ${preferences.selectedLocation}',
+                    style: const TextStyle(fontSize: 20.0),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                    child: const Text(
-                      'Current weather conditions go here',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            // 'assets/icons/feels_like.svg',
-                            "assets/images/red.svg",
-                            width: 24.0,
-                            height: 24.0,
-                          ),
-                          // SvgPicture.asset("images/sun.svg"),
-                          SizedBox(width: 16.0),
-                          Text('Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
-                        ],
-                      ),
-                      SizedBox(height: 16.0),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/red.svg',
-                            width: 24.0,
-                            height: 24.0,
-                          ),
-                          // Container(
-                          //   width: 24,
-                          //   height: 24,
-                          //   color: Colors.red,
-                          // ),
-                          SizedBox(width: 16.0),
-                          Text(windSpeedText()),
-                        ],
-                      ),
-                      SizedBox(height: 16.0),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/red.svg',
-                            width: 24.0,
-                            height: 24.0,
-                          ),
-                          SizedBox(width: 16.0),
-                          Text(weatherDescriptionText()),
-                        ],
-                      ),
-                      SizedBox(height: 16.0),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/red.svg',
-                            width: 24.0,
-                            height: 24.0,
-                          ),
-                          SizedBox(width: 16.0),
-                          Text(sunriseOrSunsetText()),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.0),
-                ],
+                )),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+              child: const Text(
+                'Current weather conditions go here',
+                style: TextStyle(fontSize: 20.0),
               ),
             ),
-          );
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      // 'assets/icons/feels_like.svg',
+                      "assets/images/red.svg",
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    // SvgPicture.asset("images/sun.svg"),
+                    SizedBox(width: 16.0),
+                    Text(feelsLikeTempText()),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    // Container(
+                    //   width: 24,
+                    //   height: 24,
+                    //   color: Colors.red,
+                    // ),
+                    SizedBox(width: 16.0),
+                    Text(windSpeedText()),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    SizedBox(width: 16.0),
+                    Text(weatherDescriptionText()),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/red.svg',
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    SizedBox(width: 16.0),
+                    Text(sunriseOrSunsetText()),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 16.0),
+          ],
+        ),
+      ),
+    );
   }
 
   /// awaits for the returned preferences from the settings screen
