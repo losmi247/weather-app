@@ -59,5 +59,7 @@ const List<String> locations = <String>[
   'Vancouver',
   'Venice',
   'Vienna',
-  'Washington DC'
+  'Washington DC',
+  'Dubai',
+  'Singapore'
 ];

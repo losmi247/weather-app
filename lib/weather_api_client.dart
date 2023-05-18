@@ -19,7 +19,9 @@ const Map<String, List<double>> hardCodedLocations = {
   'Vancouver': [49.2827, -123.1207],
   'Venice': [45.4408, 12.3155],
   'Vienna': [48.2082, 16.3738],
-  'Washington DC': [38.9072, -77.0369]
+  'Washington DC': [38.9072, -77.0369],
+  'Dubai': [25.2048, 55.2708],
+  'Singapore': [1.3521, 103.8198],
 };
 
 class WeatherApiClient {
