@@ -36,15 +36,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         /// flutter automatically adds a back button if there is a previous page,
         /// so we need a custom button to be able to send data back to the main page
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_sharp, 
-                    color: Pallete.settingsBackButtonColor),
-          onPressed: () {
-            // send preferences back to Study Outside screen
-            _sendDataBack(context);
-          }
-        ),
-        title: const Text('Settings', 
-                    style: TextStyle(color: Pallete.settingsTextColor)),
+            icon: const Icon(Icons.arrow_back_ios_new_sharp,
+                color: Pallete.settingsBackButtonColor),
+            onPressed: () {
+              // send preferences back to Study Outside screen
+              _sendDataBack(context);
+            }),
+        title: const Text('Settings',
+            style: TextStyle(color: Pallete.settingsTextColor)),
         automaticallyImplyLeading: false,
         backgroundColor: Pallete.settingsAppBarColor,
       ),
@@ -53,21 +52,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: EdgeInsets.all(16.0),
         children: [
           SwitchListTile(
-            title: const Text('Use Celsius', 
-                          style: TextStyle(color: Pallete.settingsTextColor)),
+            title: const Text('Use Celsius',
+                style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.isCelsius,
             onChanged: (value) {
               setState(() {
                 preferences.isCelsius = value;
               });
             },
-            inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-            inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+            inactiveThumbColor:
+                Pallete.settingsSwitchListTileInactiveThumbColor,
+            inactiveTrackColor:
+                Pallete.settingsSwitchListTileInactiveTrackColor,
             activeColor: Pallete.settingsSwitchListTileActiveColor,
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
+              side: const BorderSide(
+                  color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
-            ), 
+            ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
           const Text('Temperature range',
@@ -80,15 +82,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   decoration: const InputDecoration(
                     labelText: 'Min temperature',
                     labelStyle: TextStyle(color: Pallete.settingsTextColor),
-                    enabledBorder: UnderlineInputBorder(      
+                    enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Pallete.settingsTextFormFieldUnderlineEnabledColor
-                      ),   
-                    ),  
+                          color: Pallete
+                              .settingsTextFormFieldUnderlineEnabledColor),
+                    ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Pallete.settingsTextFormFieldUnderlineFocusedColor
-                      ),
+                          color: Pallete
+                              .settingsTextFormFieldUnderlineFocusedColor),
                     ),
                   ),
                   style: const TextStyle(color: Pallete.settingsTextColor),
@@ -108,15 +110,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   decoration: const InputDecoration(
                     labelText: 'Max temperature',
                     labelStyle: TextStyle(color: Pallete.settingsTextColor),
-                    enabledBorder: UnderlineInputBorder(      
+                    enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Pallete.settingsTextFormFieldUnderlineEnabledColor
-                      ),   
-                    ),  
+                          color: Pallete
+                              .settingsTextFormFieldUnderlineEnabledColor),
+                    ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Pallete.settingsTextFormFieldUnderlineFocusedColor
-                      ),
+                          color: Pallete
+                              .settingsTextFormFieldUnderlineFocusedColor),
                     ),
                   ),
                   style: const TextStyle(color: Pallete.settingsTextColor),
@@ -132,77 +134,90 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.032),
-          const Text('Willing to work in:', 
-                style: TextStyle(color: Pallete.settingsTextColor)),
+          const Text('Willing to work in:',
+              style: TextStyle(color: Pallete.settingsTextColor)),
           SizedBox(height: MediaQuery.of(context).size.height * 0.024),
           SwitchListTile(
-            title: const Text('Rain', 
-                            style: TextStyle(color: Pallete.settingsTextColor)),
+            title: const Text('Rain',
+                style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInRain,
             onChanged: (value) {
               setState(() {
                 preferences.workInRain = value;
               });
             },
-            inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-            inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+            inactiveThumbColor:
+                Pallete.settingsSwitchListTileInactiveThumbColor,
+            inactiveTrackColor:
+                Pallete.settingsSwitchListTileInactiveTrackColor,
             activeColor: Pallete.settingsSwitchListTileActiveColor,
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
+              side: const BorderSide(
+                  color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
-            ),  
+            ),
           ),
           SwitchListTile(
-            title: const Text('Snow', 
-                            style: TextStyle(color: Pallete.settingsTextColor)),
+            title: const Text('Snow',
+                style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInSnow,
             onChanged: (value) {
               setState(() {
                 preferences.workInSnow = value;
               });
             },
-            inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-            inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+            inactiveThumbColor:
+                Pallete.settingsSwitchListTileInactiveThumbColor,
+            inactiveTrackColor:
+                Pallete.settingsSwitchListTileInactiveTrackColor,
             activeColor: Pallete.settingsSwitchListTileActiveColor,
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
+              side: const BorderSide(
+                  color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
-            ), 
+            ),
           ),
           SwitchListTile(
-            title: const Text('Wind', 
-                            style: TextStyle(color: Pallete.settingsTextColor)),
+            title: const Text('Wind',
+                style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInWind,
             onChanged: (value) {
               setState(() {
                 preferences.workInWind = value;
               });
             },
-            inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-            inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+            inactiveThumbColor:
+                Pallete.settingsSwitchListTileInactiveThumbColor,
+            inactiveTrackColor:
+                Pallete.settingsSwitchListTileInactiveTrackColor,
             activeColor: Pallete.settingsSwitchListTileActiveColor,
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
+              side: const BorderSide(
+                  color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
-            ), 
+            ),
           ),
           SwitchListTile(
-            title: const Text('At night', 
-                            style: TextStyle(color: Pallete.settingsTextColor)),
+            title: const Text('At night',
+                style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workAtNight,
             onChanged: (value) {
               setState(() {
                 preferences.workAtNight = value;
               });
             },
-            inactiveThumbColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-            inactiveTrackColor: Pallete.settingsSwitchListTileInactiveTrackColor,
+            inactiveThumbColor:
+                Pallete.settingsSwitchListTileInactiveThumbColor,
+            inactiveTrackColor:
+                Pallete.settingsSwitchListTileInactiveTrackColor,
             activeColor: Pallete.settingsSwitchListTileActiveColor,
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Pallete.settingsSwitchListTileBorderColor),
+              side: const BorderSide(
+                  color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
-            ), 
+            ),
           ),
+
           /// Button to go to 'Location Settings' screen
           SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           SizedBox(
@@ -227,16 +242,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// awaits for the returned preferences from the location settings 
-  /// screen and updates the preferences on stored on this screen so 
+  /// awaits for the returned preferences from the location settings
+  /// screen and updates the preferences on stored on this screen so
   /// that we can access them later
-  void awaitReturnPreferencesFromLocationSettingsScreen(BuildContext context) async {
+  void awaitReturnPreferencesFromLocationSettingsScreen(
+      BuildContext context) async {
     final Preferences returnedPreferences = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LocationSettingsScreen(preferences: preferences)
-                                  ),
-                        );
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              LocationSettingsScreen(preferences: preferences)),
+    );
     setState(() {
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
@@ -246,7 +262,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
-      preferences.isLocationSetAutomatically = returnedPreferences.isLocationSetAutomatically;
+      preferences.isLocationSetAutomatically =
+          returnedPreferences.isLocationSetAutomatically;
       preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }

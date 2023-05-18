@@ -91,6 +91,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   Weather? data;
 
   Future<void> getData() async {
+    // // sleep for 200ms
+    // await Future.delayed(Duration(milliseconds: 200));
+
     data = await client.getWeather(preferences.selectedLocation);
   }
 
@@ -101,8 +104,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   String feelsLikeTempText() {
-    // 'Feels like ${Util.getStringForTemperature(feelsLikeTemp(), preferences.isCelsius)}'),
-
     if (data == null) {
       return 'Loading...';
     }
@@ -339,6 +340,12 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           builder: (context) => SettingsScreen(preferences: preferences)),
     );
     setState(() {
+      if (preferences.selectedLocation !=
+          returnedPreferences.selectedLocation) {
+        preferences.selectedLocation = returnedPreferences.selectedLocation;
+        getData();
+      }
+
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
       preferences.minTemp = returnedPreferences.minTemp;
@@ -349,7 +356,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.workInWind = returnedPreferences.workInWind;
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
-      preferences.selectedLocation = returnedPreferences.selectedLocation;
     });
   }
 }
