@@ -219,9 +219,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   // bool is true if conditions are met
   // string is the text to display
 
-  List checkTemp2(int hour) {
+  List checkTemp2(int hours) {
     // loop through temp data for each hour and return false if outside of selected min and max
-    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+    for (int i = 0; i <= hours && i < data!.wind!.length; i++) {
       if (data!.feelsLike![i] < preferences.minTemp) {
         if (i == 0) {
           return [false, 'It\'s too cold right now'];
@@ -236,37 +236,42 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         return [false, 'It\'s going to be too hot in $i hours'];
       }
     }
+
+    if (hours == 0) {
+      return [true, 'It\'s a comfortable temperature right now'];
+    }
+
     return [
       true,
-      'It\'s going to be a comfortable temperature for $hour hours'
+      'It\'s going to be a comfortable temperature for $hours hours'
     ];
   }
 
-  List checkWind2(int hour) {
+  List checkWind2(int hours) {
     // loop through wind data for each hour and return false if over
-    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+    for (int i = 0; i <= hours && i < data!.wind!.length; i++) {
       if (data!.wind![i] >= 14) {
         return [
           false,
-          'There will be a ${data!.windDescription![i]} in $hour hours'
+          'There will be a ${data!.windDescription![i]} in $hours hours'
         ];
       }
     }
-    return [true, 'Not too windy in the next $hour hours'];
+    return [true, 'Not too windy in the next $hours hours'];
   }
 
-  List checkRain2(int hour) {
+  List checkRain2(int hours) {
     // loop through rain data for each hour and return false if over 0.3
-    for (int i = 0; i <= hour && i < data!.wind!.length; i++) {
+    for (int i = 0; i <= hours && i < data!.wind!.length; i++) {
       if (data!.rainChance![i] > 0.3) {
         if (i == 0) {
           return [false, 'It\'s raining now'];
         }
 
-        return [false, 'It\'s going to rain in the next $hour hours'];
+        return [false, 'It\'s going to rain in the next $hours hours'];
       }
     }
-    return [true, 'No rain in the next $hour hours'];
+    return [true, 'No rain in the next $hours hours'];
   }
 
   String checkConditions(int hours) {
@@ -294,7 +299,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       return temp[1];
     }
 
-    return 'It\'s going to be a comfortable temperature for $hours hours';
+    return temp[1];
   }
 
   /// RELATIVE POSITIONING (screen height):
@@ -525,7 +530,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     int currentHour = (currentTime - currentTime % 3600) ~/ 3600;
     int endHour = (endTime - endTime % 3600) ~/ 3600;
 
-    return endHour - currentHour + 1;
+    return endHour - currentHour;
   }
 
   /// awaits for the returned preferences from the settings screen
