@@ -8,6 +8,10 @@ import 'package:flutter_application_1/weather_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'util.dart';
+/// run flutter pub add slide_digital_clock
+import 'package:slide_digital_clock/slide_digital_clock.dart';
+
+
 
 class StudyOutsideScreen extends StatefulWidget {
   const StudyOutsideScreen({Key? key}) : super(key: key);
@@ -361,6 +365,30 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                         awaitReturnPreferencesFromSettingsScreen(context);
                       },
                       //child: Text('Settings'),
+                    ),
+                  ),
+                  /// CLOCK
+                  Positioned(
+                    top: 1,
+                    left: 5,
+                    child: DigitalClock(
+                      hourMinuteDigitTextStyle: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(color: Color.fromARGB(255, 0, 0, 0)),
+                      showSecondsDigit: false,
+                      is24HourTimeFormat: false,
+                      /*secondDigitTextStyle: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.white),*/
+                      colon: Text(
+                        ":",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: Color.fromARGB(255, 0, 0, 0)),
+                      ),
                     ),
                   ),
                 ],
