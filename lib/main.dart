@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
           titleLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-          bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Roboto'),  
+          bodyMedium: TextStyle(fontSize: 18.0, fontFamily: 'Roboto'),  
         )
       ),
       home: const StudyOutsideScreen(),

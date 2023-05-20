@@ -263,6 +263,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           SizedBox(
             width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.05,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Pallete.settingsLocationSettingsButtonColor,
@@ -282,7 +283,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 /// push the 'Location Settings' screen and wait for updated preferences
                 awaitReturnPreferencesFromLocationSettingsScreen(context);
               },
-              child: const Text('Location Settings'),
+              child: const Text('Location Settings', 
+                            style: TextStyle(fontSize: 18.0, fontFamily: 'Roboto')),
             ),
           ),
         ],

@@ -70,7 +70,8 @@ class _OptionSliderState extends State<OptionSlider> {
     );*/
 
     return Container(
-      width: 130,
+      //width: 130,
+      width: 140,
       height: 120,
       child: Stack(
         alignment: Alignment.topCenter,

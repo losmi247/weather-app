@@ -500,8 +500,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             //"assets/images/red.svg",
                             //https://www.flaticon.com/free-icons/temperature
                             "assets/icons/thermometer.svg",
-                            width: 40.0,
-                            height: 40.0,
+                            width: 42.0,
+                            height: 42.0,
                           ),
                           // SvgPicture.asset("images/sun.svg"),
                           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
@@ -515,8 +515,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       Row(
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
+                            width: 42,
+                            height: 42,
                             // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                             child: OverflowBox(
                               alignment: Alignment.center,
@@ -545,8 +545,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             height: 40.0,
                           ),*/
                           Container(
-                            height: 40.0,
-                            width: 40.0,
+                            height: 42.0,
+                            width: 42.0,
                             child: Image.network('https://openweathermap.org/img/wn/' + 
                                                 (iconText()) + '@2x.png'),
                           ),    
@@ -563,8 +563,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             //https://www.flaticon.com/free-icons/sunset
                             data!.isDay() ? "assets/icons/sunset.svg" : 
                              "assets/icons/sunrise.svg",
-                            width: 40.0,
-                            height: 40.0,
+                            width: 42.0,
+                            height: 42.0,
                           ),
                           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                           Text(sunriseOrSunsetText()),
