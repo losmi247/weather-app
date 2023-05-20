@@ -177,6 +177,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     return data!.timeToSunriseOrSunset();
   }
 
+  String iconText() {
+    if (data == null) {
+      /// default icon
+      return "10d";
+    }
+    return data!.icons![0];
+  }
+
   String checkRain(int hours) {
     // loop through rain data for each hour and return false if over 0.3
     for (int i = 0; i <= hours; i++) {
@@ -511,10 +519,12 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           Container(
                             height: 40.0,
                             width: 40.0,
-                            child: Image.network('https://openweathermap.org/img/wn/10d@2x.png')
+                            child: Image.network('https://openweathermap.org/img/wn/' + 
+                                                (iconText()) + '@2x.png'),
                           ),    
                           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                           Text(weatherDescriptionText()),
+                          //Text(iconText()),
                         ],
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.02),
