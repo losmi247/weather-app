@@ -328,13 +328,17 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       body: Container(
         //move top of container to top of screen
         alignment: AlignmentDirectional.topCenter,
-        padding: EdgeInsets.all(16.0),
+        //color: Colors.white,
+        //// ??????
+        //padding: EdgeInsets.all(16.0),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            Container(
+              color: Pallete.upperBarColor,
               height: MediaQuery.of(context).size.height * 0.07,
+              width: MediaQuery.of(context).size.width,
               child: Stack(
                 children: [
                   Positioned(
@@ -343,7 +347,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
                     /// Button to go to 'Settings' screen
                     child: IconButton(
-                      icon: SvgPicture.asset("assets/images/gear.svg"),
+                      icon: SvgPicture.asset("assets/icons/gear.svg"),
                       onPressed: () {
                         /// push the 'Settings' screen and wait for updated preferences
                         awaitReturnPreferencesFromSettingsScreen(context);
@@ -354,156 +358,186 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.3, // 30% of screen height
-              //child: Expanded(
-              child: Stack(children: [
-                Container(
-                    alignment: AlignmentDirectional.center,
-                    child: SvgPicture.asset(
-                      // getAnimationFrame('happy-sun', _index),
-                      getAnimationFrame('angry-thunder', _index),
-                      // getAnimationFrame('happy-cloud', _index),
-                      // getAnimationFrame('hot-sun', _index),
-                      // getAnimationFrame('too-windy', _index),
-                      // getAnimationFrame('rain', _index),
-                      fit: BoxFit.cover,
-                    )),
+            Container(
+              color: Pallete.upperBackgroundColor,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height *
+                        0.3, // 30% of screen height
+                    //child: Expanded(
+                    child: Stack(
+                      children: [
+                        Container(
+                          alignment: AlignmentDirectional.center,
+                          child: SvgPicture.asset(
+                            // getAnimationFrame('happy-sun', _index),
+                            getAnimationFrame('angry-thunder', _index),
+                            // getAnimationFrame('happy-cloud', _index),
+                            // getAnimationFrame('hot-sun', _index),
+                            // getAnimationFrame('too-windy', _index),
+                            // getAnimationFrame('rain', _index),
+                            fit: BoxFit.cover,
+                          )),
 
-                /// PREVIOUS POSITION OF BUTTON
-                /*Positioned(
-                        top: 5,
-                        right: 5,
+                      /// PREVIOUS POSITION OF BUTTON
+                      /*Positioned(
+                              top: 5,
+                              right: 5,
 
-                        /// Button to go to 'Settings' screen
-                        child: IconButton(
-                          icon: SvgPicture.asset("assets/images/gear.svg"),
-                          onPressed: () {
-                            /// push the 'Settings' screen and wait for updated preferences
-                            awaitReturnPreferencesFromSettingsScreen(context);
-                          },
-                          //child: Text('Settings'),
-                        ),
-                      ),*/
-              ]),
-              //),
-            ),
-            /*SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      thumbColor: Pallete.sliderThumbColor,
-                      //thumbShape:
-                    ),
-                    child: Slider(
-                      value: _sliderValue,
-                      min: 0.0,
-                      max: 100.0,
-                      divisions: 20,
-                      label: '${_sliderValue.toInt()}',
-                      onChanged: (value) {
-                        setState(() {
-                          _sliderValue = value;
-                        });
-                      },
-                      activeColor: Pallete.sliderActiveColor,
-                      inactiveColor: Pallete.sliderInactiveColor,
-                    ),
-                  ),*/
-            /*const SliderWithLabels(
-                    minValue: 0,
-                    maxValue: 12,
-                    initialValue: 0,
-                  ),*/
-            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            /////// SLIDER
-            slider,
-            /////// SLIDER
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-                child: Center(
-                  child: Text(
-                    'The current location is set to ${preferences.selectedLocation}',
-                    style: const TextStyle(fontSize: 20.0),
+                              /// Button to go to 'Settings' screen
+                              child: IconButton(
+                                icon: SvgPicture.asset("assets/images/gear.svg"),
+                                onPressed: () {
+                                  /// push the 'Settings' screen and wait for updated preferences
+                                  awaitReturnPreferencesFromSettingsScreen(context);
+                                },
+                                //child: Text('Settings'),
+                              ),
+                            ),*/
+                    ]),
+                    //),
                   ),
-                )),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-              child: Text(
-                checkConditions(getNumHoursStudy()),
-                style: TextStyle(fontSize: 20.0),
+                  /*SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            thumbColor: Pallete.sliderThumbColor,
+                            //thumbShape:
+                          ),
+                          child: Slider(
+                            value: _sliderValue,
+                            min: 0.0,
+                            max: 100.0,
+                            divisions: 20,
+                            label: '${_sliderValue.toInt()}',
+                            onChanged: (value) {
+                              setState(() {
+                                _sliderValue = value;
+                              });
+                            },
+                            activeColor: Pallete.sliderActiveColor,
+                            inactiveColor: Pallete.sliderInactiveColor,
+                          ),
+                        ),*/
+                  /*const SliderWithLabels(
+                          minValue: 0,
+                          maxValue: 12,
+                          initialValue: 0,
+                        ),*/
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                ],
+              )
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.59,
+              padding: EdgeInsets.all(16.0),
+              color: Pallete.lowerBackgroundColor,
+              child: Column(
+                children: [
+                  /////// SLIDER
+                  slider,
+                  /////// SLIDER
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.03,
+                      child: Center(
+                        child: Text(
+                          'The current location is set to ${preferences.selectedLocation}',
+                          style: const TextStyle(fontSize: 20.0),
+                        ),
+                      )),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.031,
+                    child: Text(
+                      checkConditions(getNumHoursStudy()),
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            // 'assets/icons/feels_like.svg',
+                            //"assets/images/red.svg",
+                            //https://www.flaticon.com/free-icons/temperature
+                            "assets/icons/thermometer.svg",
+                            width: 40.0,
+                            height: 40.0,
+                          ),
+                          // SvgPicture.asset("images/sun.svg"),
+                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                          Text(feelsLikeTempText()),
+                          SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+                          // Text(checkTemp(getNumHoursStudy()))
+                        ],
+                      ),
+                      //SizedBox(height: 16.0),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                      Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                            child: OverflowBox(
+                              alignment: Alignment.center,
+                              minWidth: 0.0,
+                              minHeight: 0.0,
+                              maxWidth: 56,
+                              maxHeight: 36,
+                              child: SvgPicture.asset(
+                                "assets/images/too-windy/too-windy-7.svg",
+                                // getAnimationFrame('too-windy', _index),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          //SizedBox(width: 16.0),
+                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                          Text(windSpeedText()),
+                        ],
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                      Row(
+                        children: [
+                          /*SvgPicture.asset(
+                            'assets/images/red.svg',
+                            width: 40.0,
+                            height: 40.0,
+                          ),*/
+                          Container(
+                            height: 40.0,
+                            width: 40.0,
+                            child: Image.network('https://openweathermap.org/img/wn/10d@2x.png')
+                          ),    
+                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                          Text(weatherDescriptionText()),
+                        ],
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            //'assets/images/red.svg',
+                            //https://www.flaticon.com/free-icons/sunset
+                            data!.isDay() ? "assets/icons/sunset.svg" : 
+                             "assets/icons/sunrise.svg",
+                            width: 40.0,
+                            height: 40.0,
+                          ),
+                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                          Text(sunriseOrSunsetText()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ]
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      // 'assets/icons/feels_like.svg',
-                      "assets/images/red.svg",
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    // SvgPicture.asset("images/sun.svg"),
-                    SizedBox(width: 16.0),
-                    Text(feelsLikeTempText()),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.4),
-                    // Text(checkTemp(getNumHoursStudy()))
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    Container(
-                      width: 36,
-                      height: 36,
-                      // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                      child: OverflowBox(
-                        alignment: Alignment.center,
-                        minWidth: 0.0,
-                        minHeight: 0.0,
-                        maxWidth: 56,
-                        maxHeight: 36,
-                        child: SvgPicture.asset(
-                          "assets/images/too-windy/too-windy-7.svg",
-                          // getAnimationFrame('too-windy', _index),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 16.0),
-                    Text(windSpeedText()),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/red.svg',
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    SizedBox(width: 16.0),
-                    Text(weatherDescriptionText()),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/red.svg',
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    SizedBox(width: 16.0),
-                    Text(sunriseOrSunsetText()),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 16.0),
+            //SizedBox(height: 16.0),
           ],
         ),
       ),

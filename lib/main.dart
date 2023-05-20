@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Weather App',
       theme: ThemeData.dark().copyWith(
         disabledColor: Pallete.settingsSwitchListTileInactiveThumbColor,
-        scaffoldBackgroundColor: Pallete.backgroundColor,
+        //scaffoldBackgroundColor: Pallete.upperBackgroundColor,
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
           titleLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-          bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Roboto'),  
+          bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Roboto'),  
         )
       ),
       home: const StudyOutsideScreen(),

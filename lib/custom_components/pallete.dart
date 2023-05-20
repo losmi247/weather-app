@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class Pallete {
   /// Study Outside Screen Colors
-  static const Color backgroundColor = Color.fromRGBO(189, 222, 255, 1);
+  static const Color upperBackgroundColor = Color.fromRGBO(189, 222, 255, 1);
+  static const Color lowerBackgroundColor = Color.fromRGBO(192, 215, 191, 1);
+  /// original lowerBackgroundColor: Color.fromRGBO(161, 180, 160, 1);
+  static const Color upperBarColor = Color.fromRGBO(250, 249, 246, 1);
   static const Color gradient1 = Color.fromRGBO(187, 63, 221, 1);
   static const Color gradient2 = Color.fromRGBO(251, 109, 169, 1);
   static const Color gradient3 = Color.fromRGBO(255, 159, 124, 1);
