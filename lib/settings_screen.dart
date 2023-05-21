@@ -19,19 +19,21 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   /// static?
   static Preferences preferences = Preferences.defaultPreferences();
-  /// don't access these for min/max temp, access
+  /// don't access these OptionSliders for min/max temp, access
   /// preferences.minTemp, preferences.maxTemp,
   /// except they are now getters, not fields in the 
   /// Preferences class
   OptionSlider minTempSlider = OptionSlider(
     options: (preferences.isCelsius ? Preferences.minTemperaturesCelsius : 
                                      Preferences.minTemperaturesFahrenheit),
-    label: "Min temperature"
+    label: "Min temperature",
+    notifyParent: (newIndex) {},
   );
   OptionSlider maxTempSlider = OptionSlider(
     options: (preferences.isCelsius ? Preferences.maxTemperaturesCelsius : 
                                      Preferences.maxTemperaturesFahrenheit),
-    label: "Max temperature"
+    label: "Max temperature",
+    notifyParent: (newIndex) {},
   );
 
   @override
@@ -53,8 +55,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Navigator.pop(context, preferences);
   }
 
+  /// this function takes the new index that the
+  /// minTempSlider has been set to, and pushes the 
+  /// maxTempSlider up to the first temperature that 
+  /// is > than the current temperature on minTempSlider
+  void validMinTemperatureRangeLogic(newIndex){
+    if(minTempSlider.options[newIndex] >= maxTempSlider.value){
+      int pos = maxTempSlider.index;
+      while(maxTempSlider.options[pos] <= minTempSlider.options[newIndex]){
+        pos++;
+      }
+      maxTempSlider.sliderState.controller.animateToItem(pos, 
+        duration: Duration(milliseconds: 400),
+        curve: Curves.fastOutSlowIn);
+    }
+    else{
+      preferences.minTempIndex = newIndex;
+    }
+  }
+  /// this function takes the new index that the
+  /// maxTempSlider has been set to, and pushes the 
+  /// minTempSlider down to the first temperature that 
+  /// is < than the current temperature on maxTempSlider
+  void validMaxTemperatureRangeLogic(newIndex){
+    if(maxTempSlider.options[newIndex] <= minTempSlider.value){
+      int pos = minTempSlider.index;
+      while(minTempSlider.options[pos] >= maxTempSlider.options[newIndex]){
+        pos--;
+      }
+      minTempSlider.sliderState.controller.animateToItem(pos, 
+        duration: Duration(milliseconds: 400),
+        curve: Curves.fastOutSlowIn);
+    }
+    else{
+      preferences.maxTempIndex = newIndex;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    minTempSlider.notifyParent = (newIndex) {
+      validMinTemperatureRangeLogic(newIndex);
+    };
+    maxTempSlider.notifyParent = (newIndex) {
+      validMaxTemperatureRangeLogic(newIndex);
+    };
+
     return Scaffold(
       appBar: AppBar(
         /// flutter automatically adds a back button if there is a previous page,
@@ -82,10 +128,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: (value) {
               setState(() {
                 preferences.isCelsius = value;
-                minTempSlider.options = (preferences.isCelsius ? 
+                minTempSlider.sliderOptions = (preferences.isCelsius ? 
                                      Preferences.minTemperaturesCelsius : 
                                      Preferences.minTemperaturesFahrenheit);
-                maxTempSlider.options = (preferences.isCelsius ? 
+                maxTempSlider.sliderOptions = (preferences.isCelsius ? 
                                      Preferences.maxTemperaturesCelsius : 
                                      Preferences.maxTemperaturesFahrenheit);
               });

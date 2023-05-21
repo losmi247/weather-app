@@ -17,7 +17,7 @@ class Preferences {
   int minTempIndex;
   /// IF YOU CHANGE THESE LISTS - CHANGE THE DEFAULT INDICES
   /// IN Preferences.defaultPreferences() BELOW 
-  static List<double> minTemperaturesCelsius = [0, 5, 10, 15, 20, 25];
+  static List<double> minTemperaturesCelsius = [0, 5, 10, 15, 20, 25, 30, 35];
   static List<double> minTemperaturesFahrenheit = 
                  Util.listCelsiusToFahrenheit(minTemperaturesCelsius);
   /// maxTempIndex - zero-based index of currently selected
@@ -25,7 +25,7 @@ class Preferences {
   int maxTempIndex;
   /// IF YOU CHANGE THESE LISTS - CHANGE THE DEFAULT INDICES
   /// IN Preferences.defaultPreferences() BELOW 
-  static List<double> maxTemperaturesCelsius = [25, 30, 35, 40];
+  static List<double> maxTemperaturesCelsius = [10, 15, 20, 25, 30, 35, 40, 45];
   static List<double> maxTemperaturesFahrenheit = 
                  Util.listCelsiusToFahrenheit(maxTemperaturesCelsius);
 
@@ -98,7 +98,7 @@ class Preferences {
         isLocationSetAutomatically = true,
         selectedLocation = 'Cambridge',
         minTempIndex = 4,
-        maxTempIndex = 0;
+        maxTempIndex = 4;
 }
 
 // const List<String> locations = <String>['Cambridge', 'Manchester', 'Oxford'];

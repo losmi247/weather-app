@@ -6,10 +6,16 @@ class OptionSlider extends StatefulWidget {
     Key? key,
     required this.options,
     required this.label,
+    required this.notifyParent,
   }) : super(key: key);
 
-  final List<double> options;
+  List<double> options;
   final String label;
+  /// function to notify the settings screen that
+  /// the slider's value has been changed, so that
+  /// we can update the other sliders value so that
+  /// the temperature range is l < r (valid)
+  Function(int newIndex) notifyParent;
   late _OptionSliderState sliderState = _OptionSliderState();
 
   @override
@@ -23,8 +29,12 @@ class OptionSlider extends StatefulWidget {
   set index(int newIndex){
     sliderState.selectedIndex = newIndex;
   }
-  set options(List<double> newOptions){
+  set sliderOptions(List<double> newOptions){
+    options = newOptions;
     sliderState.setState(() { sliderState.options = newOptions; });
+  }
+  set notifyParentFunction(Function(int newIndex) v){
+    notifyParent = v;
   }
 }
 
@@ -32,43 +42,20 @@ class _OptionSliderState extends State<OptionSlider> {
   int selectedIndex = 0;
   List<double> options = [20];
   String label = "";
+  FixedExtentScrollController controller = FixedExtentScrollController();
 
   @override
   void initState() {
     super.initState();
     options = widget.options;
     label = widget.label;
+    controller = FixedExtentScrollController(
+      initialItem: selectedIndex,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    /*return Expanded(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            top: 100,
-            left: 100,
-            right: 100,
-            child: Container(
-              //width: 200, // Adjust the width as needed
-              //height: 200, // Adjust the height as needed
-              width: 50,
-              height: 100,
-              child: CupertinoPicker(
-                //itemExtent: 30,
-                itemExtent: 30,
-                children: stringsToWidgets(),
-                onSelectedItemChanged: (value) {
-                  selectedIndex = value;
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );*/
-
     return Container(
       //width: 130,
       width: 140,
@@ -83,12 +70,12 @@ class _OptionSliderState extends State<OptionSlider> {
               width: 130,
               height: 80,
               child: CupertinoPicker(
-                //itemExtent: 30,
-                scrollController: FixedExtentScrollController(initialItem: selectedIndex),
+                scrollController: controller,
                 itemExtent: 30,
                 children: stringsToWidgets(),
                 onSelectedItemChanged: (value) {
                   selectedIndex = value;
+                  widget.notifyParent(value);
                 },
                 backgroundColor: Color.fromRGBO(0, 0, 0, 0),
               ),
