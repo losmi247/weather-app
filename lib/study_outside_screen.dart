@@ -535,7 +535,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                   /////// SLIDER
                   SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.032,
                       child: Center(
                         child: Text(
                           'The current location is set to ${preferences.selectedLocation}',
@@ -681,9 +681,15 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           builder: (context) => SettingsScreen(preferences: preferences)),
     );
     setState(() {
-      if (preferences.selectedLocation !=
+      /// selectedLocation is now a getter in Preferences
+      /*if (preferences.selectedLocation !=
           returnedPreferences.selectedLocation) {
         preferences.selectedLocation = returnedPreferences.selectedLocation;
+        getData();
+      }*/
+      if (preferences.locationIndex !=
+          returnedPreferences.locationIndex) {
+        preferences.locationIndex = returnedPreferences.locationIndex;
         getData();
       }
 
@@ -703,6 +709,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       /// 'settings' screen
       preferences.minTempIndex = returnedPreferences.minTempIndex;
       preferences.maxTempIndex = returnedPreferences.maxTempIndex;
+      
+      /// update location index we got back from 'location settings'
+      /// screen
+      preferences.locationIndex = returnedPreferences.locationIndex;
     });
   }
 }

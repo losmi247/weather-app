@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/custom_components/locationsOptionSlider.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
 
@@ -17,10 +18,18 @@ class LocationSettingsScreen extends StatefulWidget {
 class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
   Preferences preferences = Preferences.defaultPreferences();
 
+  LocationsOptionSlider locationSlider = LocationsOptionSlider(options: locations, 
+    notifyParent:(newIndex) {
+      
+  },);
+
   @override
   void initState() {
     super.initState();
     preferences = Preferences.copy(widget.preferences);
+
+    // initalize the location slider from preferences
+    locationSlider.index = preferences.locationIndex;
   }
 
   /// sends preferences back to the previous page
@@ -39,6 +48,11 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
     //     ),
     //   );
     // }
+
+    locationSlider.notifyParentFunction = (newIndex) {
+      /// update location index in preferences
+      preferences.locationIndex = newIndex;
+    };
 
     return Scaffold(
       appBar: AppBar(
@@ -69,10 +83,19 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
               value: preferences.isLocationSetAutomatically,
               tileColor: Pallete.settignsSwitchListTileColor,
               onChanged: (value) {
-                setState(() {
+                /*setState(() {
                   preferences.isLocationSetAutomatically = value;
                   if (value == true) {
                     preferences.selectedLocation = "Cambridge";
+                  }
+                });*/
+                setState(() {
+                  preferences.isLocationSetAutomatically = value;
+                  if (value == true) {
+                    preferences.locationIndex = 0;
+                    locationSlider.sliderState.controller.animateToItem(0, 
+                      duration: Duration(milliseconds: 400),
+                      curve: Curves.fastOutSlowIn);
                   }
                 });
               },
@@ -84,7 +107,6 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                 borderRadius: BorderRadius.circular(5),
               ), 
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             // DropdownMenu<LocationLabel>(
             //   initialSelection: preferences.selectedLocation,
             //   controller: locationController,
@@ -101,7 +123,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
             //   // ),
             //
             // ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.005),
             Row(
               children: [
                 SizedBox(width: MediaQuery.of(context).size.width * 0.025),
@@ -109,7 +131,10 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                   child: Text('Select location', style: TextStyle(color: Pallete.settingsTextColor)),
                 ),
                 SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-                Expanded(
+
+
+
+                /*Expanded(
                   child: DropdownButton<String>(
                     isExpanded: true,
                     value: preferences.selectedLocation,
@@ -139,7 +164,16 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                     }).toList(),
                     dropdownColor: Pallete.settingsLocationDropdownColor,
                   )
+                ),*/
+
+                IgnorePointer(
+                  ignoring: preferences.isLocationSetAutomatically,
+                  child: Opacity(
+                    opacity: preferences.isLocationSetAutomatically ? 0.5 : 1,
+                    child: locationSlider,
+                  ),
                 ),
+
                 SizedBox(width: MediaQuery.of(context).size.width * 0.025),
               ]
             ),

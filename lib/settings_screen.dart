@@ -431,12 +431,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       preferences.workInWind = returnedPreferences.workInWind;
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
-      preferences.selectedLocation = returnedPreferences.selectedLocation;
+      //preferences.selectedLocation = returnedPreferences.selectedLocation;
 
       /// update the min/max temp indices when you come back from 
       /// 'location settings' screen (even they won't be changed there)
       preferences.minTempIndex = returnedPreferences.minTempIndex;
       preferences.maxTempIndex = returnedPreferences.maxTempIndex;
+      
+      /// update the location index we when going back from 'location settings'
+      /// screen
+      preferences.locationIndex = returnedPreferences.locationIndex;
     });
   }
 }
