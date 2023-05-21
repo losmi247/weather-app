@@ -3,6 +3,7 @@ import 'package:flutter_application_1/custom_components/option_slider.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/location_settings.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Preferences preferences;
@@ -146,6 +147,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
             ),
+            secondary: SvgPicture.asset(
+              "assets/icons/celsius.svg",
+              width: 35.0,
+              height: 35.0,
+            ),
+            contentPadding: EdgeInsets.fromLTRB(9, 0, 16, 0),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
           /// OLD MIN/MAX TEMP SETTINGS
@@ -225,6 +232,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(color: Pallete.settingsTextColor)),
           SizedBox(height: MediaQuery.of(context).size.height * 0.024),
           SwitchListTile(
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
             title: const Text('Rain',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInRain,
@@ -243,11 +251,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
             ),
+            secondary: Container(
+              height: 50.0,
+              width: 50.0,
+              child: Image.network('https://openweathermap.org/img/wn/09d@2x.png'),
+            ),
           ),
           SwitchListTile(
             title: const Text('Snow',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInSnow,
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
             onChanged: (value) {
               setState(() {
                 preferences.workInSnow = value;
@@ -263,11 +277,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
             ),
+            secondary: Container(
+              height: 50.0,
+              width: 50.0,
+              child: Image.network('https://openweathermap.org/img/wn/13d@2x.png'),
+            ),
           ),
           SwitchListTile(
             title: const Text('Wind',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInWind,
+            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
             onChanged: (value) {
               setState(() {
                 preferences.workInWind = value;
@@ -282,6 +302,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               side: const BorderSide(
                   color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
+            ),
+            secondary: Container(
+              width: 50,
+              height: 50,
+              // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+              child: OverflowBox(
+                alignment: Alignment.center,
+                minWidth: 0.0,
+                minHeight: 0.0,
+                maxWidth: 56,
+                maxHeight: 36,
+                child: SvgPicture.asset(
+                  "assets/images/too-windy/too-windy-7.svg",
+                  // getAnimationFrame('too-windy', _index),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           SwitchListTile(
@@ -302,6 +339,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               side: const BorderSide(
                   color: Pallete.settingsSwitchListTileBorderColor),
               borderRadius: BorderRadius.circular(10),
+            ),
+            secondary: SvgPicture.asset(
+                "assets/icons/night.svg",
+                width: 35.0,
+                height: 35.0,
             ),
           ),
 

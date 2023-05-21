@@ -107,6 +107,8 @@ flutter:
     - assets/icons/thermometer.svg
     - assets/icons/sunset.svg
     - assets/icons/sunrise.svg
+    - assets/icons/night.svg
+    - assets/icons/celsius.svg
 
   fonts:
     - family: Roboto
