@@ -137,6 +137,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                      Preferences.maxTemperaturesFahrenheit);
               });
             },
+            tileColor: Pallete.settignsSwitchListTileColor,
             inactiveThumbColor:
                 Pallete.settingsSwitchListTileInactiveThumbColor,
             inactiveTrackColor:
@@ -219,18 +220,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),*/
 
           /// NEW MIN/MAX TEMPS SETTINGS
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              minTempSlider,
-              maxTempSlider
-            ],
-          ), 
+          Container(
+            decoration: BoxDecoration(
+              color: Pallete.settignsSwitchListTileColor,
+              borderRadius: BorderRadius.circular(5),
+              border: Border.fromBorderSide(const BorderSide(
+                    color: Pallete.settingsSwitchListTileBorderColor),
+              ),
+              //shape: 
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                minTempSlider,
+                maxTempSlider
+              ],
+            ),
+          ),
           
-          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.036),
           const Text('Willing to work in:',
               style: TextStyle(color: Pallete.settingsTextColor)),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.024),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.018),
           SwitchListTile(
             contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
             title: const Text('Rain',
@@ -256,6 +267,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 50.0,
               child: Image.network('https://openweathermap.org/img/wn/09d@2x.png'),
             ),
+            tileColor: Pallete.settignsSwitchListTileColor,
           ),
           SwitchListTile(
             title: const Text('Snow',
@@ -282,6 +294,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 50.0,
               child: Image.network('https://openweathermap.org/img/wn/13d@2x.png'),
             ),
+            tileColor: Pallete.settignsSwitchListTileColor,
           ),
           SwitchListTile(
             title: const Text('Wind',
@@ -320,6 +333,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
+            tileColor: Pallete.settignsSwitchListTileColor,
           ),
           SwitchListTile(
             title: const Text('At night',
@@ -330,6 +344,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 preferences.workAtNight = value;
               });
             },
+            tileColor: Pallete.settignsSwitchListTileColor,
             inactiveThumbColor:
                 Pallete.settingsSwitchListTileInactiveThumbColor,
             inactiveTrackColor:
@@ -351,7 +366,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           SizedBox(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * 0.06,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Pallete.settingsLocationSettingsButtonColor,
@@ -371,8 +386,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 /// push the 'Location Settings' screen and wait for updated preferences
                 awaitReturnPreferencesFromLocationSettingsScreen(context);
               },
-              child: const Text('Location Settings', 
-                            style: TextStyle(fontSize: 18.0, fontFamily: 'Roboto')),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Location Settings',
+                              style: TextStyle(color: Colors.black,
+                                fontSize: 18.0, 
+                                fontFamily: 'Roboto')),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                  SvgPicture.asset(
+                    "assets/icons/location.svg",
+                    width: 27.0,
+                    height: 27.0,
+                  ),
+                ],
+              )
             ),
           ),
         ],

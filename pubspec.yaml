@@ -109,6 +109,7 @@ flutter:
     - assets/icons/sunrise.svg
     - assets/icons/night.svg
     - assets/icons/celsius.svg
+    - assets/icons/location.svg
 
   fonts:
     - family: Roboto

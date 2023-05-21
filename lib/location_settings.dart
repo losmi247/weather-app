@@ -67,6 +67,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
               title: const Text("Automatically set location",
                     style: TextStyle(color: Pallete.settingsTextColor)),
               value: preferences.isLocationSetAutomatically,
+              tileColor: Pallete.settignsSwitchListTileColor,
               onChanged: (value) {
                 setState(() {
                   preferences.isLocationSetAutomatically = value;

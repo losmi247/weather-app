@@ -54,18 +54,25 @@ class _OptionSliderState extends State<OptionSlider> {
     );
   }
 
+  /// previously:
+  /// text top: 0
+  /// second positioned top: 30
+  /// main container height: 120
   @override
   Widget build(BuildContext context) {
     return Container(
       //width: 130,
       width: 140,
-      height: 120,
+      height: 125,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          Text(label, style: const TextStyle(color: Pallete.settingsTextColor)),
           Positioned(
-            top: 30,
+            top: 5,
+            child: Text(label, style: const TextStyle(color: Pallete.settingsTextColor)),
+          ),
+          Positioned(
+            top: 35,
             child: Container(
               width: 130,
               height: 80,
