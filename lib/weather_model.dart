@@ -57,7 +57,7 @@ class Weather {
     var mins = (delta / 60).ceil();
     var hours = (mins / 60).floor();
     if (hours > 0) {
-      return 'Sunrise is in $hours hours and ${mins % 60} minutes';
+      return '$hours hours and ${mins % 60} minutes';
     }
     return '$hours hours and ${mins % 60} minutes';
   }

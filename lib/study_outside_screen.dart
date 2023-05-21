@@ -264,11 +264,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   List checkWind2(int hours) {
     // loop through wind data for each hour and return false if over
     for (int i = 0; i <= hours && i < data!.wind!.length; i++) {
-      if (data!.wind![i] >= 14) {
+      if (data!.wind![i] >= 7.8) {
         return [
           false,
-          'There will be a ${data!.windDescription![i]} in $hours hours'
-        ];
+    (i == 0) ? 'There is a ${data!.windDescription![i]} right now' :
+    'There will be a ${data!.windDescription![i]} in $i hours'];
       }
     }
     return [true, 'Not too windy in the next $hours hours'];
@@ -282,13 +282,35 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
           return [false, 'It\'s raining now'];
         }
 
-        return [false, 'It\'s going to rain in the next $hours hours'];
+        return [false, 'It\'s going to rain in the next $i hours'];
       }
     }
     return [true, 'No rain in the next $hours hours'];
   }
 
+  String toHoursAndMins(double hours) {
+    int hoursInt = hours.toInt();
+    int mins = ((hours - hoursInt) * 60).ceil().toInt();
+    return '$hoursInt hours and $mins minutes';
+  }
+
+  List checkDark(int hours) {
+    double hoursUntilSunset = (data!.sunset! - data!.time!) / 3600;
+    // check if it will be dark in the next hours
+    if (hoursUntilSunset < hours) {
+      return [false, 'It will be dark in ${toHoursAndMins(hoursUntilSunset)}'];
+    }
+    // check if currently dark
+    if (data!.time !< data!.sunrise!) {
+      return [false, 'It is dark right now'];
+    }
+    return [true, 'It will be light for $hours hours'];
+  }
+
   String checkConditions(int hours) {
+    if (data == null) {
+      return 'Loading...';
+    }
     // call check temp -> (inBounds: bool, text: String)
     // call check wind -> (inBounds, text)
     // call check rain -> (inBounds, text)
@@ -300,6 +322,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     List temp = checkTemp2(hours);
     List wind = checkWind2(hours);
     List rain = checkRain2(hours);
+    List dark = checkDark(hours);
 
     if (!rain[0] && !preferences.workInRain) {
       return rain[1];
@@ -311,6 +334,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
     if (!temp[0]) {
       return temp[1];
+    }
+
+    if (!dark[0] && !preferences.workAtNight) {
+      return dark[1];
     }
 
     return temp[1];
@@ -561,8 +588,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           SvgPicture.asset(
                             //'assets/images/red.svg',
                             //https://www.flaticon.com/free-icons/sunset
-                            data!.isDay() ? "assets/icons/sunset.svg" : 
-                             "assets/icons/sunrise.svg",
+                            (data == null) ? "assets/icons/sunset.svg" :
+                            (data!.isDay() ? "assets/icons/sunset.svg" :
+                            "assets/icons/sunrise.svg"),
                             width: 42.0,
                             height: 42.0,
                           ),
@@ -598,6 +626,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   int getNumHoursStudy() {
+    if (data == null) {
+      return 0;
+    }
     int currentTime = data!.time!;
     int endTime = currentTime + (slider.value * 60).toInt();
 
