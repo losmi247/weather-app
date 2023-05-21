@@ -8,6 +8,7 @@ class Weather {
   int? time;
   List? windDescription;
   List? icons;
+  String? mainDescription;
 
   Weather(
       {this.feelsLike,
@@ -18,7 +19,8 @@ class Weather {
       this.description,
       this.time,
       this.windDescription,
-      this.icons});
+      this.icons,
+      this.mainDescription});
 
   void windSpeedToDescription() {
     for (int i = 0; i < wind!.length; i++) {
@@ -98,6 +100,7 @@ class Weather {
     sunset = json['current']['sunset'];
     time = json['current']['dt'];
     icons = [];
+    mainDescription = json['current']['weather'][0]['main'];
     // loop to get weather info for next 12 hours
     for (int i = 0; i < 12; i++) {
       feelsLike!.add(json['hourly'][i]['feels_like']);

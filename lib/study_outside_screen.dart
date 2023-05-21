@@ -132,6 +132,38 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     return 'assets/images/${animation[index % animation.length]}';
   }
 
+  String getWeatherAnimation() {
+    if (data == null) {
+      return 'assets/images/sun-l.svg';
+    }
+    final weather = data!.mainDescription!;
+    if (weather == 'Thunderstorm') {
+      return getAnimationFrame('angry-thunder', _index);
+    }
+    if (weather == 'Drizzle' || weather == 'Rain') {
+      return getAnimationFrame('rain', _index);
+    }
+    if (weather == 'Snow') {
+      return 'assets/images/snow/snow-1.svg';
+    }
+    if (weather == 'Clear') {
+      if (data!.feelsLike![0] > 30) {
+        return getAnimationFrame('hot-sun', _index);
+      }
+      return getAnimationFrame('happy-sun', _index);
+    }
+    if (weather == 'Clouds') {
+      if (data!.wind![0] > 10) {
+        return getAnimationFrame('too-windy', _index);
+      }
+      return getAnimationFrame('happy-cloud', _index);
+    }
+    if (data!.feelsLike![0] > 20) {
+      return getAnimationFrame('happy-sun', _index);
+    }
+    return getAnimationFrame('happy-cloud', _index);
+  }
+
   WeatherApiClient client = WeatherApiClient();
   Weather? data;
 
@@ -295,14 +327,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   }
 
   List checkDark(int hours) {
+    // check if currently dark
+    if (data!.time !< data!.sunrise! || data!.time! > data!.sunset!) {
+      return [false, 'It is dark right now'];
+    }
     double hoursUntilSunset = (data!.sunset! - data!.time!) / 3600;
     // check if it will be dark in the next hours
     if (hoursUntilSunset < hours) {
       return [false, 'It will be dark in ${toHoursAndMins(hoursUntilSunset)}'];
-    }
-    // check if currently dark
-    if (data!.time !< data!.sunrise!) {
-      return [false, 'It is dark right now'];
     }
     return [true, 'It will be light for $hours hours'];
   }
@@ -435,11 +467,12 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           alignment: AlignmentDirectional.center,
                           child: SvgPicture.asset(
                             // getAnimationFrame('happy-sun', _index),
-                            getAnimationFrame('angry-thunder', _index),
+                            // getAnimationFrame('angry-thunder', _index),
                             // getAnimationFrame('happy-cloud', _index),
                             // getAnimationFrame('hot-sun', _index),
                             // getAnimationFrame('too-windy', _index),
                             // getAnimationFrame('rain', _index),
+                            getWeatherAnimation(),
                             fit: BoxFit.cover,
                           )),
 
