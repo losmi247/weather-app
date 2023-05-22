@@ -27,21 +27,21 @@ class Weather {
       if (wind![i] < 0.27) {
         windDescription![i] = 'Calm';
       } else if (wind![i] < 1.4) {
-        windDescription![i] = 'Light Air';
+        windDescription![i] = 'Light air';
       } else if (wind![i] < 3.1) {
-        windDescription![i] = 'Light Breeze';
+        windDescription![i] = 'Light breeze';
       } else if (wind![i] < 5.3) {
-        windDescription![i] = 'Gentle Breeze';
+        windDescription![i] = 'Gentle breeze';
       } else if (wind![i] < 7.8) {
-        windDescription![i] = 'Moderate Breeze';
+        windDescription![i] = 'Moderate breeze';
       } else if (wind![i] < 14) {
-        windDescription![i] = 'Strong Breeze';
+        windDescription![i] = 'Strong breeze';
       } else if (wind![i] < 17) {
-        windDescription![i] = 'Near Gale';
+        windDescription![i] = 'Near gale';
       } else if (wind![i] < 21) {
         windDescription![i] = 'Gale';
       } else if (wind![i] < 24) {
-        windDescription![i] = 'Strong Gale';
+        windDescription![i] = 'Strong gale';
       } else if (wind![i] < 28) {
         windDescription![i] = 'Storm';
       } else {

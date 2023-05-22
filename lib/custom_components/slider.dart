@@ -48,6 +48,8 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     thumbColor: Pallete.sliderThumbColor,
+                    overlayColor: Colors.transparent,
+                    thumbShape: RoundSliderThumbShape(elevation: 0),
                     //thumbShape:
                   ),
                   child: Slider(
@@ -86,11 +88,17 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
               Positioned(
                 left: MediaQuery.of(context).size.width / 2 - 75,
                 top: -4,
-                child: Text(
-                    "Revise for " +
-                        getStringForTimeDelta(sliderValue.toInt() *
-                            Constants.MINUTES_TO_MILLISECONDS),
-                    style: TextStyle(fontSize: 20)),
+                child: RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto'),
+                    children: <TextSpan>[
+                      const TextSpan(text: "Revise for "),
+                      TextSpan(text: getStringForTimeDelta(sliderValue.toInt() *
+                            Constants.MINUTES_TO_MILLISECONDS), 
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

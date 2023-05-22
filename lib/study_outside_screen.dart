@@ -413,18 +413,53 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 5,
+                    top: 6,
                     right: 5,
 
                     /// Button to go to 'Settings' screen
-                    child: IconButton(
-                      icon: SvgPicture.asset("assets/icons/gear.svg"),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Pallete.settingsLocationSettingsButtonColor,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          /// push the 'Settings' screen and wait for updated preferences
+                          awaitReturnPreferencesFromSettingsScreen(context);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Settings',
+                                        style: TextStyle(color: Colors.black,
+                                          fontSize: 18.0, 
+                                          fontFamily: 'Roboto')),
+                            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                            SvgPicture.asset(
+                              "assets/icons/gear.svg",
+                              width: 27.0,
+                              height: 27.0,
+                            ),
+                          ],
+                        )
+                      ),
+                    )
+                    /*child: IconButton(
+                      icon: SvgPicture.asset(
+                        "assets/icons/gear.svg",
+                        height: 80,
+                        width: 80
+                      ),
                       onPressed: () {
                         /// push the 'Settings' screen and wait for updated preferences
                         awaitReturnPreferencesFromSettingsScreen(context);
                       },
                       //child: Text('Settings'),
-                    ),
+                    ),*/
                   ),
                   /// CLOCK
                   Positioned(
@@ -530,27 +565,64 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               color: Pallete.lowerBackgroundColor,
               child: Column(
                 children: [
-                  /////// SLIDER
-                  slider,
-                  /////// SLIDER
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.032,
-                      child: Center(
-                        child: Text(
-                          'The current location is set to ${preferences.selectedLocation}',
-                          style: const TextStyle(fontSize: 20.0),
-                        ),
-                      )),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.031,
-                    child: Text(
-                      checkConditions(getNumHoursStudy()),
-                      style: TextStyle(fontSize: 20.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Pallete.sliderContainerColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.fromBorderSide(const BorderSide(
+                            color: Color.fromARGB(255, 161, 199, 129)),
+                      ),
+                      //shape: 
                     ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                        /////// SLIDER
+                        slider,
+                        /////// SLIDER
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.032,
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto'),
+                                      children: <TextSpan>[
+                                        const TextSpan(text: 'The current location is set to '),
+                                        TextSpan(text: '${preferences.selectedLocation}', 
+                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ),
+                                  /*Text(
+                                    'The current location is set to ${preferences.selectedLocation}',
+                                    style: const TextStyle(fontSize: 20.0),
+                                  ),*/
+                                  SvgPicture.asset(
+                                    "assets/icons/location.svg",
+                                    width: 27.0,
+                                    height: 27.0,
+                                  ),
+                                ],
+                              ),
+                            )
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.016),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.033,
+                          child: Text(
+                            checkConditions(getNumHoursStudy()),
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height * 0.008),
+                      ],
+                    )
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.024),
                   Column(
                     children: [
                       Row(
@@ -575,8 +647,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       Row(
                         children: [
                           Container(
-                            width: 42,
-                            height: 42,
+                            width: 41,
+                            height: 41,
                             // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
                             child: OverflowBox(
                               alignment: Alignment.center,
@@ -636,7 +708,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                 ]
               ),
             ),
-            //SizedBox(height: 16.0),
           ],
         ),
       ),
