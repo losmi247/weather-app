@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
         disabledColor: Pallete.settingsSwitchListTileInactiveThumbColor,
         //scaffoldBackgroundColor: Pallete.upperBackgroundColor,
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-          titleLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-          bodyMedium: TextStyle(fontSize: 18.0, fontFamily: 'Roboto'),  
+          displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto', color: Colors.black),
+          titleLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: 'Roboto', color: Colors.black),
+          bodyMedium: TextStyle(fontSize: 18.0, fontFamily: 'Roboto', color: Colors.black),  
         )
       ),
       home: const StudyOutsideScreen(),

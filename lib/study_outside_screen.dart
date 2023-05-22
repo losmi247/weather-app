@@ -184,7 +184,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (data == null) {
       return 'Loading...';
     }
-    return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0].round(), preferences.isCelsius)}';
+    // why round
+    //return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0].round(), preferences.isCelsius)}';
+    return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0], preferences.isCelsius)}';
   }
 
   String windSpeedText() {
@@ -328,7 +330,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
 
   List checkDark(int hours) {
     // check if currently dark
-    if (data!.time !< data!.sunrise! || data!.time! > data!.sunset!) {
+    if (data!.time! < data!.sunrise! || data!.time! > data!.sunset!) {
       return [false, 'It is dark right now'];
     }
     double hoursUntilSunset = (data!.sunset! - data!.time!) / 3600;
@@ -589,7 +591,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto'),
+                                      style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
                                       children: <TextSpan>[
                                         const TextSpan(text: 'The current location is set to '),
                                         TextSpan(text: '${preferences.selectedLocation}', 

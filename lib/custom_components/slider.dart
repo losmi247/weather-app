@@ -90,7 +90,7 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 top: -4,
                 child: RichText(
                   text: TextSpan(
-                    style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto'),
+                    style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
                     children: <TextSpan>[
                       const TextSpan(text: "Revise for "),
                       TextSpan(text: getStringForTimeDelta(sliderValue.toInt() *

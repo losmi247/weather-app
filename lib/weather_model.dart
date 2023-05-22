@@ -1,8 +1,10 @@
 class Weather {
   List? feelsLike;
   List? wind;
-  double? sunrise;
-  double? sunset;
+  /*double? sunrise;
+  double? sunset;*/
+  int? sunrise;
+  int? sunset;
   List? rainChance;
   List? description;
   int? time;
@@ -56,15 +58,18 @@ class Weather {
 
   String getTimeUntilString(delta) {
     delta = positiveOnlyMod(delta, 86400);
-    var mins = (delta / 60).ceil();
-    var hours = (mins / 60).floor();
+    //var mins = (delta / 60).ceil();
+    int mins = (delta + 60 - 1) ~/ 60;
+    //var hours = (mins / 60).floor();
+    int hours = mins ~/ 60;
     if (hours > 0) {
       return '$hours hours and ${mins % 60} minutes';
     }
-    return '$hours hours and ${mins % 60} minutes';
+    //return '$hours hours and ${mins % 60} minutes';
+    return '${mins % 60} minutes';
   }
 
-  double positiveOnlyMod(double a, double b) {
+  int positiveOnlyMod(int a, int b) {
     return (a % b + b) % b;
   }
 
@@ -73,13 +78,14 @@ class Weather {
   }
 
   String timeToSunset() {
-    var mins = ((sunset! - time!) / 60).ceil();
+    /*var mins = ((sunset! - time!) / 60).ceil();
     var hours = (mins / 60).floor();
     if (hours > 0) {
       return 'Sunset is in $hours hours and ${mins % 60} minutes';
     } else {
       return 'Sunset is in $mins minutes';
-    }
+    }*/
+    return 'Sunset is in ${getTimeUntilString(sunset! - time!)}';
   }
 
   String timeToSunriseOrSunset() {

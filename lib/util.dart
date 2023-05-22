@@ -6,11 +6,12 @@ class Util {
   static String getStringForTemperature(
       double temperatureCelsius, bool isCelsius) {
     if (!isCelsius) {
-      return '${celsiusToFahrenheit(temperatureCelsius).toStringAsFixed(0)}°F';
+      return '${celsiusToFahrenheit(temperatureCelsius).toStringAsFixed(1)}°F';
     }
 
-    return '${temperatureCelsius.toStringAsFixed(0)}°C';
+    return '${temperatureCelsius.toStringAsFixed(1)}°C';
   }
+
 
   static List<double> listCelsiusToFahrenheit(List<double> celsiusTemps) {
     List<double> fahrenheitTemps = [];
