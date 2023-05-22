@@ -184,8 +184,6 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (data == null) {
       return 'Loading...';
     }
-    // why round
-    //return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0].round(), preferences.isCelsius)}';
     return 'Feels like ${Util.getStringForTemperature(data!.feelsLike![0], preferences.isCelsius)}';
   }
 
