@@ -27,13 +27,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
   OptionSlider minTempSlider = OptionSlider(
     options: (preferences.isCelsius ? Preferences.minTemperaturesCelsius : 
                                      Preferences.minTemperaturesFahrenheit),
-    label: "Min temperature",
+    label: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SvgPicture.asset(
+            "assets/icons/lowtemp.svg",
+            width: 27.0,
+            height: 27.0,
+        ),
+        SizedBox(width: 5,),
+        const Text("Min temperature", style: const TextStyle(color: Pallete.settingsTextColor)),
+      ],
+    ),
     notifyParent: (newIndex) {},
   );
   OptionSlider maxTempSlider = OptionSlider(
     options: (preferences.isCelsius ? Preferences.maxTemperaturesCelsius : 
                                      Preferences.maxTemperaturesFahrenheit),
-    label: "Max temperature",
+    label: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SvgPicture.asset(
+          "assets/icons/hightemp.svg",
+          width: 27.0,
+          height: 27.0,
+        ),
+        SizedBox(width: 5,),
+        const Text("Max temperature", style: const TextStyle(color: Pallete.settingsTextColor)),
+      ],
+    ),
     notifyParent: (newIndex) {},
   );
 

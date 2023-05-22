@@ -10,7 +10,7 @@ class OptionSlider extends StatefulWidget {
   }) : super(key: key);
 
   List<double> options;
-  final String label;
+  final Widget label;
   /// function to notify the settings screen that
   /// the slider's value has been changed, so that
   /// we can update the other sliders value so that
@@ -41,7 +41,7 @@ class OptionSlider extends StatefulWidget {
 class _OptionSliderState extends State<OptionSlider> {
   int selectedIndex = 0;
   List<double> options = [20];
-  String label = "";
+  late Widget label;
   FixedExtentScrollController controller = FixedExtentScrollController();
 
   @override
@@ -58,18 +58,20 @@ class _OptionSliderState extends State<OptionSlider> {
   /// text top: 0
   /// second positioned top: 30
   /// main container height: 120
+  /// main container width: 140
   @override
   Widget build(BuildContext context) {
     return Container(
       //width: 130,
-      width: 140,
+      width: 160,
       height: 125,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
           Positioned(
             top: 5,
-            child: Text(label, style: const TextStyle(color: Pallete.settingsTextColor)),
+            child: label
+            //Text(label, style: const TextStyle(color: Pallete.settingsTextColor)),
           ),
           Positioned(
             top: 35,

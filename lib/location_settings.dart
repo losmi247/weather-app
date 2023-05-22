@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/custom_components/locationsOptionSlider.dart';
 import 'package:flutter_application_1/custom_components/pallete.dart';
 import 'package:flutter_application_1/custom_components/preferences.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LocationSettingsScreen extends StatefulWidget {
   final Preferences preferences;
@@ -78,8 +79,8 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SwitchListTile(
-              title: const Text("Automatically set location",
-                    style: TextStyle(color: Pallete.settingsTextColor)),
+              title: const Text("Automatically set location", 
+                    style: TextStyle(fontSize: 18, color: Pallete.settingsTextColor)),
               value: preferences.isLocationSetAutomatically,
               tileColor: Pallete.settignsSwitchListTileColor,
               onChanged: (value) {
@@ -123,59 +124,83 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
             //   // ),
             //
             // ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-            Row(
-              children: [
-                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-                const Expanded(
-                  child: Text('Select location', style: TextStyle(color: Pallete.settingsTextColor)),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+
+            Container(
+              decoration: BoxDecoration(
+                color: Pallete.settignsSwitchListTileColor,
+                borderRadius: BorderRadius.circular(5),
+                border: const Border.fromBorderSide(BorderSide(
+                      color: Pallete.settingsSwitchListTileBorderColor),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-
-
-
-                /*Expanded(
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    value: preferences.selectedLocation,
-                    elevation: 16,
-                    iconEnabledColor: Pallete.settingsLocationDropdownArrowColor,
-                    style: const TextStyle(color: Pallete.settingsTextColor),
-                    // onChanged: (String? location) {
-                    //   setState(() {
-                    //     preferences.selectedLocation = location!;
-                    //   });
-                    // },
-                    onChanged: (!preferences.isLocationSetAutomatically ?
-                    ((String? location) {
-                      setState(() {
-                        preferences.selectedLocation = location!;
-                      });
-                    })
-                        :
-                    null
-
+                //shape: 
+              ),
+              child: Row(
+                children: [
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.025),
+                  Expanded(
+                    child: Row(
+                      children: [
+                         const Text('Select location', style: TextStyle(
+                          color: Pallete.settingsTextColor,
+                          fontSize: 18
+                        )),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.018,),
+                        SvgPicture.asset(
+                          "assets/icons/location.svg",
+                          width: 27.0,
+                          height: 27.0,
+                        ),
+                      ],
                     ),
-                    items: locations.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    dropdownColor: Pallete.settingsLocationDropdownColor,
-                  )
-                ),*/
-
-                IgnorePointer(
-                  ignoring: preferences.isLocationSetAutomatically,
-                  child: Opacity(
-                    opacity: preferences.isLocationSetAutomatically ? 0.5 : 1,
-                    child: locationSlider,
                   ),
-                ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.025),
 
-                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-              ]
+                  IgnorePointer(
+                    ignoring: preferences.isLocationSetAutomatically,
+                    child: Opacity(
+                      opacity: preferences.isLocationSetAutomatically ? 0.5 : 1,
+                      child: locationSlider,
+                    ),
+                  ),
+
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.025),
+
+                  /*Expanded(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: preferences.selectedLocation,
+                      elevation: 16,
+                      iconEnabledColor: Pallete.settingsLocationDropdownArrowColor,
+                      style: const TextStyle(color: Pallete.settingsTextColor),
+                      // onChanged: (String? location) {
+                      //   setState(() {
+                      //     preferences.selectedLocation = location!;
+                      //   });
+                      // },
+                      onChanged: (!preferences.isLocationSetAutomatically ?
+                      ((String? location) {
+                        setState(() {
+                          preferences.selectedLocation = location!;
+                        });
+                      })
+                          :
+                      null
+
+                      ),
+                      items: locations.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      dropdownColor: Pallete.settingsLocationDropdownColor,
+                    )
+                  ),*/
+
+                  
+                ]
+              ),
             ),
           ],
         ),
