@@ -1,8 +1,6 @@
 class Weather {
   List? feelsLike;
   List? wind;
-  /*double? sunrise;
-  double? sunset;*/
   int? sunrise;
   int? sunset;
   List? rainChance;
@@ -24,6 +22,7 @@ class Weather {
       this.icons,
       this.mainDescription});
 
+  /// converts the wind speed to a readable description
   void windSpeedToDescription() {
     for (int i = 0; i < wind!.length; i++) {
       if (wind![i] < 0.27) {
@@ -56,16 +55,14 @@ class Weather {
     return (time! > sunrise! && time! < sunset!);
   }
 
+  /// returns the time until the given time in seconds as a string
   String getTimeUntilString(delta) {
     delta = positiveOnlyMod(delta, 86400);
-    //var mins = (delta / 60).ceil();
     int mins = (delta + 60 - 1) ~/ 60;
-    //var hours = (mins / 60).floor();
     int hours = mins ~/ 60;
     if (hours > 0) {
       return '$hours hours and ${mins % 60} minutes';
     }
-    //return '$hours hours and ${mins % 60} minutes';
     return '${mins % 60} minutes';
   }
 
@@ -78,16 +75,10 @@ class Weather {
   }
 
   String timeToSunset() {
-    /*var mins = ((sunset! - time!) / 60).ceil();
-    var hours = (mins / 60).floor();
-    if (hours > 0) {
-      return 'Sunset is in $hours hours and ${mins % 60} minutes';
-    } else {
-      return 'Sunset is in $mins minutes';
-    }*/
     return 'Sunset is in ${getTimeUntilString(sunset! - time!)}';
   }
 
+  /// returns the time until the next sunrise or sunset as a string
   String timeToSunriseOrSunset() {
     if (isDay()) {
       return timeToSunset();
@@ -96,6 +87,7 @@ class Weather {
     }
   }
 
+  /// creates a weather object from the json data
   Weather.fromJson(Map<String, dynamic> json) {
     feelsLike = [];
     wind = [];
@@ -107,7 +99,7 @@ class Weather {
     time = json['current']['dt'];
     icons = [];
     mainDescription = json['current']['weather'][0]['main'];
-    // loop to get weather info for next 12 hours
+    /// loop to get weather info for next 12 hours
     for (int i = 0; i < 12; i++) {
       feelsLike!.add(json['hourly'][i]['feels_like']);
       wind!.add(json['hourly'][i]['wind_speed']);
