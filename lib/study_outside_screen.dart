@@ -631,7 +631,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           height: MediaQuery.of(context).size.height * 0.033,
                           child: Text(
                             checkConditions(getNumHoursStudy()),
-                            style: const TextStyle(fontSize: 20.0),
+                            style: const TextStyle(fontSize: 16.0),
                           ),
                         ),
                         SizedBox(
