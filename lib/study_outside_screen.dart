@@ -323,6 +323,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   String toHoursAndMins(double hours) {
     int hoursInt = hours.toInt();
     int mins = ((hours - hoursInt) * 60).ceil().toInt();
+    if (hoursInt == 0) {
+      return '$mins minutes';
+    }
     return '$hoursInt hours and $mins minutes';
   }
 
@@ -372,7 +375,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       return dark[1];
     }
 
-    return temp[1];
+    return 'The weather is comfortable for ${toHoursAndMins(slider.value / 60)}';
   }
 
   /// RELATIVE POSITIONING (screen height):
@@ -469,7 +472,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       hourMinuteDigitTextStyle: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(color: Color.fromARGB(255, 0, 0, 0)),
+                          .copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
                       showSecondsDigit: false,
                       is24HourTimeFormat: false,
                       /*secondDigitTextStyle: Theme.of(context)
@@ -481,7 +484,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
-                            .copyWith(color: Color.fromARGB(255, 0, 0, 0)),
+                            .copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ),
                   ),
@@ -561,7 +564,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.59,
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               color: Pallete.lowerBackgroundColor,
               child: Column(
                 children: [
@@ -569,7 +572,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                     decoration: BoxDecoration(
                       color: Pallete.sliderContainerColor,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.fromBorderSide(const BorderSide(
+                      border: const Border.fromBorderSide(BorderSide(
                             color: Color.fromARGB(255, 161, 199, 129)),
                       ),
                       //shape: 
@@ -589,11 +592,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
+                                      style: const TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
                                       children: <TextSpan>[
                                         const TextSpan(text: 'The current location is set to '),
-                                        TextSpan(text: '${preferences.selectedLocation}', 
-                                          style: TextStyle(fontWeight: FontWeight.bold)),
+                                        TextSpan(text: preferences.selectedLocation,
+                                          style: const TextStyle(fontWeight: FontWeight.bold)),
                                       ],
                                     ),
                                   ),
@@ -615,7 +618,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           height: MediaQuery.of(context).size.height * 0.033,
                           child: Text(
                             checkConditions(getNumHoursStudy()),
-                            style: TextStyle(fontSize: 20.0),
+                            style: const TextStyle(fontSize: 20.0),
                           ),
                         ),
                         SizedBox(height: MediaQuery.of(context).size.height * 0.008),
@@ -679,8 +682,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                           Container(
                             height: 42.0,
                             width: 42.0,
-                            child: Image.network('https://openweathermap.org/img/wn/' + 
-                                                (iconText()) + '@2x.png'),
+                            child: Image.network('https://openweathermap.org/img/wn/${iconText()}@2x.png'),
                           ),    
                           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                           Text(weatherDescriptionText()),

@@ -95,7 +95,7 @@ class _LocationSettingsScreenState extends State<LocationSettingsScreen> {
                   if (value == true) {
                     preferences.locationIndex = 0;
                     locationSlider.sliderState.controller.animateToItem(0, 
-                      duration: Duration(milliseconds: 400),
+                      duration: const Duration(milliseconds: 400),
                       curve: Curves.fastOutSlowIn);
                   }
                 });

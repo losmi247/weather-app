@@ -86,7 +86,7 @@ class _OptionSliderState extends State<OptionSlider> {
                   selectedIndex = value;
                   widget.notifyParent(value);
                 },
-                backgroundColor: Color.fromRGBO(0, 0, 0, 0),
+                backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
               ),
             ),
           ),

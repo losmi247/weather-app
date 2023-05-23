@@ -49,7 +49,7 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                   data: SliderTheme.of(context).copyWith(
                     thumbColor: Pallete.sliderThumbColor,
                     overlayColor: Colors.transparent,
-                    thumbShape: RoundSliderThumbShape(elevation: 0),
+                    thumbShape: const RoundSliderThumbShape(elevation: 0),
                     //thumbShape:
                   ),
                   child: Slider(
@@ -75,7 +75,7 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 child: Text(
                     getStringForTimeDelta(widget.minValue.toInt() *
                         Constants.MINUTES_TO_MILLISECONDS),
-                    style: TextStyle(fontSize: 14)),
+                    style: const TextStyle(fontSize: 14)),
               ),
               Positioned(
                 bottom: 5,
@@ -83,19 +83,19 @@ class _SliderWithTimeLabelsState extends State<SliderWithTimeLabels> {
                 child: Text(
                     getStringForTimeDelta(widget.maxValue.toInt() *
                         Constants.MINUTES_TO_MILLISECONDS),
-                    style: TextStyle(fontSize: 14)),
+                    style: const TextStyle(fontSize: 14)),
               ),
               Positioned(
                 left: MediaQuery.of(context).size.width / 2 - 75,
                 top: -4,
                 child: RichText(
                   text: TextSpan(
-                    style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
+                    style: const TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
                     children: <TextSpan>[
                       const TextSpan(text: "Revise for "),
                       TextSpan(text: getStringForTimeDelta(sliderValue.toInt() *
                             Constants.MINUTES_TO_MILLISECONDS), 
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),

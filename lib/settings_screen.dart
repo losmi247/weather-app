@@ -35,8 +35,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             width: 27.0,
             height: 27.0,
         ),
-        SizedBox(width: 8,),
-        const Text("Min temperature", style: const TextStyle(color: Pallete.settingsTextColor)),
+        const SizedBox(width: 8,),
+        const Text("Min temperature", style: TextStyle(color: Pallete.settingsTextColor)),
       ],
     ),
     notifyParent: (newIndex) {},
@@ -53,7 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           height: 27.0,
         ),
         SizedBox(width: 8,),
-        const Text("Max temperature", style: const TextStyle(color: Pallete.settingsTextColor)),
+        const Text("Max temperature", style: TextStyle(color: Pallete.settingsTextColor)),
       ],
     ),
     notifyParent: (newIndex) {},
@@ -89,7 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         pos++;
       }
       maxTempSlider.sliderState.controller.animateToItem(pos, 
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.fastOutSlowIn);
     }
     else{
@@ -107,7 +107,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         pos--;
       }
       minTempSlider.sliderState.controller.animateToItem(pos, 
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.fastOutSlowIn);
     }
     else{
@@ -142,7 +142,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       backgroundColor: Pallete.settingsBackgroundDayColor,
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: [
           SwitchListTile(
             title: const Text('Use Celsius',
@@ -175,7 +175,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 35.0,
               height: 35.0,
             ),
-            contentPadding: EdgeInsets.fromLTRB(9, 0, 16, 0),
+            contentPadding: const EdgeInsets.fromLTRB(9, 0, 16, 0),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
           /// OLD MIN/MAX TEMP SETTINGS
@@ -246,7 +246,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             decoration: BoxDecoration(
               color: Pallete.settignsSwitchListTileColor,
               borderRadius: BorderRadius.circular(5),
-              border: Border.fromBorderSide(const BorderSide(
+              border: const Border.fromBorderSide(BorderSide(
                     color: Pallete.settingsSwitchListTileBorderColor),
               ),
               //shape: 
@@ -265,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(color: Pallete.settingsTextColor)),
           SizedBox(height: MediaQuery.of(context).size.height * 0.018),
           SwitchListTile(
-            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
+            contentPadding: const EdgeInsets.fromLTRB(4, 0, 16, 0),
             title: const Text('Rain',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInRain,
@@ -295,7 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('Snow',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInSnow,
-            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
+            contentPadding: const EdgeInsets.fromLTRB(4, 0, 16, 0),
             onChanged: (value) {
               setState(() {
                 preferences.workInSnow = value;
@@ -322,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('Wind',
                 style: TextStyle(color: Pallete.settingsTextColor)),
             value: preferences.workInWind,
-            contentPadding: EdgeInsets.fromLTRB(4, 0, 16, 0),
+            contentPadding: const EdgeInsets.fromLTRB(4, 0, 16, 0),
             onChanged: (value) {
               setState(() {
                 preferences.workInWind = value;

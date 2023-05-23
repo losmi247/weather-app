@@ -29,7 +29,7 @@ class WeatherApiClient {
   // Get latitude and longitude of location
   Future<List>? getCoordinates(String? location) async {
     if (hardCodedLocations.containsKey(location)) {
-      return Future.value(hardCodedLocations![location]);
+      return Future.value(hardCodedLocations[location]);
     }
 
     var endpoint = Uri.parse(
