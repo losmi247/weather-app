@@ -121,7 +121,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (weather == 'Thunderstorm') {
       return getAnimationFrame('angry-thunder', _index);
     }
-    if (weather == 'Drizzle' || weather == 'Rain') {
+    if (weather == 'Drizzle' || weather == 'Rain' || weather.contains('rain')) {
       return getAnimationFrame('rain', _index);
     }
     if (weather == 'Snow') {
@@ -186,7 +186,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
     if (data == null) {
       return 'Loading...';
     }
-    return capitaliseFirstLetter('${data!.description![0]}');
+    return capitaliseFirstLetter('${data!.mainDescription!}');
   }
 
   /// get the sunrise or sunset text
