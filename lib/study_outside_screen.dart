@@ -253,7 +253,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   List checkRain(int hours) {
     // loop through rain data for each hour and return false if over 0.3
     for (int i = 0; i <= hours && i < data!.wind!.length; i++) {
-      if (data!.rainChance![i] > 0.3) {
+      if (data!.rainChance![i] > 0.22) {
         if (i == 0) {
           return [false, 'It\'s raining now'];
         }
