@@ -178,70 +178,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             contentPadding: const EdgeInsets.fromLTRB(9, 0, 16, 0),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-          /// OLD MIN/MAX TEMP SETTINGS
-          /*const Text('Temperature range',
-              style: TextStyle(color: Pallete.settingsTextColor)),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Min temperature',
-                    labelStyle: TextStyle(color: Pallete.settingsTextColor),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Pallete
-                              .settingsTextFormFieldUnderlineEnabledColor),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Pallete
-                              .settingsTextFormFieldUnderlineFocusedColor),
-                    ),
-                  ),
-                  style: const TextStyle(color: Pallete.settingsTextColor),
-                  initialValue: preferences.minTemp.toString(),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    setState(() {
-                      preferences.minTemp = double.tryParse(value) ?? 0;
-                    });
-                  },
-                  cursorColor: Pallete.settingsTextFormFieldCursorColor,
-                ),
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.06),
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Max temperature',
-                    labelStyle: TextStyle(color: Pallete.settingsTextColor),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Pallete
-                              .settingsTextFormFieldUnderlineEnabledColor),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Pallete
-                              .settingsTextFormFieldUnderlineFocusedColor),
-                    ),
-                  ),
-                  style: const TextStyle(color: Pallete.settingsTextColor),
-                  initialValue: preferences.maxTemp.toString(),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    setState(() {
-                      preferences.maxTemp = double.tryParse(value) ?? 0;
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),*/
 
-          /// NEW MIN/MAX TEMPS SETTINGS
+          /// MIN/MAX TEMPS SETTINGS
           Container(
             decoration: BoxDecoration(
               color: Pallete.settignsSwitchListTileColor,
@@ -341,7 +279,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             secondary: Container(
               width: 50,
               height: 50,
-              // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
               child: OverflowBox(
                 alignment: Alignment.center,
                 minWidth: 0.0,
@@ -350,7 +287,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 maxHeight: 36,
                 child: SvgPicture.asset(
                   "assets/images/too-windy/too-windy-7.svg",
-                  // getAnimationFrame('too-windy', _index),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -442,18 +378,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               LocationSettingsScreen(preferences: preferences)),
     );
     setState(() {
-      //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
-      /// minTemp, maxTemp are now getters
-      //preferences.minTemp = returnedPreferences.minTemp;
-      //preferences.maxTemp = returnedPreferences.maxTemp;
       preferences.workAtNight = returnedPreferences.workAtNight;
       preferences.workInRain = returnedPreferences.workInRain;
       preferences.workInSnow = returnedPreferences.workInSnow;
       preferences.workInWind = returnedPreferences.workInWind;
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
-      //preferences.selectedLocation = returnedPreferences.selectedLocation;
 
       /// update the min/max temp indices when you come back from 
       /// 'location settings' screen (even they won't be changed there)
