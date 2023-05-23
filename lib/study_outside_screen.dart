@@ -8,10 +8,9 @@ import 'package:flutter_application_1/weather_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'util.dart';
+
 /// run flutter pub add slide_digital_clock
 import 'package:slide_digital_clock/slide_digital_clock.dart';
-
-
 
 class StudyOutsideScreen extends StatefulWidget {
   const StudyOutsideScreen({Key? key}) : super(key: key);
@@ -24,6 +23,7 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
   /// TO GET SLIDER VALUE - slider.value
   SliderWithTimeLabels slider =
       SliderWithTimeLabels(minValue: 0, maxValue: 720, initialValue: 60);
+
   /// TO GET MIN/MAX TEMP VALUE - preferences.minTemp, preferences.maxTemp
   /// (these are getters, not fields)
   Preferences preferences = Preferences.defaultPreferences();
@@ -299,8 +299,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       if (data!.wind![i] >= 7.8) {
         return [
           false,
-    (i == 0) ? 'There is a ${data!.windDescription![i]} right now' :
-    'There will be a ${data!.windDescription![i]} in $i hours'];
+          (i == 0)
+              ? 'There is a ${data!.windDescription![i]} right now'
+              : 'There will be a ${data!.windDescription![i]} in $i hours'
+        ];
       }
     }
     return [true, 'Not too windy in the next $hours hours'];
@@ -416,42 +418,45 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 6,
-                    right: 5,
+                      top: 6,
+                      right: 5,
 
-                    /// Button to go to 'Settings' screen
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Pallete.settingsLocationSettingsButtonColor,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        onPressed: () {
-                          /// push the 'Settings' screen and wait for updated preferences
-                          awaitReturnPreferencesFromSettingsScreen(context);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text('Settings',
-                                        style: TextStyle(color: Colors.black,
-                                          fontSize: 18.0, 
-                                          fontFamily: 'Roboto')),
-                            SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                            SvgPicture.asset(
-                              "assets/icons/gear.svg",
-                              width: 27.0,
-                              height: 27.0,
+                      /// Button to go to 'Settings' screen
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Pallete.settingsLocationSettingsButtonColor,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
-                          ],
-                        )
-                      ),
-                    )
-                    /*child: IconButton(
+                            onPressed: () {
+                              /// push the 'Settings' screen and wait for updated preferences
+                              awaitReturnPreferencesFromSettingsScreen(context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('Settings',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18.0,
+                                        fontFamily: 'Roboto')),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02),
+                                SvgPicture.asset(
+                                  "assets/icons/gear.svg",
+                                  width: 27.0,
+                                  height: 27.0,
+                                ),
+                              ],
+                            )),
+                      )
+                      /*child: IconButton(
                       icon: SvgPicture.asset(
                         "assets/icons/gear.svg",
                         height: 80,
@@ -463,7 +468,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                       },
                       //child: Text('Settings'),
                     ),*/
-                  ),
+                      ),
+
                   /// CLOCK
                   Positioned(
                     top: 1,
@@ -484,7 +490,8 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
-                            .copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
+                            .copyWith(
+                                color: const Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ),
                   ),
@@ -492,30 +499,29 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
               ),
             ),
             Container(
-              color: Pallete.upperBackgroundColor,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height *
-                        0.3, // 30% of screen height
-                    //child: Expanded(
-                    child: Stack(
-                      children: [
+                color: Pallete.upperBackgroundColor,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height *
+                          0.3, // 30% of screen height
+                      //child: Expanded(
+                      child: Stack(children: [
                         Container(
-                          alignment: AlignmentDirectional.center,
-                          child: SvgPicture.asset(
-                            // getAnimationFrame('happy-sun', _index),
-                            // getAnimationFrame('angry-thunder', _index),
-                            // getAnimationFrame('happy-cloud', _index),
-                            // getAnimationFrame('hot-sun', _index),
-                            // getAnimationFrame('too-windy', _index),
-                            // getAnimationFrame('rain', _index),
-                            getWeatherAnimation(),
-                            fit: BoxFit.cover,
-                          )),
+                            alignment: AlignmentDirectional.center,
+                            child: SvgPicture.asset(
+                              // getAnimationFrame('happy-sun', _index),
+                              // getAnimationFrame('angry-thunder', _index),
+                              // getAnimationFrame('happy-cloud', _index),
+                              // getAnimationFrame('hot-sun', _index),
+                              // getAnimationFrame('too-windy', _index),
+                              // getAnimationFrame('rain', _index),
+                              getWeatherAnimation(),
+                              fit: BoxFit.cover,
+                            )),
 
-                      /// PREVIOUS POSITION OF BUTTON
-                      /*Positioned(
+                        /// PREVIOUS POSITION OF BUTTON
+                        /*Positioned(
                               top: 5,
                               right: 5,
 
@@ -529,10 +535,10 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                                 //child: Text('Settings'),
                               ),
                             ),*/
-                    ]),
-                    //),
-                  ),
-                  /*SliderTheme(
+                      ]),
+                      //),
+                    ),
+                    /*SliderTheme(
                           data: SliderTheme.of(context).copyWith(
                             thumbColor: Pallete.sliderThumbColor,
                             //thumbShape:
@@ -552,38 +558,38 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             inactiveColor: Pallete.sliderInactiveColor,
                           ),
                         ),*/
-                  /*const SliderWithLabels(
+                    /*const SliderWithLabels(
                           minValue: 0,
                           maxValue: 12,
                           initialValue: 0,
                         ),*/
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                ],
-              )
-            ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                  ],
+                )),
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.59,
               padding: const EdgeInsets.all(16.0),
               color: Pallete.lowerBackgroundColor,
-              child: Column(
-                children: [
-                  Container(
+              child: Column(children: [
+                Container(
                     decoration: BoxDecoration(
                       color: Pallete.sliderContainerColor,
                       borderRadius: BorderRadius.circular(5),
-                      border: const Border.fromBorderSide(BorderSide(
-                            color: Color.fromARGB(255, 161, 199, 129)),
+                      border: const Border.fromBorderSide(
+                        BorderSide(color: Color.fromARGB(255, 161, 199, 129)),
                       ),
-                      //shape: 
+                      //shape:
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
                         /////// SLIDER
                         slider,
                         /////// SLIDER
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.032,
                             child: Center(
@@ -592,11 +598,18 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      style: const TextStyle(fontSize: 20.0, fontFamily: 'Roboto', color: Colors.black),
+                                      style: const TextStyle(
+                                          fontSize: 20.0,
+                                          fontFamily: 'Roboto',
+                                          color: Colors.black),
                                       children: <TextSpan>[
-                                        const TextSpan(text: 'The current location is set to '),
-                                        TextSpan(text: preferences.selectedLocation,
-                                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                                        const TextSpan(
+                                            text:
+                                                'The current location is set to '),
+                                        TextSpan(
+                                            text: preferences.selectedLocation,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold)),
                                       ],
                                     ),
                                   ),
@@ -611,9 +624,9 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                                   ),
                                 ],
                               ),
-                            )
-                        ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.016),
+                            )),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.016),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.033,
                           child: Text(
@@ -621,94 +634,101 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
                             style: const TextStyle(fontSize: 20.0),
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.008),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.008),
                       ],
-                    )
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.024),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            // 'assets/icons/feels_like.svg',
-                            //"assets/images/red.svg",
-                            //https://www.flaticon.com/free-icons/temperature
-                            "assets/icons/thermometer.svg",
-                            width: 42.0,
-                            height: 42.0,
-                          ),
-                          // SvgPicture.asset("images/sun.svg"),
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                          Text(feelsLikeTempText()),
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.4),
-                          // Text(checkTemp(getNumHoursStudy()))
-                        ],
-                      ),
-                      //SizedBox(height: 16.0),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                      Row(
-                        children: [
-                          Container(
-                            width: 41,
-                            height: 41,
-                            // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                            child: OverflowBox(
-                              alignment: Alignment.center,
-                              minWidth: 0.0,
-                              minHeight: 0.0,
-                              maxWidth: 56,
-                              maxHeight: 36,
-                              child: SvgPicture.asset(
-                                "assets/images/too-windy/too-windy-7.svg",
-                                // getAnimationFrame('too-windy', _index),
-                                fit: BoxFit.cover,
-                              ),
+                    )),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.024),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          // 'assets/icons/feels_like.svg',
+                          //"assets/images/red.svg",
+                          //https://www.flaticon.com/free-icons/temperature
+                          "assets/icons/thermometer.svg",
+                          width: 42.0,
+                          height: 42.0,
+                        ),
+                        // SvgPicture.asset("images/sun.svg"),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05),
+                        Text(feelsLikeTempText()),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4),
+                        // Text(checkTemp(getNumHoursStudy()))
+                      ],
+                    ),
+                    //SizedBox(height: 16.0),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    Row(
+                      children: [
+                        Container(
+                          width: 41,
+                          height: 41,
+                          // decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                          child: OverflowBox(
+                            alignment: Alignment.center,
+                            minWidth: 0.0,
+                            minHeight: 0.0,
+                            maxWidth: 56,
+                            maxHeight: 36,
+                            child: SvgPicture.asset(
+                              "assets/images/too-windy/too-windy-7.svg",
+                              // getAnimationFrame('too-windy', _index),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          //SizedBox(width: 16.0),
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                          Text(windSpeedText()),
-                        ],
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                      Row(
-                        children: [
-                          /*SvgPicture.asset(
+                        ),
+                        //SizedBox(width: 16.0),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05),
+                        Text(windSpeedText()),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    Row(
+                      children: [
+                        /*SvgPicture.asset(
                             'assets/images/red.svg',
                             width: 40.0,
                             height: 40.0,
                           ),*/
-                          Container(
-                            height: 42.0,
-                            width: 42.0,
-                            child: Image.network('https://openweathermap.org/img/wn/${iconText()}@2x.png'),
-                          ),    
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                          Text(weatherDescriptionText()),
-                          //Text(iconText()),
-                        ],
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            //'assets/images/red.svg',
-                            //https://www.flaticon.com/free-icons/sunset
-                            (data == null) ? "assets/icons/sunset.svg" :
-                            (data!.isDay() ? "assets/icons/sunset.svg" :
-                            "assets/icons/sunrise.svg"),
-                            width: 42.0,
-                            height: 42.0,
-                          ),
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                          Text(sunriseOrSunsetText()),
-                        ],
-                      ),
-                    ],
-                  ),
-                ]
-              ),
+                        Container(
+                          height: 42.0,
+                          width: 42.0,
+                          child: Image.network(
+                              'https://openweathermap.org/img/wn/${iconText()}@2x.png'),
+                        ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05),
+                        Text(weatherDescriptionText()),
+                        //Text(iconText()),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          //'assets/images/red.svg',
+                          //https://www.flaticon.com/free-icons/sunset
+                          (data == null)
+                              ? "assets/icons/sunset.svg"
+                              : (data!.isDay()
+                                  ? "assets/icons/sunset.svg"
+                                  : "assets/icons/sunrise.svg"),
+                          width: 42.0,
+                          height: 42.0,
+                        ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.05),
+                        Text(sunriseOrSunsetText()),
+                      ],
+                    ),
+                  ],
+                ),
+              ]),
             ),
           ],
         ),
@@ -760,14 +780,14 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
         preferences.selectedLocation = returnedPreferences.selectedLocation;
         getData();
       }*/
-      if (preferences.locationIndex !=
-          returnedPreferences.locationIndex) {
+      if (preferences.locationIndex != returnedPreferences.locationIndex) {
         preferences.locationIndex = returnedPreferences.locationIndex;
         getData();
       }
 
       //preferences = Preferences.copy(returnedPreferences);
       preferences.isCelsius = returnedPreferences.isCelsius;
+
       /// minTemp, maxTemp are now getters in the Preferences class
       //preferences.minTemp = returnedPreferences.minTemp;
       //preferences.maxTemp = returnedPreferences.maxTemp;
@@ -778,11 +798,11 @@ class _StudyOutsideScreenState extends State<StudyOutsideScreen> {
       preferences.isLocationSetAutomatically =
           returnedPreferences.isLocationSetAutomatically;
 
-      /// update the min/max temp indices when you come back from 
+      /// update the min/max temp indices when you come back from
       /// 'settings' screen
       preferences.minTempIndex = returnedPreferences.minTempIndex;
       preferences.maxTempIndex = returnedPreferences.maxTempIndex;
-      
+
       /// update location index we got back from 'location settings'
       /// screen
       preferences.locationIndex = returnedPreferences.locationIndex;
