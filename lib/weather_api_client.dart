@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/weather_model.dart';
 
-// hard coded geolocations
+/// hard coded geolocations
 const Map<String, List<double>> hardCodedLocations = {
   'Cambridge': [52.2053, 0.1218],
   'Manchester': [53.4808, -2.2426],
@@ -26,7 +26,7 @@ const Map<String, List<double>> hardCodedLocations = {
 };
 
 class WeatherApiClient {
-  // Get latitude and longitude of location
+  /// Get latitude and longitude of location
   Future<List>? getCoordinates(String? location) async {
     if (hardCodedLocations.containsKey(location)) {
       return Future.value(hardCodedLocations[location]);
@@ -39,7 +39,7 @@ class WeatherApiClient {
     return [body[0]['lat'], body[0]['lon']];
   }
 
-  // Get weather data for location
+  /// Call api to get weather data
   Future<Weather>? getWeather(String? location) async {
     List? latLon = await getCoordinates(location);
     double? lat = latLon?[0];
